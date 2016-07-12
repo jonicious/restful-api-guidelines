@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Mon Jul 11 2016 21:09:34 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Tue Jul 12 2016 13:50:48 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -423,7 +423,7 @@
 collection resources may return either 200 or 404 if the listing is empty</li>
 <li>must NOT have request body payload</li>
 </ul>
-<h3 id="put"><a name="put" class="plugin-anchor" href="#put"><span class="fa fa-link"></span></a>PUT:</h3>
+<h3 id="put"><a name="put" class="plugin-anchor" href="#put"><span class="fa fa-link"></span></a>PUT</h3>
 <ul>
 <li>fully uploads an entity, i.e. provides a complete replacement by the resource representation
 passed as payload</li>
@@ -433,23 +433,33 @@ in a previous POST request) and passed as a URL path segment</li>
 PUT on a collection would imply replacing the entire collection</li>
 <li>usually robust against non-existence of the entity by implicit creation before update</li>
 </ul>
-<h3 id="patch"><a name="patch" class="plugin-anchor" href="#patch"><span class="fa fa-link"></span></a>PATCH:</h3>
+<h3 id="patch"><a name="patch" class="plugin-anchor" href="#patch"><span class="fa fa-link"></span></a>PATCH</h3>
 <ul>
 <li>partial upload, i.e. only a specific subset of resource fields are replaced</li>
-<li>partial resource representation passed as payload has either resource content type with optional fields (to be
-updated) or a custom content type that also may include instructions of how to change the resource</li>
-<li>usually accepted only by single resources, because the semantics for PATCH on a collection resource
-are very hard to define</li>
 <li>usually not robust against non existence of the entity</li>
+<li>since implementing PATCH correctly is a bit tricky we strongly suggest to choose one
+and only one of the following patterns per endpoint, unless forced by
+<a href="../compatibility/Compatibility#compatibility">a backwards compatible change</a>.
+In preference order:<ol>
+<li>use PUT with complete objects to update a resource as long as feasible (i.e. do not use PATCH at all).</li>
+<li>use PATCH with partial objects to only update parts of a resource, when ever possible.
+(This is basically  <a href="https://tools.ietf.org/html/rfc7396" target="_blank">JSON Merge Patch</a>, a specialized media type
+<code>application/merge-patch+json</code> that is a partial resource representation.)</li>
+<li>use PATCH with <a href="http://tools.ietf.org/html/rfc6902" target="_blank">JSON Patch</a>, a specialized media type
+<code>application/json-patch+json</code> that includes instructions on how to change the resource.</li>
+<li>use POST (with a proper description of what is happening) instead of PATCH if the request does
+not modify the resource in a way defined by the semantics of the media type.</li>
+</ol>
+</li>
 </ul>
-<h3 id="delete"><a name="delete" class="plugin-anchor" href="#delete"><span class="fa fa-link"></span></a>DELETE:</h3>
+<h3 id="delete"><a name="delete" class="plugin-anchor" href="#delete"><span class="fa fa-link"></span></a>DELETE</h3>
 <ul>
 <li>deletes a resource instance</li>
 <li>DELETE operations are usually only accepted by single resources, not collection resources, as
 DELETE on a collection would imply deleting the entire collection</li>
 <li>should return either status 404 (Not found) or 410 (Gone) if the resource does not exist</li>
 </ul>
-<h3 id="post"><a name="post" class="plugin-anchor" href="#post"><span class="fa fa-link"></span></a>POST:</h3>
+<h3 id="post"><a name="post" class="plugin-anchor" href="#post"><span class="fa fa-link"></span></a>POST</h3>
 <ul>
 <li>creates a resource instance</li>
 <li>resource instance id(s) are created and maintained by server and returned with the output payload</li>
@@ -527,7 +537,7 @@ necessarily mean returning the same status code)</li>
 <p>Please see also <a href="https://goo.gl/vhwh8a" target="_blank">Best Practices [internal link]</a> for further hints on how to support the
 different HTTP methods on resources.</p>
 <h2 id="must-use-meaningful-http-status-codes"><a name="must-use-meaningful-http-status-codes" class="plugin-anchor" href="#must-use-meaningful-http-status-codes"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use Meaningful HTTP Status Codes</h2>
-<h3 id="success-codes"><a name="success-codes" class="plugin-anchor" href="#success-codes"><span class="fa fa-link"></span></a>Success Codes:</h3>
+<h3 id="success-codes"><a name="success-codes" class="plugin-anchor" href="#success-codes"><span class="fa fa-link"></span></a>Success Codes</h3>
 <table>
 <thead>
 <tr>
@@ -559,7 +569,7 @@ different HTTP methods on resources.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="redirection-codes"><a name="redirection-codes" class="plugin-anchor" href="#redirection-codes"><span class="fa fa-link"></span></a>Redirection Codes:</h3>
+<h3 id="redirection-codes"><a name="redirection-codes" class="plugin-anchor" href="#redirection-codes"><span class="fa fa-link"></span></a>Redirection Codes</h3>
 <table>
 <thead>
 <tr>
@@ -586,7 +596,7 @@ different HTTP methods on resources.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="client-side-error-codes"><a name="client-side-error-codes" class="plugin-anchor" href="#client-side-error-codes"><span class="fa fa-link"></span></a>Client Side Error Codes:</h3>
+<h3 id="client-side-error-codes"><a name="client-side-error-codes" class="plugin-anchor" href="#client-side-error-codes"><span class="fa fa-link"></span></a>Client Side Error Codes</h3>
 <table>
 <thead>
 <tr>
