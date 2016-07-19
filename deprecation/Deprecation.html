@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Security | Introduction</title>
+        <title>Deprecation | Introduction</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.7">
@@ -41,10 +41,10 @@
         
     
     
-    <link rel="next" href="../compatibility/Compatibility.html">
+    <link rel="next" href="../api-discovery/ApiDiscovery.html">
     
     
-    <link rel="prev" href="../general-guidelines/GeneralGuidelines.html">
+    <link rel="prev" href="../headers/ProprietaryHeaders.html">
     
 
         
@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="4" data-chapter-title="Security" data-filepath="security/Security.md" data-basepath=".." data-revision="Tue Jul 19 2016 12:59:24 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="17" data-chapter-title="Deprecation" data-filepath="deprecation/Deprecation.md" data-basepath=".." data-revision="Tue Jul 19 2016 12:59:24 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -125,7 +125,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="4" data-path="security/Security.html">
+        <li class="chapter " data-level="4" data-path="security/Security.html">
             
                 
                     <a href="../security/Security.html">
@@ -320,7 +320,7 @@
             
         </li>
     
-        <li class="chapter " data-level="17" data-path="deprecation/Deprecation.html">
+        <li class="chapter active" data-level="17" data-path="deprecation/Deprecation.html">
             
                 
                     <a href="../deprecation/Deprecation.html">
@@ -428,92 +428,49 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="security"><a name="security" class="plugin-anchor" href="#security"><span class="fa fa-link"></span></a>Security</h1>
-<h2 id="must-secure-endpoints-with-oauth-20"><a name="must-secure-endpoints-with-oauth-20" class="plugin-anchor" href="#must-secure-endpoints-with-oauth-20"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Secure Endpoints with OAuth 2.0</h2>
-<p>Every API endpoint needs to be secured using OAuth 2.0. Please refer to the 
-<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#security-definitions-object" target="_blank">official OpenAPI spec</a>
-on how to specify security definitions in you API specification or take a look at the following example.</p>
-<pre><code class="lang-yaml">securityDefinitions:
-  oauth2:
-    type: oauth2
-    flow: implicit
-    authorizationUrl: https://auth.zalando.com/oauth2/access_token?realm=services
-    scopes:
-      fulfillment-order-service.read: Access right needed to read from the fulfillment order service.
-      fulfillment-order-service.write: Access right needed to write to the fulfillment order service.
-</code></pre>
-<p>The example defines OAuth2 with implicit flow as security standard used for authentication when accessing endpoints; additionally, there are two API access rights defined via the scopes section for later endpoint authorization usage - please see next section.</p>
-<h2 id="must-define-and-assign-access-rights-scopes"><a name="must-define-and-assign-access-rights-scopes" class="plugin-anchor" href="#must-define-and-assign-access-rights-scopes"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Define and Assign Access Rights (Scopes)</h2>
-<p>Every API needs to define access rights, called scopes here, and every endpoint needs to have at least one scope assigned. Scopes are defined by name and description per API specification, as shown in the previous section. Please refer to the following rules when creating scope names:</p>
-<pre><code>&lt;api-scope&gt; ::= &lt;api-standard-scope&gt; |            -- should be sufficient for majority of use cases 
-                &lt;api-resource-specific-scope&gt; |   -- for special security access differentiation use cases 
-                &lt;api-pseudo-scope&gt;                -- used to explicitly indicate that access is not restricted
-
-&lt;api-standard-scope&gt;          ::= &lt;application-id&gt;.&lt;access-type&gt; 
-&lt;api-resource-specific-scope&gt; ::= &lt;application-id&gt;.&lt;resource-id&gt;.&lt;access-type&gt;
-&lt;api-pseudo-scope&gt;            ::= uid
-
-&lt;application-id&gt; ::= &lt;as defined via STUPS&gt;
-&lt;access-type&gt;    ::= read | write           -- might be extended in future
-&lt;resource-id&gt;    ::= &lt;free identifier following application-id syntax&gt;
-</code></pre><p>APIs should stick to standard scopes by default -- for the majority of use cases, restricting access to specific APIs (with read vs. write differentiation) is sufficient for controlling access for client types like merchant or retailer business partners, customers or operational staff. We want to avoid too many, fine grained scopes increasing governance complexity without real value add. In some situations, where the API serves different types of resources for different owners, resource specific scopes may make sense.</p>
-<p>Some examples for standard and resource-specific scopes:</p>
-<table>
-<thead>
-<tr>
-<th>Application ID</th>
-<th>Resource ID</th>
-<th>Access Type</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>fulfillment-order</code></td>
-<td></td>
-<td><code>read</code></td>
-<td><code>fulfillment-order.read</code></td>
-</tr>
-<tr>
-<td><code>fulfillment-order</code></td>
-<td></td>
-<td><code>write</code></td>
-<td><code>fulfillment-order.write</code></td>
-</tr>
-<tr>
-<td><code>sales-order</code></td>
-<td><code>sales_order</code></td>
-<td><code>read</code></td>
-<td><code>sales-order.sales_order.read</code></td>
-</tr>
-<tr>
-<td><code>sales-order</code></td>
-<td><code>shipment_order</code></td>
-<td><code>read</code></td>
-<td><code>sales-order.shipment_order.read</code></td>
-</tr>
-</tbody>
-</table>
-<p>After scopes names are defined and the scope is declared in the security definition at the top of an API specification, it should be assigned to each API operation by specifying a <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#securityRequirementObject" target="_blank"><code>security</code> requirement</a> like this:</p>
-<pre><code class="lang-yaml">paths:
-  /sales-orders/{order-number}:
-    get:
-      summary: Retrieves a sales order
-      security:
-        - oauth2:
-          - sales-order-service.sales_order.read
-</code></pre>
-<p>In very rare cases a whole API or some selected endpoints may not require specific access control. However, to make this explicit you should assign the <code>uid</code> pseudo access right scope in this case. It is the user id and always available as OAuth2 default scope. </p>
-<pre><code class="lang-yaml">paths:
-  /public-information:
-    get:
-      summary: Provides public information about ... 
-               Accessible by any user; no access rights needed. 
-      security:
-        - oauth2:
-          - uid
-</code></pre>
-<p>Hint: you need not explicitly define the &quot;Authorization&quot; header; it is a standard header so to say implicitly defined via the security section.</p>
+                        <h1 id="deprecation"><a name="deprecation" class="plugin-anchor" href="#deprecation"><span class="fa fa-link"></span></a>Deprecation</h1>
+<p>Sometimes it is necessary to phase out an API endpoint (or version). I.e. this
+may be necessary if a field is no longer supported in the result or a whole
+business functionality behind an endpoint has to be shut down. There are
+many other reasons as well.</p>
+<h2 id="must-obtain-approval-of-clients"><a name="must-obtain-approval-of-clients" class="plugin-anchor" href="#must-obtain-approval-of-clients"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Obtain Approval of Clients</h2>
+<p>Before shutting down an API (or version of an API) the producer must make
+sure, that all clients have given their consent to shut down the
+endpoint. Producers should help consumers to migrate to a potential new
+endpoint (i.e. by providing a migration manual). After all clients are
+migrated, the producer may shut down the deprecated API.</p>
+<h2 id="must-external-partners-must-agree-on-deprecation-timespan"><a name="must-external-partners-must-agree-on-deprecation-timespan" class="plugin-anchor" href="#must-external-partners-must-agree-on-deprecation-timespan"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> External Partners Must Agree on Deprecation Timespan</h2>
+<p>If the API is consumed by any external partner, the producer must define a
+reasonable timespan that the API will be maintained after the producer has
+announced deprecation. The external partner (client) must agree to this
+minimum after-deprecation-lifespan before he starts using the API. </p>
+<h2 id="must-reflect-deprecation-in-api-definition"><a name="must-reflect-deprecation-in-api-definition" class="plugin-anchor" href="#must-reflect-deprecation-in-api-definition"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Reflect Deprecation in API Definition</h2>
+<p>API deprecation must be part of the OpenAPI definition. If a method
+on a path, a whole path or even a whole API endpoint (multiple paths) should
+be deprecated, the producers must set <code>deprecated=true</code> on each method / path
+element that will be deprecated (OpenAPI 2.0 only allows you to define
+deprecation on this level). If deprecation should happen on a more fine grained 
+level (i.e. query parameter, payload etc.), the producer should set
+<code>deprecated=true</code> on the affected method / path element and add further
+explanation to the <code>description</code> section. </p>
+<p>If <code>deprecated</code> is set to <code>true</code>, the producer must describe what clients
+should use instead and when the API will be shut down in the <code>description</code>
+section of the API definition. </p>
+<h2 id="should-monitor-usage-of-deprecated-apis"><a name="should-monitor-usage-of-deprecated-apis" class="plugin-anchor" href="#should-monitor-usage-of-deprecated-apis"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Monitor Usage of Deprecated APIs</h2>
+<p>Producers should monitor usage of deprecated APIs until it the API can be shut down.</p>
+<h2 id="should-add-a-warning-header-to-responses"><a name="should-add-a-warning-header-to-responses" class="plugin-anchor" href="#should-add-a-warning-header-to-responses"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Add a Warning Header to Responses</h2>
+<p>During deprecation phase, the producer should add a <code>Warning</code> header (see <a href="https://tools.ietf.org/html/rfc7234#section-5.5" target="_blank">RFC
+7234 - Warning header</a>)
+field. When adding the <code>Warning</code> header, the <code>warn-code</code> must be <code>299</code> and the
+<code>warn-text</code> should be in form of <em>&quot;The path/operation/parameter/... {name} is
+deprecated and will be removed by {date}. Please see {link} for details.&quot;</em>
+with a link to a documentation describing why the API is no longer supported
+in the current form and what clients should do about it. Adding the <code>Warning</code>
+header is not sufficient to gain client consent to shut down an API.</p>
+<h2 id="should-add-monitoring-for-warning-header"><a name="should-add-monitoring-for-warning-header" class="plugin-anchor" href="#should-add-monitoring-for-warning-header"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Add Monitoring for Warning Header</h2>
+<p>Clients should monitor the <code>Warning</code> header in HTTP responses to see if an API will be deprecated in future.</p>
+<h2 id="must-not-start-using-deprecated-apis"><a name="must-not-start-using-deprecated-apis" class="plugin-anchor" href="#must-not-start-using-deprecated-apis"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Not Start Using Deprecated APIs</h2>
+<p>Clients must not start using deprecated parts of an API.</p>
 
                     
                     </section>
@@ -524,10 +481,10 @@ on how to specify security definitions in you API specification or take a look a
         </div>
 
         
-        <a href="../general-guidelines/GeneralGuidelines.html" class="navigation navigation-prev " aria-label="Previous page: General Guidelines"><i class="fa fa-angle-left"></i></a>
+        <a href="../headers/ProprietaryHeaders.html" class="navigation navigation-prev " aria-label="Previous page: Proprietary Headers"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../compatibility/Compatibility.html" class="navigation navigation-next " aria-label="Next page: Compatibility"><i class="fa fa-angle-right"></i></a>
+        <a href="../api-discovery/ApiDiscovery.html" class="navigation navigation-next " aria-label="Next page: API Discovery"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
