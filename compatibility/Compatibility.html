@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Tue Jul 19 2016 12:59:24 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Fri Jul 29 2016 15:39:47 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -549,14 +549,6 @@ version 1.5.1  -- first draft for next review and API change cycle;
 </code></pre><p>Hint: This versioning scheme differs in the less strict DRAFT aspect from
 <a href="http://semver.org" target="_blank">semantic version information</a> used for released APIs and
 service applications.</p>
-<h2 id="deprecating-an-api"><a name="deprecating-an-api" class="plugin-anchor" href="#deprecating-an-api"><span class="fa fa-link"></span></a>Deprecating an API</h2>
-<p>Sometimes it is necessary to phase out an API endpoint (or version). I.e. this may be necessary if a field is no longer supported in the result or a whole business functionality behind an endpoint has to be shut down. There are multiple other reasons as well.</p>
-<p>Before shutting down an API (or version of an API) the producer must make sure, that all clients have given their consent to shut down the endpoint. Producers should help consumers to migrate to a potential new endpoint (i.e. by providing a migration manual). After all clients are migrated, the producer may shut down the deprecated API.</p>
-<p>API deprecation must reflect in the producers OpenAPI definition. If a method on a path, a whole path or even a whole API endpoint (multiple paths) should be deprecated, the producers must set <code>deprecated=true</code> on each method / path element that will be deprecated (OpenAPI 2.0 only allows you to define deprecation on this level). If deprecation should happen on a finer level (i.e. query parameter, payload etc.), the producer should set <code>deprecated=true</code> on the affected method / path element and add further explanation to the <code>description</code> section.
-If <code>deprecated</code> is set to <code>true</code>, the producer must describe what clients should use instead and when the API will be shut down in the <code>description</code> section of the API definition.</p>
-<p>Clients must not start using deprecated parts of an API and producers should monitor usage of those APIs.</p>
-<p>During deprecation phase, the producer should add a <code>Warning</code> header (see <a href="https://tools.ietf.org/html/rfc7234#section-5.5" target="_blank">RFC 7234 - Warning header</a>) field. When adding the <code>Warning</code> header, the <code>warn-code</code> must be <code>299</code> and the <code>warn-text</code> should be in form of <em>&quot;The path/operation/parameter/... {name} is deprecated and will be removed by {date}. Please see {link} for details.&quot;</em> with a link to a documentation describing why the API is no longer supported in the current form and what clients should do about it. Clients should monitor the <code>Warning</code> header in HTTP responses. Adding the <code>Warning</code> header is not sufficient to gain client consent to shut down an API.</p>
-<p>If the API is consumed by any external partner, the producer must define a reasonable timespan that the API will be maintained after the producer has announced deprecation. The external partner (client) must agree to this minimum after-deprecation-lifespan before he starts using the API.</p>
 
                     
                     </section>

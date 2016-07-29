@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="8" data-chapter-title="Resources" data-filepath="resources/Resources.md" data-basepath=".." data-revision="Tue Jul 19 2016 12:59:24 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="8" data-chapter-title="Resources" data-filepath="resources/Resources.md" data-basepath=".." data-revision="Fri Jul 29 2016 15:39:47 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -454,8 +454,8 @@ In URLs, use only nouns.</p>
 <p>If a sub-resource is only accessible via its parent resource and may not exists without parent resource, consider using a nested URL structure, for instance:</p>
 <pre><code>/carts/1681e6b88ec1/cart-items/1
 </code></pre><p>However, if the resource can be accessed directly via its unique id, then the API should expose it as a top-level resource. For example, customer is a collection for sales orders; however, sales orders have globally unique id and some services may choose to access the orders directly, for instance:</p>
-<pre><code>/customer/1681e6b88ec1
-/sales-order/5273gh3k525a
+<pre><code>/customers/1681e6b88ec1
+/sales-orders/5273gh3k525a
 </code></pre><h2 id="should-limit-of-resources"><a name="should-limit-of-resources" class="plugin-anchor" href="#should-limit-of-resources"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Limit of Resources</h2>
 <p>To keep maintenance and service evolution manageable, we should follow &quot;functional segmentation&quot; and &quot;separation of concern&quot; design principles and do not mix different business functionalities in same API definition. In this sense the number of resources exposed via API should be limited - our experience is that a typical range of resources for a well-designed API is between 4 and 8. There may be exceptions with more complex business domains that require more resources, but you should first check if you can split them into separate subdomains with distinct APIs.</p>
 <h2 id="should-limit-of-subresource-levels"><a name="should-limit-of-subresource-levels" class="plugin-anchor" href="#should-limit-of-subresource-levels"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Limit of Sub-Resource Levels</h2>
