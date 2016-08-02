@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Fri Jul 29 2016 15:39:47 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Tue Aug 02 2016 12:29:55 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -455,8 +455,30 @@ You can see this expressed by many rules throughout these guidelines, e.g.:</p>
 <p>Links to other resources must be defined exclusively using <a href="http://stateless.co/hal_specification.html" target="_blank">HAL</a> and
 preferably using standard <a href="http://www.iana.org/assignments/link-relations/link-relations.xml" target="_blank">link relations</a>.</p>
 <p>Clients and Servers are required to support <code>_links</code> with its <code>href</code> and <code>rel</code> attributes, not only at the root level
-but also in nested objects. To reduce the effort needed by clients to process hypertext data from servers it&apos;s not recommended to serve data with CURIEs, URI templates or embedded resources. Nor is it required to support the HAL media type
-<code>application/hal+json</code>.</p>
+but also in nested objects. To reduce the effort needed by clients to process hypertext data from servers it&apos;s not recommended to serve data with CURIEs, URI templates or embedded resources. Nor is it required to support the HAL media type <code>application/hal+json</code>. The following snippet specifies the HAL link structure in JSONSchema:</p>
+<pre><code class="lang-yaml">Link:
+  type: object
+  properties:
+    href:
+      type: string
+      format: uri
+      example: https://api.example.com/sales-orders/10101058747628
+  required:
+    - href
+Links:
+  type: object
+  description: |
+    Values can be either a single Link or an array of Links
+    See https://docs.pennybags.zalan.do/ for more.
+  additionalProperties:
+    # keys are link relations
+    type: array
+    items:
+      $ref: &apos;#/definitions/Link&apos;
+  example:
+    &apos;self&apos;:
+      - href: https://api.example.com/sales-orders/10101058747628
+</code></pre>
 <p>We opted for this subset of HAL after conducting a comparison of different hypermedia formats based on properties like:</p>
 <ul>
 <li>Simplicity: resource link syntax and concepts are easy to understand and interpret for API clients.</li>
