@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Thu Aug 04 2016 13:40:15 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Thu Aug 04 2016 15:18:20 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -720,10 +720,28 @@ different HTTP methods on resources.</p>
 </tr>
 </tbody>
 </table>
-<p>All error codes you can find in <a href="https://tools.ietf.org/html/rfc7231#section-6" target="_blank">RFC7231</a> and <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">Wikipedia</a> or via <a href="https://httpstatuses.com/" target="_blank">https://httpstatuses.com/</a><error_code>.</error_code></p>
+<p>All error codes can be found in <a href="https://tools.ietf.org/html/rfc7231#section-6" target="_blank">RFC7231</a> and <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">Wikipedia</a> or via <a href="https://httpstatuses.com/" target="_blank">https://httpstatuses.com/</a><error_code>.</error_code></p>
 <h2 id="must-providing-error-documentation"><a name="must-providing-error-documentation" class="plugin-anchor" href="#must-providing-error-documentation"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Providing Error Documentation</h2>
-<p>APIs should define the functional, business view and abstract from implementation aspects. Errors become a key element providing context and visibility into how to use an API. The error object should be extended by an application-specific error identifier since the HTTP status code often is not specific enough to articulate the domain error situation. For this reason, we use a standardized error return object definition &#x2014; see <a href="../common-data-objects/CommonDataObjects.html#must-use-common-error-return-objects"><em>Use Common Error Return Objects</em></a>.</p>
+<p>APIs should define the functional, business view and abstract from implementation aspects. Errors become a key element providing context and visibility into how to use an API. The error object should be extended by an application-specific error identifier if and only if the HTTP status code is not specific enough to convey the domain-specific error semantic. For this reason, we use a standardized error return object definition &#x2014; see <a href="../common-data-objects/CommonDataObjects.html#must-use-common-error-return-objects"><em>Use Common Error Return Objects</em></a>.</p>
 <p>The OpenAPI specification shall include definitions for error descriptions that will be returned; they are part of the interface definition and provide important information for service clients to handle exceptional situations and support troubleshooting. You should also think about a troubleshooting board &#x2014; it is part of the associated online API documentation, provides information and handling guidance on application-specific errors and is referenced via links of the API definition. This can reduce service support tasks and contribute to service client and provider performance.</p>
+<p>Service providers should differentiate between technical and functional errors. In most cases it&apos;s not useful to document technical errors that are not in control of the service provider unless the status code convey application-specific semantics. The list of status code that can be omitted from API specifications includes but is not limited to:</p>
+<ul>
+<li><code>401 Unauthorized</code></li>
+<li><code>403 Forbidden</code></li>
+<li><code>404 Not Found</code> unless it has some additional semantics</li>
+<li><code>405 Method Not Allowed</code></li>
+<li><code>406 Not Acceptable</code></li>
+<li><code>408 Request Timeout</code></li>
+<li><code>413 Payload Too Large</code></li>
+<li><code>414 URI Too Long</code></li>
+<li><code>415 Unsupported Media Type</code></li>
+<li><code>500 Internal Server Error</code></li>
+<li><code>502 Bad Gateway</code></li>
+<li><code>503 Service Unavailable</code></li>
+<li><code>504 Gateway Timeout</code></li>
+</ul>
+<p>Even though they might not be documented - they may very much occur in production, so clients should be prepared for unexpected response codes, and in case of doubt handle them like they would handle the corresponding x00 code. Adding new response codes (specially error responses) should be considered a compatible API evolution.</p>
+<p>Functional errors on the other hand, that convey domain-specific semantics, must be documented and are strongly encouraged to be expressed with <a href="../common-data-objects/CommonDataObjects.html#must-use-common-error-return-objects"><em>Problem types</em></a>.</p>
 <h2 id="must-use-429-with-headers-for-rate-limits"><a name="must-use-429-with-headers-for-rate-limits" class="plugin-anchor" href="#must-use-429-with-headers-for-rate-limits"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use 429 with Headers for Rate Limits</h2>
 <p>APIs that wish to manage the request rate of clients must use the <a href="http://tools.ietf.org/html/rfc6585" target="_blank">&apos;429 Too Many Requests&apos;</a> response code if the client exceeded the request rate and therefore the request can&apos;t be fulfilled. Such responses must also contain header information providing further details to the client. There are two approaches a service can take for header information:</p>
 <ul>
