@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Thu Aug 04 2016 15:18:20 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Thu Aug 18 2016 08:43:17 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -560,7 +560,7 @@ Links:
 <p>We don&apos;t allow the use of the <a href="http://tools.ietf.org/html/rfc5988#section-5" target="_blank"><code>Link</code> Header defined by RFC 5988</a>
 in conjunction with JSON media types, and favor <a href="#must-use-hal">HAL</a> instead. The primary reason is to have a consistent
 place for links as well as the better support for links in JSON payloads compared to the uncommon link header syntax.</p>
-<h2 id="could-use-uris-for-custom-link-relations"><a name="could-use-uris-for-custom-link-relations" class="plugin-anchor" href="#could-use-uris-for-custom-link-relations"><span class="fa fa-link"></span></a><span style="color:green;font-weight:bold">Could:</span> Use URIs for Custom Link Relations</h2>
+<h2 id="could-use-custom-link-relations"><a name="could-use-custom-link-relations" class="plugin-anchor" href="#could-use-custom-link-relations"><span class="fa fa-link"></span></a><span style="color:green;font-weight:bold">Could:</span> Use Custom Link Relations</h2>
 <p>You should consider using a custom link relation if and only if standard <a href="http://www.iana.org/assignments/link-relations/link-relations.xml" target="_blank">link relations</a>
 are not sufficient to express a relation.
 Related or even embedded (sub-) resources should be linked via &#x201C;meta link attributes&#x201D; within the response payload; use
@@ -568,12 +568,14 @@ the following <a href="http://stateless.co/hal_specification.html" target="_blan
 <pre><code>{
   ...
   &#x201C;_links&#x201D;: {
-    &#x201C;https://docs.team.zalan.do/rels/my-entity&#x201D;: [{
+    &#x201C;my-entity&#x201D;: {
       &#x201C;href&#x201D;: &#x201C;https://service.team.zalan.do/my-entities/123&#x201D;
-    }]
+    }
   }
 }
-</code></pre><h2 id="should-allow-optional-embedding-of-subresources"><a name="should-allow-optional-embedding-of-subresources" class="plugin-anchor" href="#should-allow-optional-embedding-of-subresources"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Allow Optional Embedding of Sub-Resources</h2>
+</code></pre><p>In earlier versions of this rule we proposed URIs but dropped that in favor of readability. Since link relations are
+properties in the <code>_links</code> object you should define and describe them individually in the API specification. </p>
+<h2 id="should-allow-optional-embedding-of-subresources"><a name="should-allow-optional-embedding-of-subresources" class="plugin-anchor" href="#should-allow-optional-embedding-of-subresources"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Allow Optional Embedding of Sub-Resources</h2>
 <p>Embedding related resources (also know as <em>Resource expansion</em>) is a great way to reduce the number of requests. In
 cases where clients know upfront that they need some related resources they can instruct the server to prefetch that
 data eagerly. Whether this is optimized on the server, e.g. a database join, or done in a generic way, e.g. an HTTP
