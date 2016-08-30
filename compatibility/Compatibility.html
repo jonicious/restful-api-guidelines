@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Tue Aug 30 2016 08:13:53 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Tue Aug 30 2016 09:42:48 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -471,6 +471,8 @@ provide default behavior for unknown values, if applicable</li>
 <li>Follow the redirect when the server returns an &#x201C;HTTP 301 Moved Permanently&#x201D; response code</li>
 <li>Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions! Note also, that status codes are extensible -- default handling is how you would treat the corresponding x00 code (see <a href="https://tools.ietf.org/html/rfc7231#section-6" target="_blank">RFC7231  Section 6</a>)</li>
 </ul>
+<h2 id="must-always-return-json-objects-as-toplevel-data-structures-to-support-extensibility"><a name="must-always-return-json-objects-as-toplevel-data-structures-to-support-extensibility" class="plugin-anchor" href="#must-always-return-json-objects-as-toplevel-data-structures-to-support-extensibility"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Always Return JSON Objects As Top-Level Data Structures To Support Extensibility</h2>
+<p>In a response body, you must always return a JSON objects (and not e.g. an array) as a top level data structure to support future extensibility. JSON objects support compatible extension by additional attributes. This allows you to easily extend your response and e.g. add pagination later, without breaking backwards compatibility.</p>
 <h2 id="should-avoid-versioning"><a name="should-avoid-versioning" class="plugin-anchor" href="#should-avoid-versioning"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Avoid Versioning</h2>
 <p>When changing your RESTful APIs,
 do so in a compatible way and avoid generating additional API versions. Multiple
