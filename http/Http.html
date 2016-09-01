@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Tue Aug 30 2016 09:42:48 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Thu Sep 01 2016 14:18:51 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -495,7 +495,7 @@ of methods or as a structured list of link templates)</li>
 <li>this operation is rarely implemented, though it could be used to self-describe the full functionality
 of a resource.</li>
 </ul>
-<h2 id="must--http-methods-must-fulfill-safeness-and-idempotency-properties"><a name="must--http-methods-must-fulfill-safeness-and-idempotency-properties" class="plugin-anchor" href="#must--http-methods-must-fulfill-safeness-and-idempotency-properties"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span>  HTTP Methods must Fulfill Safeness and Idempotency Properties</h2>
+<h2 id="must-fulfill-safeness-and-idempotency-properties"><a name="must-fulfill-safeness-and-idempotency-properties" class="plugin-anchor" href="#must-fulfill-safeness-and-idempotency-properties"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Fulfill Safeness and Idempotency Properties</h2>
 <p>An operation can be...</p>
 <ul>
 <li>idempotent, i.e. operation will produce the same results if executed once or multiple times (note: this does not
@@ -716,7 +716,7 @@ different HTTP methods on resources.</p>
 </tbody>
 </table>
 <p>All error codes can be found in <a href="https://tools.ietf.org/html/rfc7231#section-6" target="_blank">RFC7231</a> and <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">Wikipedia</a> or via <a href="https://httpstatuses.com/" target="_blank">https://httpstatuses.com/</a><error_code>.</error_code></p>
-<h2 id="must-providing-error-documentation"><a name="must-providing-error-documentation" class="plugin-anchor" href="#must-providing-error-documentation"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Providing Error Documentation</h2>
+<h2 id="must-provide-error-documentation"><a name="must-provide-error-documentation" class="plugin-anchor" href="#must-provide-error-documentation"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Provide Error Documentation</h2>
 <p>APIs should define the functional, business view and abstract from implementation aspects. Errors become a key element providing context and visibility into how to use an API. The error object should be extended by an application-specific error identifier if and only if the HTTP status code is not specific enough to convey the domain-specific error semantic. For this reason, we use a standardized error return object definition &#x2014; see <a href="../common-data-objects/CommonDataObjects.html#must-use-common-error-return-objects"><em>Use Common Error Return Objects</em></a>.</p>
 <p>The OpenAPI specification shall include definitions for error descriptions that will be returned; they are part of the interface definition and provide important information for service clients to handle exceptional situations and support troubleshooting. You should also think about a troubleshooting board &#x2014; it is part of the associated online API documentation, provides information and handling guidance on application-specific errors and is referenced via links of the API definition. This can reduce service support tasks and contribute to service client and provider performance.</p>
 <p>Service providers should differentiate between technical and functional errors. In most cases it&apos;s not useful to document technical errors that are not in control of the service provider unless the status code convey application-specific semantics. The list of status code that can be omitted from API specifications includes but is not limited to:</p>

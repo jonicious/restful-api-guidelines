@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="14" data-chapter-title="Common Data Objects" data-filepath="common-data-objects/CommonDataObjects.md" data-basepath=".." data-revision="Tue Aug 30 2016 09:42:48 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="14" data-chapter-title="Common Data Objects" data-filepath="common-data-objects/CommonDataObjects.md" data-basepath=".." data-revision="Thu Sep 01 2016 14:18:51 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -528,7 +528,7 @@ You can reference it by using:</p>
     schema:
       $ref: &apos;https://zalando.github.io/problem/schema.yaml#/Problem&apos;
 </code></pre>
-<h2 id="must-an-error-message-must-not-contain-the-stack-trace"><a name="must-an-error-message-must-not-contain-the-stack-trace" class="plugin-anchor" href="#must-an-error-message-must-not-contain-the-stack-trace"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> An error message must not contain the stack trace.</h2>
+<h2 id="must-do-not-expose-stack-traces"><a name="must-do-not-expose-stack-traces" class="plugin-anchor" href="#must-do-not-expose-stack-traces"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Do not expose Stack Traces</h2>
 <p>Stack traces contain implementation details that are not part of an API, and on which clients
 should never rely. Moreover, stack traces can leak sensitive information that partners and third
 parties are not allowed to receive and may disclose insights about vulnerabilities to attackers.</p>
