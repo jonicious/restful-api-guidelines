@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="14" data-chapter-title="Common Data Objects" data-filepath="common-data-objects/CommonDataObjects.md" data-basepath=".." data-revision="Wed Sep 07 2016 11:27:11 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="14" data-chapter-title="Common Data Objects" data-filepath="common-data-objects/CommonDataObjects.md" data-basepath=".." data-revision="Wed Sep 07 2016 11:31:00 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -532,6 +532,19 @@ You can reference it by using:</p>
 <p>Stack traces contain implementation details that are not part of an API, and on which clients
 should never rely. Moreover, stack traces can leak sensitive information that partners and third
 parties are not allowed to receive and may disclose insights about vulnerabilities to attackers.</p>
+<h3 id="must-use-common-field-names"><a name="must-use-common-field-names" class="plugin-anchor" href="#must-use-common-field-names"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use common field names</h3>
+<p>There are some data fields that come up again and again in API data. We describe four here:</p>
+<ul>
+<li><p><code>id</code>: the identity of the object. If used, IDs must opaque strings and not numbers. IDs are unique within some documented context, are stable and don&apos;t change for a given object once assigned, and are never recycled cross entities. </p>
+</li>
+<li><p><code>created</code>: when the object was created. If used this must be a date-time construct.</p>
+</li>
+<li><p><code>modified</code>: when the object was updated. If used this must be a date-time construct.</p>
+</li>
+<li><p><code>type</code>: the kind of thing this object is. If used this should be a string. Types allow runtime information on the entity provided that otherwise requires examining the Open API file. </p>
+</li>
+</ul>
+<p>These properties are not always strictly neccessary, but making them idiomatic allows API client developers to build up a common understanding of Zalando&apos;s resources. There is very little utility for API consumers in having different names or value types for these fields across APIs. </p>
 
                     
                     </section>
