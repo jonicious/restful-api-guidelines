@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="11" data-chapter-title="Pagination" data-filepath="pagination/Pagination.md" data-basepath=".." data-revision="Wed Sep 07 2016 11:21:31 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="11" data-chapter-title="Pagination" data-filepath="pagination/Pagination.md" data-basepath=".." data-revision="Wed Sep 07 2016 11:27:11 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -485,13 +485,11 @@ deleted while fetching two pages</li>
 </ul>
 <h2 id="could-use-pagination-links-where-applicable"><a name="could-use-pagination-links-where-applicable" class="plugin-anchor" href="#could-use-pagination-links-where-applicable"><span class="fa fa-link"></span></a><span style="color:green;font-weight:bold">Could:</span> Use Pagination Links Where Applicable</h2>
 <ul>
-<li>Set <code>X-Total-Count</code> to send back the total count of entities.</li>
 <li>Set links to provide information to the client about subsequent paging options.</li>
 </ul>
 <p>For example:</p>
 <pre><code class="lang-http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
 <span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/x.zalando.products+json</span>
-<span class="hljs-attribute">X-Total-Count</span>: <span class="hljs-string">1309</span>
 
 <span class="json">{
   &quot;<span class="hljs-attribute">_links</span>&quot;: <span class="hljs-value">{
@@ -502,6 +500,7 @@ deleted while fetching two pages</li>
       &quot;<span class="hljs-attribute">href</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;http://catalog-service.zalando.net/products?offset=5&amp;limit=5&quot;</span>
     </span>}
   </span>}</span>,
+  &quot;<span class="hljs-attribute">total_count</span>&quot;: <span class="hljs-value"><span class="hljs-number">42</span></span>,
   &quot;<span class="hljs-attribute">products</span>&quot;: <span class="hljs-value">[
     {&quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;7e4ab218-1772-11e6-892c-836df3feeaee&quot;</span></span>},
     {&quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;9469725a-1772-11e6-83c2-ab22ac368913&quot;</span></span>},
@@ -512,7 +511,15 @@ deleted while fetching two pages</li>
 </span>}
 </span></code></pre>
 <p><a href="http://www.iana.org/assignments/link-relations/link-relations.xml" target="_blank">Possible relations</a>:
-<code>next</code>, <code>prev</code>, <code>last</code>, <code>first</code></p>
+<code>next</code>, <code>prev</code>, <code>last</code>, <code>first</code>.</p>
+<p>Previous editions of the guidelines documented the <code>X-Total-Count</code> header to send back the total count of entities in conjunction with the <code>Link</code> header, which has since been deprecated. Instead when returning an object structure, the count can be added as a JSON property, and this is the preferred way to return count (or other result level) information. </p>
+<p>The <code>X-Total-Count</code> is applicable in these cases:</p>
+<ul>
+<li>The API design is still using the <code>Link</code> header.</li>
+<li>The API is returning a non-JSON response media type, and isn&apos;t able to carry the information.</li>
+<li>The JSON response is an array and not an object.</li>
+</ul>
+<p>You should avoid providing a total count in your API unless there&apos;s a clear need to do so. Very often, there are systems and performance implications to supporting full counts, especially as datasets grow and requests become complex queries or filters that drive full scans (e.g., your database might need to look at all candidate items to count them). While this is an implementation detail relative to the API, it&apos;s important to consider your ability to support serving counts over the life of a service.</p>
 
                     
                     </section>
