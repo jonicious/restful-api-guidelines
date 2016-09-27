@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Thu Sep 15 2016 15:04:57 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Tue Sep 27 2016 08:22:59 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -454,7 +454,8 @@ used for input parameters.</li>
 <li>Enum ranges can be reduced when used as input parameters, only if the server
 is ready to accept and handle old range values too. Enum values can be reduced
 when used as output parameters.</li>
-<li>Use x-extensible-enum, if range is used for output parameters and likely to
+<li>Use <a href="#should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations"><code>x-extensible-enum</code></a>,
+if range is used for output parameters and likely to
 be extended with growing functionality. It defines an open list of explicit
 values and clients must be agnostic to new values (e.g. via casuistic with
 default behavior).</li>
@@ -466,13 +467,32 @@ default behavior).</li>
 <ul>
 <li>Ignore new and unknown fields in the payload (see also Fowler&#x2019;s
 &#x201C;<a href="http://martinfowler.com/bliki/TolerantReader.html" target="_blank">TolerantReader</a>&#x201D; post)</li>
-<li>Be prepared for new enum values declared with x-extensible-enum (see above);
+<li>Be prepared for new enum values declared with
+<a href="#should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations"><code>x-extensible-enum</code></a>;
 provide default behavior for unknown values, if applicable</li>
 <li>Follow the redirect when the server returns an &#x201C;HTTP 301 Moved Permanently&#x201D; response code</li>
 <li>Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions! Note also, that status codes are extensible -- default handling is how you would treat the corresponding x00 code (see <a href="https://tools.ietf.org/html/rfc7231#section-6" target="_blank">RFC7231  Section 6</a>)</li>
 </ul>
 <h2 id="must-always-return-json-objects-as-toplevel-data-structures-to-support-extensibility"><a name="must-always-return-json-objects-as-toplevel-data-structures-to-support-extensibility" class="plugin-anchor" href="#must-always-return-json-objects-as-toplevel-data-structures-to-support-extensibility"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Always Return JSON Objects As Top-Level Data Structures To Support Extensibility</h2>
 <p>In a response body, you must always return a JSON objects (and not e.g. an array) as a top level data structure to support future extensibility. JSON objects support compatible extension by additional attributes. This allows you to easily extend your response and e.g. add pagination later, without breaking backwards compatibility.</p>
+<h2 id="should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations"><a name="should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations" class="plugin-anchor" href="#should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Used Open-Ended List of Values (x-extensible-enum) Instead of Enumerations</h2>
+<p>Enumerations are per definition closed sets of values, that are assumed to be complete and not
+intended for extension. This closed principle of enumerations imposes compatibility issues when
+an enumeration must be extended. To avoid these issues, we strongly recommend to use an open-ended
+list of values instead of an enumeration unless:</p>
+<ol>
+<li>the API has full control of the enumeration values, i.e. the list of values does not depend
+on any external tool or interface, and</li>
+<li>the list of value is complete with respect to any thinkable and unthinkable future feature.</li>
+</ol>
+<p>To specify an open-ended list of values use the marker <code>x-extensible-enum</code> as follows:</p>
+<pre><code>deliver_methods:
+  type: string
+  x-extensible-enum:
+    - parcel
+    - letter
+    - email
+</code></pre><p><strong>Note:</strong> <code>x-extensible-enum</code> is not JSON Schema conform but will be ignored by most tools.</p>
 <h2 id="should-avoid-versioning"><a name="should-avoid-versioning" class="plugin-anchor" href="#should-avoid-versioning"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Avoid Versioning</h2>
 <p>When changing your RESTful APIs,
 do so in a compatible way and avoid generating additional API versions. Multiple
