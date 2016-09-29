@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="10" data-chapter-title="Performance" data-filepath="performance/Performance.md" data-basepath=".." data-revision="Thu Sep 29 2016 09:47:39 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="10" data-chapter-title="Performance" data-filepath="performance/Performance.md" data-basepath=".." data-revision="Thu Sep 29 2016 12:27:17 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -508,8 +508,33 @@ caching of entities.</p>
 <li>hash of the response body</li>
 <li>hash of the entity&#x2019;s last modified field</li>
 </ul>
-<p>Also see <a href="../hyper-media/Hypermedia.html#should-allow-embedding-of-complex-subresources"><em>Allow Embedding of Complex Sub-Resources</em></a>
-below as contribution to performance optimization as to avoid multiple requests for sub-resources.</p>
+<p>Also see <a href="Performance.html#should-allow-embedding-of-complex-subresources"><em>Allow Embedding of Complex Sub-Resources</em></a>
+below as contribution to performance optimization to avoid multiple requests for sub-resources.</p>
+<h2 id="should-allow-optional-embedding-of-subresources"><a name="should-allow-optional-embedding-of-subresources" class="plugin-anchor" href="#should-allow-optional-embedding-of-subresources"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Allow Optional Embedding of Sub-Resources</h2>
+<p>Embedding related resources (also know as <em>Resource expansion</em>) is a great way to reduce the number of requests. In
+cases where clients know upfront that they need some related resources they can instruct the server to prefetch that
+data eagerly. Whether this is optimized on the server, e.g. a database join, or done in a generic way, e.g. an HTTP
+proxy that transparently embeds resources, is up to the implementation.</p>
+<p>See <a href="../naming/Naming.html#could-use-conventional-query-strings"><em>Conventional Query Strings</em></a> for naming. Please use <a href="https://github.com/zalando/json-fields" target="_blank">json-fields</a> library, already mentioned above for filtering, when it comes to an embedding query syntax.</p>
+<p>Embedding a sub-resource can possibly look like this where an order resource has its order items as sub-resource (/order/{orderId}/items):</p>
+<pre><code class="lang-http"><span class="hljs-request">GET <span class="hljs-string">/order/123?embed=(items)</span> HTTP/1.1</span>
+
+<span class="json">{
+  &quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;123&quot;</span></span>,
+  &quot;<span class="hljs-attribute">_embedded</span>&quot;: <span class="hljs-value">{
+    &quot;<span class="hljs-attribute">items</span>&quot;: <span class="hljs-value">[
+      {
+        &quot;<span class="hljs-attribute">position</span>&quot;: <span class="hljs-value"><span class="hljs-number">1</span></span>,
+        &quot;<span class="hljs-attribute">sku</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;1234-ABCD-7890&quot;</span></span>,
+        &quot;<span class="hljs-attribute">price</span>&quot;: <span class="hljs-value">{
+          &quot;<span class="hljs-attribute">amount</span>&quot;: <span class="hljs-value"><span class="hljs-number">71.99</span></span>,
+          &quot;<span class="hljs-attribute">currency</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;EUR&quot;</span>
+        </span>}
+      </span>}
+    ]
+  </span>}
+</span>}
+</span></code></pre>
 
                     
                     </section>

@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Thu Sep 29 2016 09:47:39 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Thu Sep 29 2016 12:27:17 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -550,7 +550,7 @@ Links:
 </tr>
 </tbody>
 </table>
-<p>We define HAL links to be extensible, i.e. to contain additional properties if needed. For consistency extensions should reuse attributes from the <a href="https://tools.ietf.org/html/rfc5988#section-5" target="_blank"><code>Link</code> header</a>. </p>
+<p>We define HAL links to be extensible, i.e. to contain additional properties if needed. For consistency extensions should reuse attributes from the <a href="https://tools.ietf.org/html/rfc5988#section-5" target="_blank"><code>Link</code> header</a>.</p>
 <p>Interesting articles for comparisons of different hypermedia formats:</p>
 <ul>
 <li><a href="http://sookocheff.com/post/api/on-choosing-a-hypermedia-format/" target="_blank">Kevin Sookocheff&#x2019;s On choosing a hypermedia type for your API</a></li>
@@ -568,27 +568,13 @@ the following <a href="http://stateless.co/hal_specification.html" target="_blan
 <pre><code>{
   ...
   &#x201C;_links&#x201D;: {
-    &#x201C;my-entity&#x201D;: {
+    &#x201C;my-relation&#x201D;: {
       &#x201C;href&#x201D;: &#x201C;https://service.team.zalan.do/my-entities/123&#x201D;
     }
   }
 }
 </code></pre><p>In earlier versions of this rule we proposed URIs but dropped that in favor of readability. Since link relations are
-properties in the <code>_links</code> object you should define and describe them individually in the API specification. </p>
-<h2 id="should-allow-optional-embedding-of-subresources"><a name="should-allow-optional-embedding-of-subresources" class="plugin-anchor" href="#should-allow-optional-embedding-of-subresources"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Allow Optional Embedding of Sub-Resources</h2>
-<p>Embedding related resources (also know as <em>Resource expansion</em>) is a great way to reduce the number of requests. In
-cases where clients know upfront that they need some related resources they can instruct the server to prefetch that
-data eagerly. Whether this is optimized on the server, e.g. a database join, or done in a generic way, e.g. an HTTP
-proxy that transparently embeds resources, is up to the implementation.</p>
-<p>See <a href="../naming/Naming.html#could-use-conventional-query-strings"><em>Conventional Query Strings</em></a> for naming.</p>
-<h2 id="must-modify-the-contenttype-for-embedded-resources"><a name="must-modify-the-contenttype-for-embedded-resources" class="plugin-anchor" href="#must-modify-the-contenttype-for-embedded-resources"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Modify the Content-Type for Embedded Resources</h2>
-<p>Embedded resources requires to change the media type of the response accordingly:</p>
-<pre><code class="lang-http"><span class="hljs-request">GET <span class="hljs-string">/order/123?embed=(items)</span> HTTP/1.1</span>
-<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/x.order+json</span>
-</code></pre>
-<pre><code class="lang-http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
-<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/x.order+json;embed=(items)</span>
-</code></pre>
+properties in the <code>_links</code> object you should define and describe them individually in the API specification.</p>
 
                     
                     </section>
