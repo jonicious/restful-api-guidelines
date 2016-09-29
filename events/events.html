@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="19" data-chapter-title="Events" data-filepath="events/events.md" data-basepath=".." data-revision="Tue Sep 27 2016 08:22:59 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="19" data-chapter-title="Events" data-filepath="events/events.md" data-basepath=".." data-revision="Thu Sep 29 2016 09:47:39 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -440,6 +440,14 @@
 <p>Nakadi defines a structure called an <em>EventType</em>, which describes details for a particular kind of event. The EventType declares standard information, such as a name, an owning application (and by implication, an owning team), a well known event category (business process or data change), and a schema defining the event payload. It also allows the declaration of validation and enrichment strategies for events, along with supplemental information such as how events are partitioned in the stream. </p>
 <p>An EventType is registered with Nakadi via its <em>Schema Registry API</em>. Once the EventType is created, individual events that conform to the type and its payload schema can be published, and consumers can access them as stream of Events. <a href="https://github.com/zalando/nakadi/blob/nakadi-jvm/api/nakadi-event-bus-api.yaml" target="_blank">Nakadi&apos;s Open API definitions</a> include the definitions for two main categories, business events (BusinessEvent), and data change events (DataChangeEvent), as well as a generic &apos;undefined&apos; type. </p>
 <p>The service specific data defined for an event is called the <em>payload</em>. Only this non-Nakadi defined part of the event is expected to be submitted with the EventType schema.  When defining an EventType&apos;s payload schema as part of your API and for review purposes, it&apos;s ok to declare the payload as an object definition using Open API, but please note that Nakadi currently expects the EventType&apos;s schema to be submitted as JSON Schema and not as Open API JSON or YAML. Further details on how to register EventTypes are available in the Nakadi project&apos;s documentation.</p>
+<h2 id="must-events-must-not-provide-sensitive-customer-personal-data"><a name="must-events-must-not-provide-sensitive-customer-personal-data" class="plugin-anchor" href="#must-events-must-not-provide-sensitive-customer-personal-data"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Events must not provide sensitive customer personal data.</h2>
+<p>+Similar to API permission scopes, there will be Event Type permissions passed via an OAuth token supported in near future by the Nakadi API. Hence, Nakadi will restrict event data access to clients with sufficient authorization. However, teams are asked to note the following:</p>
+<ul>
+<li><p>Sensitive data, such as (e-mail addresses, phone numbers, etc) are subject to strict access and data protection controls. </p>
+</li>
+<li><p>Event type owners <strong>must not</strong> publish sensitive information unless it&apos;s mandatory or neccessary to do so. For example, events sometimes need to provide personal data, such as delivery addresses in shipment orders  (as do other APIs), and this is fine.</p>
+</li>
+</ul>
 <h2 id="must-use-business-events-to-signal-steps-and-arrival-points-in-business-processes"><a name="must-use-business-events-to-signal-steps-and-arrival-points-in-business-processes" class="plugin-anchor" href="#must-use-business-events-to-signal-steps-and-arrival-points-in-business-processes"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use Business Events to signal steps and arrival points in business processes</h2>
 <p>Nakadi defines a specific event type for business processes, called <a href="https://github.com/zalando/nakadi/blob/nakadi-jvm/api/nakadi-event-bus-api.yaml#/definitions/BusinessEvent" target="_blank">BusinessEvent</a>. When publishing events that represent steps in a business process, event types must be based on the BusinessEvent type.</p>
 <p>All your events of a single business process will conform to the following rules:</p>
