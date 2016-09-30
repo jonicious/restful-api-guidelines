@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="3" data-chapter-title="General Guidelines" data-filepath="general-guidelines/GeneralGuidelines.md" data-basepath=".." data-revision="Thu Sep 29 2016 12:27:17 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="3" data-chapter-title="General Guidelines" data-filepath="general-guidelines/GeneralGuidelines.md" data-basepath=".." data-revision="Fri Sep 30 2016 13:11:08 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -430,16 +430,27 @@
                     
                         <h1 id="general-guidelines"><a name="general-guidelines" class="plugin-anchor" href="#general-guidelines"><span class="fa fa-link"></span></a>General Guidelines</h1>
 <p>The titles are marked with the corresponding labels: <span style="color:red;font-weight:bold">Must:</span>, <span style="color:darkgoldenrod;font-weight:bold">Should:</span>, <span style="color:green;font-weight:bold">Could:</span>.</p>
-<h2 id="must-api-first-define-apis-using-openapi"><a name="must-api-first-define-apis-using-openapi" class="plugin-anchor" href="#must-api-first-define-apis-using-openapi"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> API First: Define APIs using OpenAPI</h2>
+<h2 id="must-provide-api-reference-definition-using-openapi"><a name="must-provide-api-reference-definition-using-openapi" class="plugin-anchor" href="#must-provide-api-reference-definition-using-openapi"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Provide API Reference Definition using OpenAPI</h2>
 <p>API First is one of our architecture principles, as per our Architecture Rules of Play.
 Define, document and review your APIs before delivering them (also see API review procedure).
-Whether you choose YAML or JSON as a format of your specification file is up to you.</p>
-<h2 id="should-provide-external-documentation"><a name="should-provide-external-documentation" class="plugin-anchor" href="#should-provide-external-documentation"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Provide External Documentation</h2>
-<p>In addition to defining the API with OpenAPI, it&#x2019;s good practice to provide documentation that
-describes the API&#x2019;s scope and purpose; architecture and use-case context (including figures);
-sequence flows; edge cases and possible error situations, etc. Include a link to this documentation
-using the &#x201C;externalDocs&#x201D; property in your RESTful API OpenAPI definition and post it online on
-GitHub Enterprise pages, on specific team web servers, or as a Google doc.</p>
+Whether you choose YAML or JSON as a format of your OpenAPI API specification file is up to you; 
+however, YAML is generally preferred due to its improved readability. 
+We also call the OpenAPI API specification the &quot;API Reference Definition&quot;; 
+it provides all information needed by an experienced API client developer to use this API. </p>
+<h2 id="should-provide-user-manual-documentation"><a name="should-provide-user-manual-documentation" class="plugin-anchor" href="#should-provide-user-manual-documentation"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Provide User Manual Documentation</h2>
+<p>In addition to defining the API as OpenAPI Reference Definition, it&#x2019;s good practice to provide 
+further documentation to improve client developer experience, especially of engineers that 
+are novices in using this API. A helpful API User Manual documentation typically describes 
+the following API aspects:</p>
+<ul>
+<li>API&#x2019;s scope, purpose and use cases</li>
+<li>concrete usage examples </li>
+<li>architecture context - including figures and sequence flows</li>
+<li>edge cases and possible error situations</li>
+</ul>
+<p>The User Manual must be posted online, e.g. via GitHub Enterprise pages, on specific 
+team web servers, or as a Google doc. And don&apos;t forget to include a link to this 
+user manual documentation into your OpenAPI definition using the &#x201C;externalDocs&#x201D; property.</p>
 <h2 id="must-write-apis-in-us-english"><a name="must-write-apis-in-us-english" class="plugin-anchor" href="#must-write-apis-in-us-english"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Write APIs in U.S. English</h2>
 
                     
