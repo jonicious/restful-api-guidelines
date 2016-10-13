@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="18" data-chapter-title="API Operation" data-filepath="api-operation/ApiOperation.md" data-basepath=".." data-revision="Fri Sep 30 2016 13:11:08 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="18" data-chapter-title="API Operation" data-filepath="api-operation/ApiOperation.md" data-basepath=".." data-revision="Thu Oct 13 2016 10:34:39 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -429,24 +429,30 @@
                     <section class="normal" id="section-">
                     
                         <h1 id="api-operation"><a name="api-operation" class="plugin-anchor" href="#api-operation"><span class="fa fa-link"></span></a>API Operation</h1>
-<h2 id="must-applications-must-provide-online-access-to-their-api-swagger-definitions"><a name="must-applications-must-provide-online-access-to-their-api-swagger-definitions" class="plugin-anchor" href="#must-applications-must-provide-online-access-to-their-api-swagger-definitions"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Applications Must Provide Online Access to Their API (Swagger) Definitions</h2>
-<p>In our dynamic and complex service infrastructure, it is important to provide a central place with
-online access to the API definitions of all running applications. All service applications must
-provide the following two API endpoints:</p>
+<h2 id="must-provide-online-access-to-openapi-reference-definition"><a name="must-provide-online-access-to-openapi-reference-definition" class="plugin-anchor" href="#must-provide-online-access-to-openapi-reference-definition"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Provide Online Access to OpenAPI Reference Definition</h2>
+<p>All service applications must support access to the OpenAPI Reference Definitions of their external APIs &#x2014; it 
+is optional for internal APIs &#x2014; via the following two API endpoints:  </p>
 <ul>
-<li>endpoint(s) for GET access on its API OpenAPI definition(s), for instance
+<li>endpoint(s) for GET access on its OpenAPI definition(s), for instance
 <code>https://example.com/swagger.json</code> or <code>https://example.com/swagger.yaml</code>.</li>
 <li>&#x201C;Twintip&#x201D; discovery endpoint <code>https://example.com/.well-known/schema-discovery</code> that delivers
 the OpenAPI definition endpoint(s) above (see the link below for a description of its format).</li>
 </ul>
-<p>Note, these discovery endpoints have to be supported but need not be part of the OpenAPI definition as there is no API specific information in their description.</p>
-<p>Background: <a href="http://docs.stups.io/en/latest/components/twintip.html" target="_blank">Twintip</a> is an API definition
-crawler of the STUPS infrastructure; it checks all running applications via the endpoint above and
+<p>Hint: Though discovery endpoints have to be supported, they should not be specified in the OpenAPI definition 
+as they are generic and provide no API specific information.</p>
+<p>We distinguish between internal and external APIs of an application which is owned by a specific team and often 
+implemented via small set of services. An external API is used by clients outside the team - usually 
+another application owned by a different team or even an external business partner user of our platform. 
+An internal API is only used within the application and only by the owning team, for instance, 
+for operational or implementation internal purposes. </p>
+<p>Background: In our dynamic and complex service infrastructure, it is important to provide API client 
+developers a central place with online access to the OpenAPI reference definitions of all running applications. 
+<a href="http://docs.stups.io/en/latest/components/twintip.html" target="_blank">Twintip</a> is an API definition
+crawler of the Zalando platform infrastructure; it checks all running applications via the endpoint above and
 stores the discovered API definitions. Twintip itself provides a RESTful API as well as an
 API Viewer (Swagger-UI) for central access to all discovered API definitions.</p>
-<p>For the time being, this document is an appropriate place to mention this rule, even though it is
-not a RESTful API definition rule or related to our STUPS infrastructure for application service
-management.</p>
+<p>Editorial: For the time being, this document is an appropriate place to mention this rule, even though it is
+not a RESTful API definition rule but related to service implementation obligations to support client developer API discovery. </p>
 <p>Further reading:</p>
 <ul>
 <li><a href="https://github.com/zalando-stups/twintip-spring-web" target="_blank">Library to make your Spring Boot service crawlable via Twintip</a></li>
