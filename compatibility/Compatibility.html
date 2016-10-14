@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Thu Oct 13 2016 14:33:50 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -532,10 +532,11 @@ application/x.zalando.cart+json;version=2. For incompatible changes, a new
 media type version for the resource is created. To generate the new
 representation version, consumer and producer can do content negotiation using
 the HTTP Content-Type and Accept headers. Note: This versioning only applies to
-the content schema, not to URI or method semantics.</p>
-<p>In this example, a client wants only the new version:</p>
+the request and response content schema, not to URI or method semantics.</p>
+<p>In this example, a client wants only the new version of the response:</p>
+<pre><code>Accept: application/x.zalando.cart+json;version=2
+</code></pre><p>A server responding to this, as well as a client sending a request with content should use the Content-Type header, declaring that one is sending the new version:</p>
 <pre><code>Content-Type: application/x.zalando.cart+json;version=2
-Accept: application/x.zalando.cart+json;version=2
 </code></pre><p>Using header versioning should:</p>
 <ul>
 <li>include versions in request and response headers to increase visibility</li>
@@ -544,8 +545,11 @@ Accept: application/x.zalando.cart+json;version=2
 <p>Hint: <a href="https://github.com/OAI/OpenAPI-Specification/issues/146" target="_blank">OpenAPI currently doesn&#x2019;t support content
 negotiation</a>, though <a href="https://github.com/OAI/OpenAPI-Specification/issues/146#issuecomment-117288707" target="_blank">a comment in this
 issue</a> mentions
-a workaround (using a fragment identifier that
-gets stripped off).</p>
+a workaround (using a fragment identifier that gets stripped off).
+Another way would be to document just the new version, but let the server accept the old
+one (with the previous content-type).</p>
+<p>Until an incompatible change is necessary, it is recommended to stay with the standard
+<code>application/json</code> media type.</p>
 <h2 id="must-do-not-use-uri-versioning"><a name="must-do-not-use-uri-versioning" class="plugin-anchor" href="#must-do-not-use-uri-versioning"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Do Not Use URI Versioning</h2>
 <p>With URI versioning a (major) version number is included in the path, e.g.
 /v1/customers. The consumer has to wait until the provider has been released

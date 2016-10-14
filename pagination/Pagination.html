@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="11" data-chapter-title="Pagination" data-filepath="pagination/Pagination.md" data-basepath=".." data-revision="Thu Oct 13 2016 14:33:50 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="11" data-chapter-title="Pagination" data-filepath="pagination/Pagination.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -503,8 +503,11 @@ deleted while fetching two pages</li>
 <li>Set links to provide information to the client about subsequent paging options.</li>
 </ul>
 <p>For example:</p>
-<pre><code class="lang-http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
-<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/x.zalando.products+json</span>
+<pre><code class="lang-http"><span class="hljs-request">GET <span class="hljs-string">http://catalog-service.zalando.net/products?offset=10&amp;limit=5</span> HTTP/1.1</span>
+<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
+
+<span class="http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span>
 
 <span class="json">{
   &quot;<span class="hljs-attribute">_links</span>&quot;: <span class="hljs-value">{
@@ -524,7 +527,7 @@ deleted while fetching two pages</li>
     {&quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;adb407ac-1772-11e6-b255-078fb28ff55b&quot;</span></span>}
   ]
 </span>}
-</span></code></pre>
+</span></span></code></pre>
 <p><a href="http://www.iana.org/assignments/link-relations/link-relations.xml" target="_blank">Possible relations</a>:
 <code>next</code>, <code>prev</code>, <code>last</code>, <code>first</code>.</p>
 <p>Previous editions of the guidelines documented the <code>X-Total-Count</code> header to send back the total count of entities in conjunction with the <code>Link</code> header, which has since been deprecated. Instead when returning an object structure, the count can be added as a JSON property, and this is the preferred way to return count (or other result level) information. </p>

@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="13" data-chapter-title="Data Formats" data-filepath="data-formats/DataFormats.md" data-basepath=".." data-revision="Thu Oct 13 2016 14:33:50 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="13" data-chapter-title="Data Formats" data-filepath="data-formats/DataFormats.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -473,11 +473,11 @@ use another, more sufficient media type. But only do this if you can not transfe
 <li><p><a href="https://en.wikipedia.org/wiki/ISO_4217" target="_blank">ISO 4217 currency codes</a></p>
 </li>
 </ul>
-<h2 id="could-use-applicationspecific-content-types"><a name="could-use-applicationspecific-content-types" class="plugin-anchor" href="#could-use-applicationspecific-content-types"><span class="fa fa-link"></span></a><span style="color:green;font-weight:bold">Could:</span> Use Application-Specific Content Types</h2>
-<p>For instance, <code>application/x.zalando.article+json</code>. For complex types, it&#x2019;s better to have a
-specific content type. For simple use cases this isn&#x2019;t necessary. We can attach version info to
-media type names and support content negotiation to get different representations, e.g.
-<code>application/x.zalando.article+json;version=2</code>.</p>
+<h2 id="should-prefer-standard-media-type-name-applicationjson"><a name="should-prefer-standard-media-type-name-applicationjson" class="plugin-anchor" href="#should-prefer-standard-media-type-name-applicationjson"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Prefer standard Media type name <code>application/json</code></h2>
+<p>Previously, this guideline allowed the use of custom media types like <code>application/x.zalando.article+json</code>.
+This usage is not recommended anymore and should be avoided, except where it is necessary for cases
+of <a href="../compatibility/Compatibility.html#must-use-media-type-versioning">media type versioning</a>. Instead, the standard media type name <code>application/json</code> (or <a href="http://zalando.github.io/restful-api-guidelines/common-data-objects/CommonDataObjects.html#must-use-problem-json" target="_blank"><code>application/problem+json</code> for HTTP error details</a>) should be used for JSON-formatted data.</p>
+<p>Custom media types with subtypes beginning with <code>x</code> bring no advantage compared to the standard media type for JSON, and make automated processing more difficult. They are also <a href="https://tools.ietf.org/html/rfc6838#section-3.4" target="_blank">discouraged by RFC 6838</a>.</p>
 
                     
                     </section>

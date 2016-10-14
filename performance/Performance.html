@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="10" data-chapter-title="Performance" data-filepath="performance/Performance.md" data-basepath=".." data-revision="Thu Oct 13 2016 14:33:50 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="10" data-chapter-title="Performance" data-filepath="performance/Performance.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -472,7 +472,7 @@ compression via the Content-Encoding header.</p>
 <pre><code class="lang-http"><span class="hljs-request">GET <span class="hljs-string">http://api.example.org/resources/123</span> HTTP/1.1</span>
 
 <span class="http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
-<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/x.person+json</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span>
 
 <span class="json">{
   &quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;cddd5e44-dae0-11e5-8c01-63ed66ab2da5&quot;</span></span>,
@@ -491,7 +491,7 @@ compression via the Content-Encoding header.</p>
 <pre><code class="lang-http"><span class="hljs-request">GET <span class="hljs-string">http://api.example.org/resources/123?fields=(name,partner(name))</span> HTTP/1.1</span>
 
 <span class="http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
-<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/x.person+json;fields=(name,partner(name))</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span>
 
 <span class="json">{
   &quot;<span class="hljs-attribute">name</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;John Doe&quot;</span></span>,
