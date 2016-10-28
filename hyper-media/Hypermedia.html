@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Fri Oct 28 2016 09:16:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -443,8 +443,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="hypermedia"><a name="hypermedia" class="plugin-anchor" href="#hypermedia"><span class="fa fa-link"></span></a>Hypermedia</h1>
-<h2 id="must-use-rest-maturity-level-2"><a name="must-use-rest-maturity-level-2" class="plugin-anchor" href="#must-use-rest-maturity-level-2"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use REST Maturity Level 2</h2>
+                        <h1 id="hypermedia">Hypermedia</h1>
+<h2 id="must-use-rest-maturity-level-2"><span style="color:red;font-weight:bold">Must:</span> Use REST Maturity Level 2</h2>
 <p>We strive for a good implementation of <a href="http://martinfowler.com/articles/richardsonMaturityModel.html#level2" target="_blank">REST Maturity Level 2</a> as it enables
 us to build resource-oriented APIs that make full use of HTTP verbs and status codes.
 You can see this expressed by many rules throughout these guidelines, e.g.:</p>
@@ -455,7 +455,7 @@ You can see this expressed by many rules throughout these guidelines, e.g.:</p>
 <li><a href="../http/Http.html#must-use-meaningful-http-status-codes">Use Meaningful HTTP Status Codes</a></li>
 </ul>
 <p>Although this is not HATEOAS, it should not prevent you from designing proper link relationships in your APIs as stated in rules below.</p>
-<h2 id="could-use-rest-maturity-level-3--hateoas"><a name="could-use-rest-maturity-level-3--hateoas" class="plugin-anchor" href="#could-use-rest-maturity-level-3--hateoas"><span class="fa fa-link"></span></a><span style="color:green;font-weight:bold">Could:</span> Use REST Maturity Level 3 - HATEOAS</h2>
+<h2 id="could-use-rest-maturity-level-3--hateoas"><span style="color:green;font-weight:bold">Could:</span> Use REST Maturity Level 3 - HATEOAS</h2>
 <p>We do not generally recommend to implement <a href="http://martinfowler.com/articles/richardsonMaturityModel.html#level3" target="_blank">REST Maturity Level 3</a>. HATEOAS comes with additional API complexity without real value in our SOA context where client and server interact via REST APIs and provide complex business functions as part of our e-commerce platform.</p>
 <p>Our major concerns regarding the promised advantages of HATEOAS (see also <a href="https://www.infoq.com/news/2014/03/rest-at-odds-with-web-apis for detailed discussion" target="_blank">RESTistential Crisis over Hypermedia APIs</a>, <a href="https://jeffknupp.com/blog/2014/06/03/why-i-hate-hateoas/" target="_blank">Why I Hate HATEOAS</a> and others):</p>
 <ul>
@@ -466,7 +466,7 @@ You can see this expressed by many rules throughout these guidelines, e.g.:</p>
 <li>Hypermedia does not prevent API clients to implement shortcuts and directly target resources without &apos;discovering&apos; them</li>
 </ul>
 <p>However, we do not forbid HATEOAS; you could use it, if you checked its limitations and still see clear value for your usage scenario that justifies its additional complexity. If you use HATEOAS please share experience and present your findings in the <a href="https://techwiki.zalando.net/display/GUL/API+Guild" target="_blank">API Guild [internal link]</a>.</p>
-<h2 id="must-use-a-welldefined-subset-of-hal"><a name="must-use-a-welldefined-subset-of-hal" class="plugin-anchor" href="#must-use-a-welldefined-subset-of-hal"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use a well-defined subset of HAL</h2>
+<h2 id="must-use-a-welldefined-subset-of-hal"><span style="color:red;font-weight:bold">Must:</span> Use a well-defined subset of HAL</h2>
 <p>Links to other resources must be defined exclusively using <a href="http://stateless.co/hal_specification.html" target="_blank">HAL</a> and
 preferably using standard <a href="http://www.iana.org/assignments/link-relations/link-relations.xml" target="_blank">link relations</a>.</p>
 <p>Clients and Servers are required to support <code>_links</code> with its <code>href</code> and <code>rel</code> attributes, not only at the root level
@@ -571,11 +571,11 @@ Links:
 <li><a href="http://sookocheff.com/post/api/on-choosing-a-hypermedia-format/" target="_blank">Kevin Sookocheff&#x2019;s On choosing a hypermedia type for your API</a></li>
 <li><a href="http://blogs.mulesoft.com/dev/api-dev/api-best-practices-hypermedia-part-3/" target="_blank">Mike Stowe&apos;s API Best Practices: Hypermedia</a></li>
 </ul>
-<h2 id="must-do-not-use-link-headers-with-json-entities"><a name="must-do-not-use-link-headers-with-json-entities" class="plugin-anchor" href="#must-do-not-use-link-headers-with-json-entities"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Do Not Use Link Headers with JSON entities</h2>
+<h2 id="must-do-not-use-link-headers-with-json-entities"><span style="color:red;font-weight:bold">Must:</span> Do Not Use Link Headers with JSON entities</h2>
 <p>We don&apos;t allow the use of the <a href="http://tools.ietf.org/html/rfc5988#section-5" target="_blank"><code>Link</code> Header defined by RFC 5988</a>
 in conjunction with JSON media types, and favor <a href="#must-use-hal">HAL</a> instead. The primary reason is to have a consistent
 place for links as well as the better support for links in JSON payloads compared to the uncommon link header syntax.</p>
-<h2 id="could-use-custom-link-relations"><a name="could-use-custom-link-relations" class="plugin-anchor" href="#could-use-custom-link-relations"><span class="fa fa-link"></span></a><span style="color:green;font-weight:bold">Could:</span> Use Custom Link Relations</h2>
+<h2 id="could-use-custom-link-relations"><span style="color:green;font-weight:bold">Could:</span> Use Custom Link Relations</h2>
 <p>You should consider using a custom link relation if and only if standard <a href="http://www.iana.org/assignments/link-relations/link-relations.xml" target="_blank">link relations</a>
 are not sufficient to express a relation.
 Related or even embedded (sub-) resources should be linked via &#x201C;meta link attributes&#x201D; within the response payload; use
@@ -612,6 +612,10 @@ properties in the <code>_links</code> object you should define and describe them
 <script src="../gitbook/app.js"></script>
 
     
+    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
+    
+
+    
     <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
     
 
@@ -629,7 +633,7 @@ properties in the <code>_links</code> object you should define and describe them
 
 <script>
 require(["gitbook"], function(gitbook) {
-    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
+    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"edit-link":{"base":"https://github.com/zalando/restful-api-guidelines/edit/master","label":"Edit This Page"},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
     gitbook.start(config);
 });
 </script>

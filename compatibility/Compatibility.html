@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Fri Oct 28 2016 09:16:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -443,8 +443,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="compatibility"><a name="compatibility" class="plugin-anchor" href="#compatibility"><span class="fa fa-link"></span></a>Compatibility</h1>
-<h2 id="must-dont-break-backward-compatibility"><a name="must-dont-break-backward-compatibility" class="plugin-anchor" href="#must-dont-break-backward-compatibility"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Don&#x2019;t Break Backward Compatibility</h2>
+                        <h1 id="compatibility">Compatibility</h1>
+<h2 id="must-dont-break-backward-compatibility"><span style="color:red;font-weight:bold">Must:</span> Don&#x2019;t Break Backward Compatibility</h2>
 <p>Change APIs, but keep all consumers
 running. Consumers usually have independent release lifecycles, focus on
 stability, and avoid changes that do not provide additional value. APIs are
@@ -457,7 +457,7 @@ service contracts that cannot be broken via unilateral decisions.</p>
 <p>We strongly encourage using compatible API extensions and discourage versioning.
 With Postel&#x2019;s Law in mind, here are some rules for providers and consumers that
 allow us to make compatible changes without versioning:</p>
-<h2 id="should-prefer-compatible-extensions"><a name="should-prefer-compatible-extensions" class="plugin-anchor" href="#should-prefer-compatible-extensions"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Prefer Compatible Extensions</h2>
+<h2 id="should-prefer-compatible-extensions"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Prefer Compatible Extensions</h2>
 <p>Apply the following rules to evolve RESTful APIs in a backward-compatible way:</p>
 <ul>
 <li>Ignore unknown fields in the payload</li>
@@ -477,7 +477,7 @@ default behavior).</li>
 <li>Support redirection in case an URL has to change
 (<a href="https://en.wikipedia.org/wiki/HTTP_301" target="_blank">301 Moved Permanently</a>)</li>
 </ul>
-<h2 id="must-prepare-clients-for-compatible-api-extensions-the-robustness-principle"><a name="must-prepare-clients-for-compatible-api-extensions-the-robustness-principle" class="plugin-anchor" href="#must-prepare-clients-for-compatible-api-extensions-the-robustness-principle"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Prepare Clients for Compatible API Extensions (the Robustness Principle)</h2>
+<h2 id="must-prepare-clients-for-compatible-api-extensions-the-robustness-principle"><span style="color:red;font-weight:bold">Must:</span> Prepare Clients for Compatible API Extensions (the Robustness Principle)</h2>
 <p>How to do this:</p>
 <ul>
 <li>Ignore new and unknown fields in the payload (see also Fowler&#x2019;s
@@ -488,9 +488,9 @@ provide default behavior for unknown values, if applicable</li>
 <li>Follow the redirect when the server returns an &#x201C;HTTP 301 Moved Permanently&#x201D; response code</li>
 <li>Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions! Note also, that status codes are extensible -- default handling is how you would treat the corresponding x00 code (see <a href="https://tools.ietf.org/html/rfc7231#section-6" target="_blank">RFC7231  Section 6</a>)</li>
 </ul>
-<h2 id="must-always-return-json-objects-as-toplevel-data-structures-to-support-extensibility"><a name="must-always-return-json-objects-as-toplevel-data-structures-to-support-extensibility" class="plugin-anchor" href="#must-always-return-json-objects-as-toplevel-data-structures-to-support-extensibility"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Always Return JSON Objects As Top-Level Data Structures To Support Extensibility</h2>
+<h2 id="must-always-return-json-objects-as-toplevel-data-structures-to-support-extensibility"><span style="color:red;font-weight:bold">Must:</span> Always Return JSON Objects As Top-Level Data Structures To Support Extensibility</h2>
 <p>In a response body, you must always return a JSON objects (and not e.g. an array) as a top level data structure to support future extensibility. JSON objects support compatible extension by additional attributes. This allows you to easily extend your response and e.g. add pagination later, without breaking backwards compatibility.</p>
-<h2 id="should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations"><a name="should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations" class="plugin-anchor" href="#should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Used Open-Ended List of Values (x-extensible-enum) Instead of Enumerations</h2>
+<h2 id="should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Used Open-Ended List of Values (x-extensible-enum) Instead of Enumerations</h2>
 <p>Enumerations are per definition closed sets of values, that are assumed to be complete and not
 intended for extension. This closed principle of enumerations imposes compatibility issues when
 an enumeration must be extended. To avoid these issues, we strongly recommend to use an open-ended
@@ -508,7 +508,7 @@ on any external tool or interface, and</li>
     - letter
     - email
 </code></pre><p><strong>Note:</strong> <code>x-extensible-enum</code> is not JSON Schema conform but will be ignored by most tools.</p>
-<h2 id="should-avoid-versioning"><a name="should-avoid-versioning" class="plugin-anchor" href="#should-avoid-versioning"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Avoid Versioning</h2>
+<h2 id="should-avoid-versioning"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Avoid Versioning</h2>
 <p>When changing your RESTful APIs,
 do so in a compatible way and avoid generating additional API versions. Multiple
 versions can significantly complicate understanding, testing, maintaining,
@@ -521,7 +521,7 @@ three ways:</p>
 <li>create a new API version supported in parallel with the old API by the same microservice</li>
 </ul>
 <p>As we discourage versioning by all means because of the manifold disadvantages, we suggest to only use the first two approaches.</p>
-<h2 id="must-use-media-type-versioning"><a name="must-use-media-type-versioning" class="plugin-anchor" href="#must-use-media-type-versioning"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use Media Type Versioning</h2>
+<h2 id="must-use-media-type-versioning"><span style="color:red;font-weight:bold">Must:</span> Use Media Type Versioning</h2>
 <p>When API versioning is unavoidable, you have to design your multi-version
 RESTful APIs using media type versioning (instead of URI versioning, see below).
 Media type versioning is less tightly coupled since it supports content
@@ -550,7 +550,7 @@ Another way would be to document just the new version, but let the server accept
 one (with the previous content-type).</p>
 <p>Until an incompatible change is necessary, it is recommended to stay with the standard
 <code>application/json</code> media type.</p>
-<h2 id="must-do-not-use-uri-versioning"><a name="must-do-not-use-uri-versioning" class="plugin-anchor" href="#must-do-not-use-uri-versioning"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Do Not Use URI Versioning</h2>
+<h2 id="must-do-not-use-uri-versioning"><span style="color:red;font-weight:bold">Must:</span> Do Not Use URI Versioning</h2>
 <p>With URI versioning a (major) version number is included in the path, e.g.
 /v1/customers. The consumer has to wait until the provider has been released
 and deployed. If the consumer also supports hypermedia links &#x2014; even in their
@@ -559,7 +559,7 @@ coordinating version upgrades &#x2014; especially with hyperlinked service
 dependencies &#x2014; when using URL versioning. To avoid this tighter coupling and
 complexer release management we do not use URI versioning, and go instead with
 media type versioning and content negotiation (see above).</p>
-<h2 id="should-provide-version-information-in-openapi-documentation"><a name="should-provide-version-information-in-openapi-documentation" class="plugin-anchor" href="#should-provide-version-information-in-openapi-documentation"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Provide Version Information in OpenAPI Documentation</h2>
+<h2 id="should-provide-version-information-in-openapi-documentation"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Provide Version Information in OpenAPI Documentation</h2>
 <p>Only the documentation, not the API itself, needs version information.</p>
 <p>Example:</p>
 <pre><code>&quot;swagger&quot;: &quot;2.0&quot;,
@@ -613,6 +613,10 @@ service applications.</p>
 <script src="../gitbook/app.js"></script>
 
     
+    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
+    
+
+    
     <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
     
 
@@ -630,7 +634,7 @@ service applications.</p>
 
 <script>
 require(["gitbook"], function(gitbook) {
-    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
+    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"edit-link":{"base":"https://github.com/zalando/restful-api-guidelines/edit/master","label":"Edit This Page"},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
     gitbook.start(config);
 });
 </script>

@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="13" data-chapter-title="Data Formats" data-filepath="data-formats/DataFormats.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="13" data-chapter-title="Data Formats" data-filepath="data-formats/DataFormats.md" data-basepath=".." data-revision="Fri Oct 28 2016 09:16:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -443,21 +443,21 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="data-formats"><a name="data-formats" class="plugin-anchor" href="#data-formats"><span class="fa fa-link"></span></a>Data Formats</h1>
-<h2 id="must-use-json-as-the-body-payload"><a name="must-use-json-as-the-body-payload" class="plugin-anchor" href="#must-use-json-as-the-body-payload"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use JSON as the Body Payload</h2>
+                        <h1 id="data-formats">Data Formats</h1>
+<h2 id="must-use-json-as-the-body-payload"><span style="color:red;font-weight:bold">Must:</span> Use JSON as the Body Payload</h2>
 <p>JSON-encode the body payload. The JSON payload must follow <a href="https://tools.ietf.org/html/rfc7159" target="_blank">RFC-7159</a> by having
 (if possible) a serialized object as the top-level structure, since it would allow for future extension.
 This also applies for collection resources where one naturally would assume an array. See the
 <a href="../pagination/Pagination.html#could-use-pagination-links-where-applicable">pagination</a> section for an example.</p>
-<h2 id="could-use-other-media-types-than-json"><a name="could-use-other-media-types-than-json" class="plugin-anchor" href="#could-use-other-media-types-than-json"><span class="fa fa-link"></span></a><span style="color:green;font-weight:bold">Could:</span> Use other Media Types than JSON</h2>
+<h2 id="could-use-other-media-types-than-json"><span style="color:green;font-weight:bold">Could:</span> Use other Media Types than JSON</h2>
 <p>If for given use case JSON does not make sense, for instance when providing attachments in form of PDFs, you should
 use another, more sufficient media type. But only do this if you can not transfer the information in JSON.</p>
-<h2 id="must-use-standard-date-and-time-formats"><a name="must-use-standard-date-and-time-formats" class="plugin-anchor" href="#must-use-standard-date-and-time-formats"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use Standard Date and Time Formats</h2>
-<h3 id="json-payload"><a name="json-payload" class="plugin-anchor" href="#json-payload"><span class="fa fa-link"></span></a>JSON Payload</h3>
+<h2 id="must-use-standard-date-and-time-formats"><span style="color:red;font-weight:bold">Must:</span> Use Standard Date and Time Formats</h2>
+<h3 id="json-payload">JSON Payload</h3>
 <p>Read more about date and time format in <a href="../json-guidelines/JsonGuidelines.html#date-property-values-should-conform-to-rfc-3399">Json Guideline</a>.</p>
-<h3 id="http-headers"><a name="http-headers" class="plugin-anchor" href="#http-headers"><span class="fa fa-link"></span></a>HTTP headers</h3>
+<h3 id="http-headers">HTTP headers</h3>
 <p>Http headers including the proprietary headers. Use the <a href="http://tools.ietf.org/html/rfc7231#section-7.1.1.1" target="_blank">HTTP date format defined in RFC 7231</a>.</p>
-<h2 id="could-use-standards-for-country-language-and-currency-codes"><a name="could-use-standards-for-country-language-and-currency-codes" class="plugin-anchor" href="#could-use-standards-for-country-language-and-currency-codes"><span class="fa fa-link"></span></a><span style="color:green;font-weight:bold">Could:</span> Use Standards for Country, Language and Currency Codes</h2>
+<h2 id="could-use-standards-for-country-language-and-currency-codes"><span style="color:green;font-weight:bold">Could:</span> Use Standards for Country, Language and Currency Codes</h2>
 <p>Use the following standard formats for country, language and currency codes:</p>
 <ul>
 <li><p><a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank">ISO 3166-1-alpha2 country codes</a></p>
@@ -473,7 +473,7 @@ use another, more sufficient media type. But only do this if you can not transfe
 <li><p><a href="https://en.wikipedia.org/wiki/ISO_4217" target="_blank">ISO 4217 currency codes</a></p>
 </li>
 </ul>
-<h2 id="should-prefer-standard-media-type-name-applicationjson"><a name="should-prefer-standard-media-type-name-applicationjson" class="plugin-anchor" href="#should-prefer-standard-media-type-name-applicationjson"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Prefer standard Media type name <code>application/json</code></h2>
+<h2 id="should-prefer-standard-media-type-name-applicationjson"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Prefer standard Media type name <code>application/json</code></h2>
 <p>Previously, this guideline allowed the use of custom media types like <code>application/x.zalando.article+json</code>.
 This usage is not recommended anymore and should be avoided, except where it is necessary for cases
 of <a href="../compatibility/Compatibility.html#must-use-media-type-versioning">media type versioning</a>. Instead, the standard media type name <code>application/json</code> (or <a href="http://zalando.github.io/restful-api-guidelines/common-data-objects/CommonDataObjects.html#must-use-problem-json" target="_blank"><code>application/problem+json</code> for HTTP error details</a>) should be used for JSON-formatted data.</p>
@@ -500,6 +500,10 @@ of <a href="../compatibility/Compatibility.html#must-use-media-type-versioning">
 <script src="../gitbook/app.js"></script>
 
     
+    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
+    
+
+    
     <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
     
 
@@ -517,7 +521,7 @@ of <a href="../compatibility/Compatibility.html#must-use-media-type-versioning">
 
 <script>
 require(["gitbook"], function(gitbook) {
-    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
+    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"edit-link":{"base":"https://github.com/zalando/restful-api-guidelines/edit/master","label":"Edit This Page"},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
     gitbook.start(config);
 });
 </script>

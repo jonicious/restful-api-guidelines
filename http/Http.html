@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Fri Oct 28 2016 09:16:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -443,10 +443,10 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="http"><a name="http" class="plugin-anchor" href="#http"><span class="fa fa-link"></span></a>HTTP</h1>
-<h2 id="must-use-http-methods-correctly"><a name="must-use-http-methods-correctly" class="plugin-anchor" href="#must-use-http-methods-correctly"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use HTTP Methods Correctly</h2>
+                        <h1 id="http">HTTP</h1>
+<h2 id="must-use-http-methods-correctly"><span style="color:red;font-weight:bold">Must:</span> Use HTTP Methods Correctly</h2>
 <p>Be compliant with the standardized HTTP method semantics summarized as follows:</p>
-<h3 id="get"><a name="get" class="plugin-anchor" href="#get"><span class="fa fa-link"></span></a>GET</h3>
+<h3 id="get">GET</h3>
 <p>GET requests are used to read a single resource or query set of resources.</p>
 <ul>
 <li>GET requests for individual resources will usually generate a 404 if the resource does not exist</li>
@@ -456,7 +456,7 @@ the list is missing)</li>
 </ul>
 <p><strong>Note:</strong> GET requests on collection resources should provide a sufficient filter mechanism as well
 as <a href="../pagination/Pagination.html">pagination</a>.</p>
-<h3 id="put"><a name="put" class="plugin-anchor" href="#put"><span class="fa fa-link"></span></a>PUT</h3>
+<h3 id="put">PUT</h3>
 <p>PUT requests are used to create or update single resources or an entire collection resources. The
 semantic is best described as &#xBB;<em>please put the enclosed representation at the resource mentioned by
 the URL</em>&#xAB;.</p>
@@ -474,7 +474,7 @@ without actual content returned), and 201 (if the resource was created)</li>
 URL path segment. Putting the same resource twice is required to be idempotent and to result in
 the same single resource instance. If PUT is applied for creating a resource, only URIs should be
 allowed as resource IDs. If URIs are not available POST should be preferred.</p>
-<h3 id="post"><a name="post" class="plugin-anchor" href="#post"><span class="fa fa-link"></span></a>POST</h3>
+<h3 id="post">POST</h3>
 <p>POST requests are idiomatically used to create single resources on a collection resource endpoint,
 but other semantics on single resources endpoint are equally possible. The semantic for collection
 endpoints is best described as &#xBB;<em>please add the enclosed representation to the collection resource
@@ -497,7 +497,7 @@ returned with response payload. Posting the same resource twice is by itself <st
 be idempotent and may result in multiple resource instances. Anyhow, if external URIs are present
 that can be used to identify duplicate requests, it is best practice to implement POST in an
 idempotent way.</p>
-<h3 id="patch"><a name="patch" class="plugin-anchor" href="#patch"><span class="fa fa-link"></span></a>PATCH</h3>
+<h3 id="patch">PATCH</h3>
 <p>PATCH request are only used for partial update of single resources, i.e. where only a specific
 subset of resource fields should be replaced. The semantic is best described as &#xBB;<em>please change
 the resource identified by the URL according to my change request</em>&#xAB;. The semantic of the change
@@ -532,7 +532,7 @@ limited, especially when trying to update single objects in large collections (a
 resource). In this cases <a href="http://tools.ietf.org/html/rfc6902" target="_blank">JSON Patch</a> can shown its full power
 while still showing readable patch requests
 (<a href="http://erosb.github.io/post/json-patch-vs-merge-patch" target="_blank">see also</a>).</p>
-<h3 id="delete"><a name="delete" class="plugin-anchor" href="#delete"><span class="fa fa-link"></span></a>DELETE</h3>
+<h3 id="delete">DELETE</h3>
 <p>DELETE request are used to delete resources. The semantic is best described as &#xBB;<em>please delete the
 resource identified by the URL</em>&#xAB;.</p>
 <ul>
@@ -543,12 +543,12 @@ would imply deleting the entire collection</li>
 <li>failed DELETE request will usually generate 404 (if the resource cannot be found) or 410 (if the
 resource was already deleted before)</li>
 </ul>
-<h3 id="head"><a name="head" class="plugin-anchor" href="#head"><span class="fa fa-link"></span></a>HEAD</h3>
+<h3 id="head">HEAD</h3>
 <p>HEAD requests are used retrieve to header information of single resources and resource collections.</p>
 <ul>
 <li>HEAD has exactly the same semantics as GET, but returns headers only, no body.</li>
 </ul>
-<h3 id="options"><a name="options" class="plugin-anchor" href="#options"><span class="fa fa-link"></span></a>OPTIONS</h3>
+<h3 id="options">OPTIONS</h3>
 <p>OPTIONS are used to inspect the available operations (HTTP methods) of a given endpoint.</p>
 <ul>
 <li>OPTIONS requests usually either return a comma separated list of methods (provided by an
@@ -556,7 +556,7 @@ resource was already deleted before)</li>
 </ul>
 <p><strong>Note:</strong> OPTIONS is rarely implemented, though it could be used to self-describe the full
 functionality of a resource.</p>
-<h2 id="must-fulfill-safeness-and-idempotency-properties"><a name="must-fulfill-safeness-and-idempotency-properties" class="plugin-anchor" href="#must-fulfill-safeness-and-idempotency-properties"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Fulfill Safeness and Idempotency Properties</h2>
+<h2 id="must-fulfill-safeness-and-idempotency-properties"><span style="color:red;font-weight:bold">Must:</span> Fulfill Safeness and Idempotency Properties</h2>
 <p>An operation can be...</p>
 <ul>
 <li>idempotent, i.e. operation will produce the same results if executed once or multiple times (note: this does not
@@ -612,8 +612,8 @@ necessarily mean returning the same status code)</li>
 </table>
 <p>Please see also <a href="https://goo.gl/vhwh8a" target="_blank">Best Practices [internal link]</a> for further hints on how to support the
 different HTTP methods on resources.</p>
-<h2 id="must-use-meaningful-http-status-codes"><a name="must-use-meaningful-http-status-codes" class="plugin-anchor" href="#must-use-meaningful-http-status-codes"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use Meaningful HTTP Status Codes</h2>
-<h3 id="success-codes"><a name="success-codes" class="plugin-anchor" href="#success-codes"><span class="fa fa-link"></span></a>Success Codes</h3>
+<h2 id="must-use-meaningful-http-status-codes"><span style="color:red;font-weight:bold">Must:</span> Use Meaningful HTTP Status Codes</h2>
+<h3 id="success-codes">Success Codes</h3>
 <table>
 <thead>
 <tr>
@@ -645,7 +645,7 @@ different HTTP methods on resources.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="redirection-codes"><a name="redirection-codes" class="plugin-anchor" href="#redirection-codes"><span class="fa fa-link"></span></a>Redirection Codes</h3>
+<h3 id="redirection-codes">Redirection Codes</h3>
 <table>
 <thead>
 <tr>
@@ -672,7 +672,7 @@ different HTTP methods on resources.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="client-side-error-codes"><a name="client-side-error-codes" class="plugin-anchor" href="#client-side-error-codes"><span class="fa fa-link"></span></a>Client Side Error Codes</h3>
+<h3 id="client-side-error-codes">Client Side Error Codes</h3>
 <table>
 <thead>
 <tr>
@@ -754,7 +754,7 @@ different HTTP methods on resources.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="server-side-error-codes"><a name="server-side-error-codes" class="plugin-anchor" href="#server-side-error-codes"><span class="fa fa-link"></span></a>Server Side Error Codes:</h3>
+<h3 id="server-side-error-codes">Server Side Error Codes:</h3>
 <table>
 <thead>
 <tr>
@@ -782,7 +782,7 @@ different HTTP methods on resources.</p>
 </tbody>
 </table>
 <p>All error codes can be found in <a href="https://tools.ietf.org/html/rfc7231#section-6" target="_blank">RFC7231</a> and <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">Wikipedia</a> or via <a href="https://httpstatuses.com/" target="_blank">https://httpstatuses.com/</a><error_code>.</error_code></p>
-<h2 id="must-provide-error-documentation"><a name="must-provide-error-documentation" class="plugin-anchor" href="#must-provide-error-documentation"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Provide Error Documentation</h2>
+<h2 id="must-provide-error-documentation"><span style="color:red;font-weight:bold">Must:</span> Provide Error Documentation</h2>
 <p>APIs should define the functional, business view and abstract from implementation aspects. Errors become a key element providing context and visibility into how to use an API. The error object should be extended by an application-specific error identifier if and only if the HTTP status code is not specific enough to convey the domain-specific error semantic. For this reason, we use a standardized error return object definition &#x2014; see <a href="../common-data-objects/CommonDataObjects.html#must-use-common-error-return-objects"><em>Use Common Error Return Objects</em></a>.</p>
 <p>The OpenAPI specification shall include definitions for error descriptions that will be returned; they are part of the interface definition and provide important information for service clients to handle exceptional situations and support troubleshooting. You should also think about a troubleshooting board &#x2014; it is part of the associated online API documentation, provides information and handling guidance on application-specific errors and is referenced via links of the API definition. This can reduce service support tasks and contribute to service client and provider performance.</p>
 <p>Service providers should differentiate between technical and functional errors. In most cases it&apos;s not useful to document technical errors that are not in control of the service provider unless the status code convey application-specific semantics. The list of status code that can be omitted from API specifications includes but is not limited to:</p>
@@ -803,7 +803,7 @@ different HTTP methods on resources.</p>
 </ul>
 <p>Even though they might not be documented - they may very much occur in production, so clients should be prepared for unexpected response codes, and in case of doubt handle them like they would handle the corresponding x00 code. Adding new response codes (specially error responses) should be considered a compatible API evolution.</p>
 <p>Functional errors on the other hand, that convey domain-specific semantics, must be documented and are strongly encouraged to be expressed with <a href="../common-data-objects/CommonDataObjects.html#must-use-common-error-return-objects"><em>Problem types</em></a>.</p>
-<h2 id="must-use-429-with-headers-for-rate-limits"><a name="must-use-429-with-headers-for-rate-limits" class="plugin-anchor" href="#must-use-429-with-headers-for-rate-limits"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use 429 with Headers for Rate Limits</h2>
+<h2 id="must-use-429-with-headers-for-rate-limits"><span style="color:red;font-weight:bold">Must:</span> Use 429 with Headers for Rate Limits</h2>
 <p>APIs that wish to manage the request rate of clients must use the <a href="http://tools.ietf.org/html/rfc6585" target="_blank">&apos;429 Too Many Requests&apos;</a> response code if the client exceeded the request rate and therefore the request can&apos;t be fulfilled. Such responses must also contain header information providing further details to the client. There are two approaches a service can take for header information:</p>
 <ul>
 <li><p>Return a <a href="https://tools.ietf.org/html/rfc7231#section-7.1.3" target="_blank">&apos;Retry-After&apos;</a> header indicating how long the client ought to wait before making a follow-up request. The Retry-After header can contain a HTTP date value to retry after or the number of seconds to delay. Either is acceptable but APIs should prefer to use a delay in seconds.</p>
@@ -840,6 +840,10 @@ different HTTP methods on resources.</p>
 <script src="../gitbook/app.js"></script>
 
     
+    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
+    
+
+    
     <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
     
 
@@ -857,7 +861,7 @@ different HTTP methods on resources.</p>
 
 <script>
 require(["gitbook"], function(gitbook) {
-    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
+    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"edit-link":{"base":"https://github.com/zalando/restful-api-guidelines/edit/master","label":"Edit This Page"},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
     gitbook.start(config);
 });
 </script>

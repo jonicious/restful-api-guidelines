@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="17" data-chapter-title="Deprecation" data-filepath="deprecation/Deprecation.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="17" data-chapter-title="Deprecation" data-filepath="deprecation/Deprecation.md" data-basepath=".." data-revision="Fri Oct 28 2016 09:16:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -443,23 +443,23 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="deprecation"><a name="deprecation" class="plugin-anchor" href="#deprecation"><span class="fa fa-link"></span></a>Deprecation</h1>
+                        <h1 id="deprecation">Deprecation</h1>
 <p>Sometimes it is necessary to phase out an API endpoint (or version). I.e. this
 may be necessary if a field is no longer supported in the result or a whole
 business functionality behind an endpoint has to be shut down. There are
 many other reasons as well.</p>
-<h2 id="must-obtain-approval-of-clients"><a name="must-obtain-approval-of-clients" class="plugin-anchor" href="#must-obtain-approval-of-clients"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Obtain Approval of Clients</h2>
+<h2 id="must-obtain-approval-of-clients"><span style="color:red;font-weight:bold">Must:</span> Obtain Approval of Clients</h2>
 <p>Before shutting down an API (or version of an API) the producer must make
 sure, that all clients have given their consent to shut down the
 endpoint. Producers should help consumers to migrate to a potential new
 endpoint (i.e. by providing a migration manual). After all clients are
 migrated, the producer may shut down the deprecated API.</p>
-<h2 id="must-external-partners-must-agree-on-deprecation-timespan"><a name="must-external-partners-must-agree-on-deprecation-timespan" class="plugin-anchor" href="#must-external-partners-must-agree-on-deprecation-timespan"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> External Partners Must Agree on Deprecation Timespan</h2>
+<h2 id="must-external-partners-must-agree-on-deprecation-timespan"><span style="color:red;font-weight:bold">Must:</span> External Partners Must Agree on Deprecation Timespan</h2>
 <p>If the API is consumed by any external partner, the producer must define a
 reasonable timespan that the API will be maintained after the producer has
 announced deprecation. The external partner (client) must agree to this
 minimum after-deprecation-lifespan before he starts using the API. </p>
-<h2 id="must-reflect-deprecation-in-api-definition"><a name="must-reflect-deprecation-in-api-definition" class="plugin-anchor" href="#must-reflect-deprecation-in-api-definition"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Reflect Deprecation in API Definition</h2>
+<h2 id="must-reflect-deprecation-in-api-definition"><span style="color:red;font-weight:bold">Must:</span> Reflect Deprecation in API Definition</h2>
 <p>API deprecation must be part of the OpenAPI definition. If a method
 on a path, a whole path or even a whole API endpoint (multiple paths) should
 be deprecated, the producers must set <code>deprecated=true</code> on each method / path
@@ -471,9 +471,9 @@ explanation to the <code>description</code> section. </p>
 <p>If <code>deprecated</code> is set to <code>true</code>, the producer must describe what clients
 should use instead and when the API will be shut down in the <code>description</code>
 section of the API definition. </p>
-<h2 id="must-monitor-usage-of-deprecated-apis"><a name="must-monitor-usage-of-deprecated-apis" class="plugin-anchor" href="#must-monitor-usage-of-deprecated-apis"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Monitor Usage of Deprecated APIs</h2>
+<h2 id="must-monitor-usage-of-deprecated-apis"><span style="color:red;font-weight:bold">Must:</span> Monitor Usage of Deprecated APIs</h2>
 <p>Owners of APIs used in production must monitor usage of deprecated APIs until the API can be shut down in order to align deprecation and avoid uncontrolled breaking effects. See also the <a href="../api-operation/ApiOperation.html">general rule on API usage monitoring</a></p>
-<h2 id="should-add-a-warning-header-to-responses"><a name="should-add-a-warning-header-to-responses" class="plugin-anchor" href="#should-add-a-warning-header-to-responses"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Add a Warning Header to Responses</h2>
+<h2 id="should-add-a-warning-header-to-responses"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Add a Warning Header to Responses</h2>
 <p>During deprecation phase, the producer should add a <code>Warning</code> header (see <a href="https://tools.ietf.org/html/rfc7234#section-5.5" target="_blank">RFC
 7234 - Warning header</a>)
 field. When adding the <code>Warning</code> header, the <code>warn-code</code> must be <code>299</code> and the
@@ -482,9 +482,9 @@ deprecated and will be removed by {date}. Please see {link} for details.&quot;</
 with a link to a documentation describing why the API is no longer supported
 in the current form and what clients should do about it. Adding the <code>Warning</code>
 header is not sufficient to gain client consent to shut down an API.</p>
-<h2 id="should-add-monitoring-for-warning-header"><a name="should-add-monitoring-for-warning-header" class="plugin-anchor" href="#should-add-monitoring-for-warning-header"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Add Monitoring for Warning Header</h2>
+<h2 id="should-add-monitoring-for-warning-header"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Add Monitoring for Warning Header</h2>
 <p>Clients should monitor the <code>Warning</code> header in HTTP responses to see if an API will be deprecated in future.</p>
-<h2 id="must-not-start-using-deprecated-apis"><a name="must-not-start-using-deprecated-apis" class="plugin-anchor" href="#must-not-start-using-deprecated-apis"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Not Start Using Deprecated APIs</h2>
+<h2 id="must-not-start-using-deprecated-apis"><span style="color:red;font-weight:bold">Must:</span> Not Start Using Deprecated APIs</h2>
 <p>Clients must not start using deprecated parts of an API.</p>
 
                     
@@ -508,6 +508,10 @@ header is not sufficient to gain client consent to shut down an API.</p>
 <script src="../gitbook/app.js"></script>
 
     
+    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
+    
+
+    
     <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
     
 
@@ -525,7 +529,7 @@ header is not sufficient to gain client consent to shut down an API.</p>
 
 <script>
 require(["gitbook"], function(gitbook) {
-    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
+    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"edit-link":{"base":"https://github.com/zalando/restful-api-guidelines/edit/master","label":"Edit This Page"},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
     gitbook.start(config);
 });
 </script>

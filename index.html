@@ -50,7 +50,7 @@
     <body>
         
         
-    <div class="book" data-level="0" data-chapter-title="Introduction" data-filepath="Introduction.md" data-basepath="." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="0" data-chapter-title="Introduction" data-filepath="Introduction.md" data-basepath="." data-revision="Fri Oct 28 2016 09:16:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -442,7 +442,7 @@
                     <section class="normal" id="section-">
                     
                         <p><img src="api-zalando-small.jpg" alt="APIGuild icon"></p>
-<h1 id="introduction"><a name="introduction" class="plugin-anchor" href="#introduction"><span class="fa fa-link"></span></a>Introduction</h1>
+<h1 id="introduction">Introduction</h1>
 <p>Zalando&#x2019;s software architecture centers around decoupled microservices that provide functionality
 via RESTful APIs with a JSON payload. Small engineering teams own, deploy and operate these microservices in
 their AWS (team) accounts. Our APIs most purely express what our systems do, and are therefore
@@ -464,7 +464,7 @@ We encourage our teams to follow them to ensure that our APIs:</p>
 <li>are consistent with other teams&#x2019; APIs and our global architecture</li>
 </ul>
 <p>Ideally, all Zalando APIs will look like the same author created them.</p>
-<h2 id="zalando-specific-information"><a name="zalando-specific-information" class="plugin-anchor" href="#zalando-specific-information"><span class="fa fa-link"></span></a>Zalando specific information</h2>
+<h2 id="zalando-specific-information">Zalando specific information</h2>
 <p>The purpose of our &#x201C;RESTful API guidelines&#x201D; is to define standards to successfully establish
 &#x201C;consistent API look and feel&#x201D; quality. The <a href="https://techwiki.zalando.net/display/GUL/API+Guild" target="_blank">API Guild [internal link]</a> drafted and owns this document. Teams are responsible to fulfill these guidelines during API
 development and are encouraged to contribute to guideline evolution via pull requests.</p>
@@ -490,6 +490,10 @@ teams can confidently follow and trust them.</p>
 <script src="gitbook/app.js"></script>
 
     
+    <script src="gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
+    
+
+    
     <script src="gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
     
 
@@ -507,7 +511,7 @@ teams can confidently follow and trust them.</p>
 
 <script>
 require(["gitbook"], function(gitbook) {
-    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
+    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"edit-link":{"base":"https://github.com/zalando/restful-api-guidelines/edit/master","label":"Edit This Page"},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
     gitbook.start(config);
 });
 </script>

@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="18" data-chapter-title="API Operation" data-filepath="api-operation/ApiOperation.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="18" data-chapter-title="API Operation" data-filepath="api-operation/ApiOperation.md" data-basepath=".." data-revision="Fri Oct 28 2016 09:16:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -443,8 +443,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="api-operation"><a name="api-operation" class="plugin-anchor" href="#api-operation"><span class="fa fa-link"></span></a>API Operation</h1>
-<h2 id="must-provide-online-access-to-openapi-reference-definition"><a name="must-provide-online-access-to-openapi-reference-definition" class="plugin-anchor" href="#must-provide-online-access-to-openapi-reference-definition"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Provide Online Access to OpenAPI Reference Definition</h2>
+                        <h1 id="api-operation">API Operation</h1>
+<h2 id="must-provide-online-access-to-openapi-reference-definition"><span style="color:red;font-weight:bold">Must:</span> Provide Online Access to OpenAPI Reference Definition</h2>
 <p>All service applications must support access to the OpenAPI Reference Definitions of their external APIs &#x2014; it 
 is optional for internal APIs &#x2014; via the following two API endpoints:  </p>
 <ul>
@@ -472,7 +472,7 @@ not a RESTful API definition rule but related to service implementation obligati
 <ul>
 <li><a href="https://github.com/zalando-stups/twintip-spring-web" target="_blank">Library to make your Spring Boot service crawlable via Twintip</a></li>
 </ul>
-<h2 id="should-monitor-api-usage"><a name="should-monitor-api-usage" class="plugin-anchor" href="#should-monitor-api-usage"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Monitor API Usage</h2>
+<h2 id="should-monitor-api-usage"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Monitor API Usage</h2>
 <p>Owners of APIs used in production should monitor API service to get information about its using clients.
 This information, for instance, is useful to identify potential review partner for API changes.</p>
 <p>Hint: A preferred way of client detection implementation is by logging of the client-id retrieved from the OAuth token.</p>
@@ -498,6 +498,10 @@ This information, for instance, is useful to identify potential review partner f
 <script src="../gitbook/app.js"></script>
 
     
+    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
+    
+
+    
     <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
     
 
@@ -515,7 +519,7 @@ This information, for instance, is useful to identify potential review partner f
 
 <script>
 require(["gitbook"], function(gitbook) {
-    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
+    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"edit-link":{"base":"https://github.com/zalando/restful-api-guidelines/edit/master","label":"Edit This Page"},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
     gitbook.start(config);
 });
 </script>

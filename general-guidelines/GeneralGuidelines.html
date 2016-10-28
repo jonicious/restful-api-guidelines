@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="3" data-chapter-title="General Guidelines" data-filepath="general-guidelines/GeneralGuidelines.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="3" data-chapter-title="General Guidelines" data-filepath="general-guidelines/GeneralGuidelines.md" data-basepath=".." data-revision="Fri Oct 28 2016 09:16:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -443,9 +443,9 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="general-guidelines"><a name="general-guidelines" class="plugin-anchor" href="#general-guidelines"><span class="fa fa-link"></span></a>General Guidelines</h1>
+                        <h1 id="general-guidelines">General Guidelines</h1>
 <p>The titles are marked with the corresponding labels: <span style="color:red;font-weight:bold">Must:</span>, <span style="color:darkgoldenrod;font-weight:bold">Should:</span>, <span style="color:green;font-weight:bold">Could:</span>.</p>
-<h2 id="must-follow-api-first-principle"><a name="must-follow-api-first-principle" class="plugin-anchor" href="#must-follow-api-first-principle"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Follow API First Principle</h2>
+<h2 id="must-follow-api-first-principle"><span style="color:red;font-weight:bold">Must:</span> Follow API First Principle</h2>
 <p>As mentioned in the introduction, API First is one of our architecture principles, as per our Architecture Rules of Play. 
 In a nutshell API First has two aspects:</p>
 <ul>
@@ -482,7 +482,7 @@ or even the service productive operation has started.
 It is crucial to request and get early feedback &#x2014; as early as possible, but not before the API changes are comprehensive 
 with focus to the next evolution step and have a certain quality (including API Guideline compliance), 
 already confirmed via team internal reviews. </p>
-<h2 id="must-provide-api-reference-definition-using-openapi"><a name="must-provide-api-reference-definition-using-openapi" class="plugin-anchor" href="#must-provide-api-reference-definition-using-openapi"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Provide API Reference Definition using OpenAPI</h2>
+<h2 id="must-provide-api-reference-definition-using-openapi"><span style="color:red;font-weight:bold">Must:</span> Provide API Reference Definition using OpenAPI</h2>
 <p>We use the <a href="http://swagger.io/specification/" target="_blank">OpenAPI specification</a> (aka Swagger spec) as standard for our REST API definitions. 
 You may choose YAML or JSON as a format of your OpenAPI API definition file; 
 however, YAML is generally preferred due to its improved readability. </p>
@@ -491,7 +491,7 @@ it provides all information needed by an experienced API client developer to use
 <p>The OpenAPI API specification file should be subject of version control together with source code management. 
 Services also have to support an
 <a href="../api-operation/ApiOperation.html#must-Provide-Online-Access-to-OpenAPI-Reference-Definition">endpoint to access the API Reference definition</a> for their external API(s). </p>
-<h2 id="should-provide-user-manual-documentation"><a name="should-provide-user-manual-documentation" class="plugin-anchor" href="#should-provide-user-manual-documentation"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Provide User Manual Documentation</h2>
+<h2 id="should-provide-user-manual-documentation"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Provide User Manual Documentation</h2>
 <p>In addition to defining the API as OpenAPI Reference Definition, it&#x2019;s good practice to provide 
 further documentation to improve client developer experience, especially of engineers that 
 are novices in using this API. A helpful API User Manual documentation typically describes 
@@ -505,7 +505,7 @@ the following API aspects:</p>
 <p>The User Manual must be posted online, e.g. via GitHub Enterprise pages, on specific 
 team web servers, or as a Google doc. And don&apos;t forget to include a link to this 
 user manual documentation into your OpenAPI definition using the &#x201C;externalDocs&#x201D; property.</p>
-<h2 id="must-write-apis-in-us-english"><a name="must-write-apis-in-us-english" class="plugin-anchor" href="#must-write-apis-in-us-english"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Write APIs in U.S. English</h2>
+<h2 id="must-write-apis-in-us-english"><span style="color:red;font-weight:bold">Must:</span> Write APIs in U.S. English</h2>
 
                     
                     </section>
@@ -528,6 +528,10 @@ user manual documentation into your OpenAPI definition using the &#x201C;externa
 <script src="../gitbook/app.js"></script>
 
     
+    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
+    
+
+    
     <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
     
 
@@ -545,7 +549,7 @@ user manual documentation into your OpenAPI definition using the &#x201C;externa
 
 <script>
 require(["gitbook"], function(gitbook) {
-    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
+    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"edit-link":{"base":"https://github.com/zalando/restful-api-guidelines/edit/master","label":"Edit This Page"},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
     gitbook.start(config);
 });
 </script>

@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="10" data-chapter-title="Performance" data-filepath="performance/Performance.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="10" data-chapter-title="Performance" data-filepath="performance/Performance.md" data-basepath=".." data-revision="Fri Oct 28 2016 09:16:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -443,8 +443,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="performance"><a name="performance" class="plugin-anchor" href="#performance"><span class="fa fa-link"></span></a>Performance</h1>
-<h2 id="should-reduce-bandwidth-needs-and-improve-responsiveness"><a name="should-reduce-bandwidth-needs-and-improve-responsiveness" class="plugin-anchor" href="#should-reduce-bandwidth-needs-and-improve-responsiveness"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Reduce Bandwidth Needs and Improve Responsiveness</h2>
+                        <h1 id="performance">Performance</h1>
+<h2 id="should-reduce-bandwidth-needs-and-improve-responsiveness"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Reduce Bandwidth Needs and Improve Responsiveness</h2>
 <p>APIs should support techniques for reducing bandwidth based on client needs. This holds for APIs
 that (might) have high payloads and/or are used in high-traffic scenarios like the public Internet
 and telecommunication networks. Typical examples are APIs used by mobile web app clients with
@@ -460,15 +460,15 @@ below)</li>
 <li>pagination for incremental access of larger (result) lists</li>
 </ul>
 <p>Each of these items is described in greater detail below.</p>
-<h2 id="should-use-gzip-compression"><a name="should-use-gzip-compression" class="plugin-anchor" href="#should-use-gzip-compression"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Use gzip Compression</h2>
+<h2 id="should-use-gzip-compression"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Use gzip Compression</h2>
 <p>Compress the payload of your API&#x2019;s responses with gzip, unless there&#x2019;s a good reason not
 to &#x2014; for example,  you are serving so many requests that the time to compress becomes a bottleneck.
 This helps to transport data faster over the network (fewer bytes) and makes frontends respond faster.</p>
 <p>Though gzip compression might be the default choice for server payload, the server should also support payload without compression and its client control via Accept-Encoding request header -- see also <a href="http://tools.ietf.org/html/rfc7231#section-5.3.4" target="_blank">RFC 7231 Section 5.3.4</a>. The server should indicate used gzip
 compression via the Content-Encoding header.</p>
-<h2 id="should-support-filtering-of-resource-fields"><a name="should-support-filtering-of-resource-fields" class="plugin-anchor" href="#should-support-filtering-of-resource-fields"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Support Filtering of Resource Fields</h2>
+<h2 id="should-support-filtering-of-resource-fields"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Support Filtering of Resource Fields</h2>
 <p>Depending on your use case and payload size, you can significantly reduce network bandwidth need by supporting filtering of returned entity fields. Here, the client can determine the subset of fields he wants to receive via the fields query parameter &#x2014; example see <a href="https://cloud.google.com/appengine/docs/python/taskqueue/rest/performance#partial-response" target="_blank">Google AppEngine API&apos;s partial response</a>:</p>
-<h3 id="unfiltered"><a name="unfiltered" class="plugin-anchor" href="#unfiltered"><span class="fa fa-link"></span></a>Unfiltered</h3>
+<h3 id="unfiltered">Unfiltered</h3>
 <pre><code class="lang-http"><span class="hljs-request">GET <span class="hljs-string">http://api.example.org/resources/123</span> HTTP/1.1</span>
 
 <span class="http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
@@ -487,7 +487,7 @@ compression via the Content-Encoding header.</p>
   </span>}
 </span>}
 </span></span></code></pre>
-<h3 id="filtered"><a name="filtered" class="plugin-anchor" href="#filtered"><span class="fa fa-link"></span></a>Filtered</h3>
+<h3 id="filtered">Filtered</h3>
 <pre><code class="lang-http"><span class="hljs-request">GET <span class="hljs-string">http://api.example.org/resources/123?fields=(name,partner(name))</span> HTTP/1.1</span>
 
 <span class="http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
@@ -513,7 +513,7 @@ can easily be introduced with a minimum of effort.</p>
 <p>Hint: OpenAPI doesn&apos;t allow you to formally specify whether depending on a given parameter will
 return different parts of the specified result schema. Explain this in English in the parameter
 description.</p>
-<h2 id="could-support-the-etag-header"><a name="could-support-the-etag-header" class="plugin-anchor" href="#could-support-the-etag-header"><span class="fa fa-link"></span></a><span style="color:green;font-weight:bold">Could:</span> Support the ETag Header</h2>
+<h2 id="could-support-the-etag-header"><span style="color:green;font-weight:bold">Could:</span> Support the ETag Header</h2>
 <p>If a resource changes, the contents of the <a href="https://en.wikipedia.org/wiki/HTTP_ETag" target="_blank"><code>ETag</code></a> header
 must also change. Combined with the <code>If-Match</code> and <code>If-None-Match</code> headers, the <code>ETag</code> header allows
 caching of entities.</p>
@@ -525,7 +525,7 @@ caching of entities.</p>
 </ul>
 <p>Also see <a href="Performance.html#should-allow-embedding-of-complex-subresources"><em>Allow Embedding of Complex Sub-Resources</em></a>
 below as contribution to performance optimization to avoid multiple requests for sub-resources.</p>
-<h2 id="should-allow-optional-embedding-of-subresources"><a name="should-allow-optional-embedding-of-subresources" class="plugin-anchor" href="#should-allow-optional-embedding-of-subresources"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Allow Optional Embedding of Sub-Resources</h2>
+<h2 id="should-allow-optional-embedding-of-subresources"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Allow Optional Embedding of Sub-Resources</h2>
 <p>Embedding related resources (also know as <em>Resource expansion</em>) is a great way to reduce the number of requests. In
 cases where clients know upfront that they need some related resources they can instruct the server to prefetch that
 data eagerly. Whether this is optimized on the server, e.g. a database join, or done in a generic way, e.g. an HTTP
@@ -572,6 +572,10 @@ proxy that transparently embeds resources, is up to the implementation.</p>
 <script src="../gitbook/app.js"></script>
 
     
+    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
+    
+
+    
     <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
     
 
@@ -589,7 +593,7 @@ proxy that transparently embeds resources, is up to the implementation.</p>
 
 <script>
 require(["gitbook"], function(gitbook) {
-    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
+    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"edit-link":{"base":"https://github.com/zalando/restful-api-guidelines/edit/master","label":"Edit This Page"},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
     gitbook.start(config);
 });
 </script>

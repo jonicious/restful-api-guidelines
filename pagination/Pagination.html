@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="11" data-chapter-title="Pagination" data-filepath="pagination/Pagination.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="11" data-chapter-title="Pagination" data-filepath="pagination/Pagination.md" data-basepath=".." data-revision="Fri Oct 28 2016 09:16:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -443,8 +443,8 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="pagination"><a name="pagination" class="plugin-anchor" href="#pagination"><span class="fa fa-link"></span></a>Pagination</h1>
-<h2 id="must-support-pagination"><a name="must-support-pagination" class="plugin-anchor" href="#must-support-pagination"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Support Pagination</h2>
+                        <h1 id="pagination">Pagination</h1>
+<h2 id="must-support-pagination"><span style="color:red;font-weight:bold">Must:</span> Support Pagination</h2>
 <p>Access to lists of data items must support pagination for best client side batch processing and iteration experience. This holds true for all lists that are (potentially) larger than just a
 few hundred entries.</p>
 <p>There are two page iteration techniques:</p>
@@ -459,7 +459,7 @@ unique key element identifies the first page entry (see also
 in this <a href="https://www.smashingmagazine.com/2016/03/pagination-infinite-scrolling-load-more-buttons/" target="_blank">article</a>,
 jumping to a specific page is far less used than navigation via next/previous page links. This favours
 cursor-based over offset-based pagination.</p>
-<h2 id="should-prefer-cursorbased-pagination-avoid-offsetbased-pagination"><a name="should-prefer-cursorbased-pagination-avoid-offsetbased-pagination" class="plugin-anchor" href="#should-prefer-cursorbased-pagination-avoid-offsetbased-pagination"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Prefer Cursor-Based Pagination, Avoid Offset-Based Pagination</h2>
+<h2 id="should-prefer-cursorbased-pagination-avoid-offsetbased-pagination"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Prefer Cursor-Based Pagination, Avoid Offset-Based Pagination</h2>
 <p>Cursor-based pagination is usually better and more efficient when compared to offset-based pagination. Especially when it comes to
 high-data volumes and / or storage in NoSQL databases.</p>
 <p>Before choosing cursor-based pagination, consider the following trade-offs:</p>
@@ -498,7 +498,7 @@ deleted while fetching two pages</li>
 <li><a href="http://use-the-index-luke.com/no-offset" target="_blank">Use the Index, Luke</a></li>
 <li><a href="https://www.citusdata.com/blog/1872-joe-nelson/409-five-ways-paginate-postgres-basic-exotic" target="_blank">Paging in PostgreSQL</a></li>
 </ul>
-<h2 id="could-use-pagination-links-where-applicable"><a name="could-use-pagination-links-where-applicable" class="plugin-anchor" href="#could-use-pagination-links-where-applicable"><span class="fa fa-link"></span></a><span style="color:green;font-weight:bold">Could:</span> Use Pagination Links Where Applicable</h2>
+<h2 id="could-use-pagination-links-where-applicable"><span style="color:green;font-weight:bold">Could:</span> Use Pagination Links Where Applicable</h2>
 <ul>
 <li>Set links to provide information to the client about subsequent paging options.</li>
 </ul>
@@ -560,6 +560,10 @@ deleted while fetching two pages</li>
 <script src="../gitbook/app.js"></script>
 
     
+    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
+    
+
+    
     <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
     
 
@@ -577,7 +581,7 @@ deleted while fetching two pages</li>
 
 <script>
 require(["gitbook"], function(gitbook) {
-    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
+    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"edit-link":{"base":"https://github.com/zalando/restful-api-guidelines/edit/master","label":"Edit This Page"},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
     gitbook.start(config);
 });
 </script>

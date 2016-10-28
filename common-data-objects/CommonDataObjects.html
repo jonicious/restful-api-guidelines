@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="14" data-chapter-title="Common Data Objects" data-filepath="common-data-objects/CommonDataObjects.md" data-basepath=".." data-revision="Fri Oct 14 2016 10:53:54 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="14" data-chapter-title="Common Data Objects" data-filepath="common-data-objects/CommonDataObjects.md" data-basepath=".." data-revision="Fri Oct 28 2016 09:16:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -443,9 +443,9 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="common-data-objects"><a name="common-data-objects" class="plugin-anchor" href="#common-data-objects"><span class="fa fa-link"></span></a>Common Data Objects</h1>
+                        <h1 id="common-data-objects">Common Data Objects</h1>
 <p>Definitions of data objects that are good candidates for wider usage:</p>
-<h2 id="should-use-a-common-money-object"><a name="should-use-a-common-money-object" class="plugin-anchor" href="#should-use-a-common-money-object"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Use a Common Money Object</h2>
+<h2 id="should-use-a-common-money-object"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Use a Common Money Object</h2>
 <p>Use the following common money structure:</p>
 <pre><code>Money:
   type: object
@@ -470,7 +470,7 @@ See <a href="http://stackoverflow.com/a/3730040/342852" target="_blank">Stack Ov
 <a href="https://docs.google.com/spreadsheets/d/12wTj-2w39f69XZGwRDrosNc1yWPwQpGgEs_DCt5ODaQ" target="_blank">pros and cons</a>,
 we&#x2019;ve decided on &quot;decimal&quot; as our amount format. It is not a standard OpenAPI format, but should
 help us to avoid parsing numbers as float / doubles.</p>
-<h2 id="should-use-common-address-fields"><a name="should-use-common-address-fields" class="plugin-anchor" href="#should-use-common-address-fields"><span class="fa fa-link"></span></a><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Use Common Address Fields</h2>
+<h2 id="should-use-common-address-fields"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Use Common Address Fields</h2>
 <p>Address structures play a role in different functional and use-case contexts, including country
 variances. The address structure below should be sufficient for most of our business-related use
 cases. Use it in your APIs &#x2014; and compatible extend it if necessary for your API concerns:</p>
@@ -523,7 +523,7 @@ cases. Use it in your APIs &#x2014; and compatible extend it if necessary for yo
       - city
       - zip
       - country_code
-</code></pre><h2 id="must-use-problem-json"><a name="must-use-problem-json" class="plugin-anchor" href="#must-use-problem-json"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use Problem JSON</h2>
+</code></pre><h2 id="must-use-problem-json"><span style="color:red;font-weight:bold">Must:</span> Use Problem JSON</h2>
 <p><a href="http://tools.ietf.org/html/rfc7807" target="_blank">RFC 7807</a> defines the media type <code>application/problem+json</code>.
 Operations should return that (together with a suitable status code) when any problem
 occurred during processing and you can give more details than the status code itself
@@ -543,11 +543,11 @@ You can reference it by using:</p>
     schema:
       $ref: &apos;https://zalando.github.io/problem/schema.yaml#/Problem&apos;
 </code></pre>
-<h2 id="must-do-not-expose-stack-traces"><a name="must-do-not-expose-stack-traces" class="plugin-anchor" href="#must-do-not-expose-stack-traces"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Do not expose Stack Traces</h2>
+<h2 id="must-do-not-expose-stack-traces"><span style="color:red;font-weight:bold">Must:</span> Do not expose Stack Traces</h2>
 <p>Stack traces contain implementation details that are not part of an API, and on which clients
 should never rely. Moreover, stack traces can leak sensitive information that partners and third
 parties are not allowed to receive and may disclose insights about vulnerabilities to attackers.</p>
-<h3 id="must-use-common-field-names"><a name="must-use-common-field-names" class="plugin-anchor" href="#must-use-common-field-names"><span class="fa fa-link"></span></a><span style="color:red;font-weight:bold">Must:</span> Use common field names</h3>
+<h3 id="must-use-common-field-names"><span style="color:red;font-weight:bold">Must:</span> Use common field names</h3>
 <p>There are some data fields that come up again and again in API data. We describe four here:</p>
 <ul>
 <li><p><code>id</code>: the identity of the object. If used, IDs must opaque strings and not numbers. IDs are unique within some documented context, are stable and don&apos;t change for a given object once assigned, and are never recycled cross entities. </p>
@@ -582,6 +582,10 @@ parties are not allowed to receive and may disclose insights about vulnerabiliti
 <script src="../gitbook/app.js"></script>
 
     
+    <script src="../gitbook/plugins/gitbook-plugin-edit-link/plugin.js"></script>
+    
+
+    
     <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
     
 
@@ -599,7 +603,7 @@ parties are not allowed to receive and may disclose insights about vulnerabiliti
 
 <script>
 require(["gitbook"], function(gitbook) {
-    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
+    var config = {"structured-toc":{},"gitbook-restructure-navigation":{"transformations":[{"from":0,"to":1}]},"edit-link":{"base":"https://github.com/zalando/restful-api-guidelines/edit/master","label":"Edit This Page"},"restructure-navigation":{},"anchors":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"}};
     gitbook.start(config);
 });
 </script>
