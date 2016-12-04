@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="4" data-chapter-title="Security" data-filepath="security/Security.md" data-basepath=".." data-revision="Thu Nov 03 2016 17:13:56 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="4" data-chapter-title="Security" data-filepath="security/Security.md" data-basepath=".." data-revision="Sun Dec 04 2016 13:54:01 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -451,13 +451,14 @@ on how to specify security definitions in you API specification or take a look a
 <pre><code class="lang-yaml">securityDefinitions:
   oauth2:
     type: oauth2
-    flow: implicit
+    flow: password
     authorizationUrl: https://auth.zalando.com/oauth2/access_token?realm=services
     scopes:
       fulfillment-order-service.read: Access right needed to read from the fulfillment order service.
       fulfillment-order-service.write: Access right needed to write to the fulfillment order service.
 </code></pre>
-<p>The example defines OAuth2 with implicit flow as security standard used for authentication when accessing endpoints; additionally, there are two API access rights defined via the scopes section for later endpoint authorization usage - please see next section.</p>
+<p>The example defines OAuth2 with password flow as security standard used for authentication when accessing endpoints; additionally, there are two API access rights defined via the scopes section for later endpoint authorization usage - please see next section.</p>
+<p>It makes little sense specifying the flow to retrieve OAuth tokens in the <code>securityDefinitions</code> section, as API endpoints should not care, how OAuth tokens were created. Unfortunately the <code>flow</code> field is mandatory and cannot be ommited. API endpoints should always set <code>flow: password</code> and ignore this information.</p>
 <h2 id="must-define-and-assign-access-rights-scopes"><span style="color:red;font-weight:bold">Must:</span> Define and Assign Access Rights (Scopes)</h2>
 <p>Every API needs to define access rights, called scopes here, and every endpoint needs to have at least one scope assigned. Scopes are defined by name and description per API specification, as shown in the previous section. Please refer to the following rules when creating scope names:</p>
 <pre><code>&lt;api-scope&gt; ::= &lt;api-standard-scope&gt; |            -- should be sufficient for majority of use cases 
