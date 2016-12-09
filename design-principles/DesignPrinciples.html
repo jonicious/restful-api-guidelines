@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="2" data-chapter-title="Principles" data-filepath="design-principles/DesignPrinciples.md" data-basepath=".." data-revision="Thu Dec 08 2016 18:09:01 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="2" data-chapter-title="Principles" data-filepath="design-principles/DesignPrinciples.md" data-basepath=".." data-revision="Fri Dec 09 2016 16:20:48 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -444,6 +444,27 @@
                     <section class="normal" id="section-">
                     
                         <h1 id="principles">Principles</h1>
+<h2 id="api-as-a-product">API as a Product</h2>
+<p>As mentioned above, Zalando is transforming from an online shop into an expansive fashion platform 
+comprising a rich set of products following a Software as a Platform (SaaS) model for our business partners. 
+As a company we want to deliver products to our (internal and external) customers which can be consumed like a service. </p>
+<p>Platform products provide their functionality via (public) APIs; 
+hence, the design of our APIs should be based on the API as a Product principle:</p>
+<ul>
+<li>Treat your API as product and understand the needs of its customers</li>
+<li>Take ownership and advocate for the customer and continuous improvement</li>
+<li>Emphasize easy understanding, discovery and usage of APIs; design APIs irresistible for client engineers</li>
+<li>Actively improve and maintain API consistency over the long term</li>
+<li>Make use of customer feedback and provide service level support</li>
+</ul>
+<p>RESTful API as a Product makes the difference between enterprise integration business and agile, 
+innovative product service business built on a platform of APIs.</p>
+<p>Based on your concrete customer use cases, you should carefully check the trade-offs of API design variants 
+and avoid short-term server side implementation optimizations at the expense of unnecessary client side 
+obligations and have a high attention on API quality and client developer experience. </p>
+<p>API as a Product is closely related to our 
+<a href="../general-guidelines/GeneralGuidelines.html#Must-Follow-API-First-Principle">API First principle</a> 
+(see next chapter) which is more focussed on how we engineer high quality APIs. </p>
 <h2 id="api-design-principles">API Design Principles</h2>
 <p>Comparing SOA web service interfacing style of SOAP vs. REST,
 the former tend to be centered around operations that are usually use-case specific and specialized.
@@ -473,27 +494,6 @@ Architecture</a></li>
 <li>Lessons-learned blog: <a href="http://restful-api-design.readthedocs.org/en/latest/" target="_blank">Thoughts on RESTful API Design</a></li>
 <li>Fielding Dissertation: <a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm" target="_blank">Architectural Styles and the Design of Network-Based Software Architectures</a></li>
 </ul>
-<h2 id="api-as-a-product">API as a Product</h2>
-<p>As mentioned above, Zalando is transforming from an online shop into an expansive fashion platform 
-comprising a rich set of products following a Software as a Platform (SaaS) model for our business partners. 
-As a company we want to deliver products to our (internal and external) customers which can be consumed like a service. </p>
-<p>Platform products provide their functionality via (public) APIs; 
-hence, the design of our APIs should be based on the API as a Product principle:</p>
-<ul>
-<li>Treat your API as product and understand the needs of its customers</li>
-<li>Take ownership and advocate for the customer and continuous improvement</li>
-<li>Emphasize easy understanding, discovery and usage of APIs; design APIs irresistible for client engineers</li>
-<li>Actively improve and maintain API consistency over the long term</li>
-<li>Make use of customer feedback and provide service level support</li>
-</ul>
-<p>RESTful API as a Product makes the difference between enterprise integration business and agile, 
-innovative product service business built on a platform of APIs.</p>
-<p>Based on your concrete customer use cases, you should carefully check the trade-offs of API design variants 
-and avoid short-term server side implementation optimizations at the expense of unnecessary client side 
-obligations and have a high attention on API quality and client developer experience. </p>
-<p>API as a Product is closely related to our 
-<a href="../general-guidelines/GeneralGuidelines.html#Must-Follow-API-First-Principle">API First principle</a> 
-(see next chapter) which is more focussed on how we engineer high quality APIs. </p>
 
                     
                     </section>
