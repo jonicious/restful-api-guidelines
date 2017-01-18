@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="6" data-chapter-title="JSON Guidelines" data-filepath="json-guidelines/JsonGuidelines.md" data-basepath=".." data-revision="Wed Jan 18 2017 14:48:29 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="6" data-chapter-title="JSON Guidelines" data-filepath="json-guidelines/JsonGuidelines.md" data-basepath=".." data-revision="Wed Jan 18 2017 18:44:49 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -444,14 +444,12 @@
                     <section class="normal" id="section-">
                     
                         <h1 id="json-guidelines">JSON Guidelines</h1>
-<p>These guidelines provides recommendations for defining JSON data at Zalando. JSON here refers to <a href="http://www.rfc-editor.org/rfc/rfc7159.txt" target="_blank">RFC 7159</a> (which updates <a href="https://www.ietf.org/rfc/rfc4627.txt" target="_blank">RFC 4627</a>), the &#x201C;application/json&#x201D; media type and custom JSON media types defined for APIs. The guidelines clarifies some specific cases to allow Zalando JSON data to have an idiomatic form across teams and services. </p>
+<p>These guidelines provides recommendations for defining JSON data at Zalando. JSON here refers to <a href="http://www.rfc-editor.org/rfc/rfc7159.txt" target="_blank">RFC 7159</a> (which updates <a href="https://www.ietf.org/rfc/rfc4627.txt" target="_blank">RFC 4627</a>), the &#x201C;application/json&#x201D; media type and custom JSON media types defined for APIs. The guidelines clarifies some specific cases to allow Zalando JSON data to have an idiomatic form across teams and services.</p>
 <h2 id="must-use-consistent-property-names"><span style="color:red;font-weight:bold">Must:</span> Use Consistent Property Names</h2>
 <h3 id="must-property-names-must-be-snakecase-and-never-camelcase"><span style="color:red;font-weight:bold">Must:</span> Property names must be snake_case (and never camelCase).</h3>
-<p>No established industry standard exists, but many popular Internet companies prefer snake_case: e.g. GitHub, Stack Exchange, Twitter. Others, like Google and Amazon, use both - but not only camelCase. It&#x2019;s essential to establish a consistent look and feel such that JSON looks as if it came from the same hand. </p>
+<p>No established industry standard exists, but many popular Internet companies prefer snake_case: e.g. GitHub, Stack Exchange, Twitter. Others, like Google and Amazon, use both - but not only camelCase. It&#x2019;s essential to establish a consistent look and feel such that JSON looks as if it came from the same hand.</p>
 <h3 id="must-property-names-must-be-an-ascii-subset"><span style="color:red;font-weight:bold">Must:</span> Property names must be an ASCII subset</h3>
 <p>Property names are restricted to ASCII encoded strings. The first character must be a letter, an underscore  or a dollar sign, and subsequent characters can be a letter, an underscore, a dollar sign, or a number.</p>
-<h3 id="should-reserved-javascript-keywords-should-be-avoided"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Reserved JavaScript keywords should be avoided</h3>
-<p>Most API content is consumed by non-JavaScript clients today, but for security and sanity reasons, JavaScript (strictly, ECMAScript) keywords are worth avoiding. A list of keywords can be found in the <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-reserved-words" target="_blank">ECMAScript Language Specification</a>.</p>
 <h3 id="should-array-names-should-be-pluralized"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Array names should be pluralized</h3>
 <p>To indicate they contain multiple values prefer to pluralize array names. This implies that object names should in turn be singular.</p>
 <h2 id="must-use-consistent-property-values"><span style="color:red;font-weight:bold">Must:</span> Use Consistent Property Values</h2>
@@ -462,11 +460,11 @@
 <h3 id="should-empty-array-values-should-not-be-null"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Empty array values should not be null</h3>
 <p>Empty array values can unambiguously be represented as the the empty list, <code>[]</code>.</p>
 <h3 id="should-enumerations-should-be-represented-as-strings"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Enumerations should be represented as Strings</h3>
-<p>Strings are a reasonable target for values that are by design enumerations. </p>
+<p>Strings are a reasonable target for values that are by design enumerations.</p>
 <h3 id="should-date-property-values-should-conform-to-rfc-3399"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Date property values should conform to RFC 3399</h3>
 <p>Use the date and time formats defined by <a href="http://tools.ietf.org/html/rfc3339#section-5.6" target="_blank">RFC 3339</a>:</p>
 <ul>
-<li><p>for &quot;date&quot; use strings matching <code>date-fullyear &quot;-&quot; date-month &quot;-&quot; date-mday</code>, for example: <code>2015-05-28</code> </p>
+<li><p>for &quot;date&quot; use strings matching <code>date-fullyear &quot;-&quot; date-month &quot;-&quot; date-mday</code>, for example: <code>2015-05-28</code></p>
 </li>
 <li><p>for &quot;date-time&quot; use strings matching <code>full-date &quot;T&quot; full-time</code>, for example <code>2015-05-28T14:07:17Z</code></p>
 </li>
@@ -476,10 +474,10 @@
 <p>When it comes to storage, all dates should be consistently stored in UTC without a zone offset. Localization should be done locally by the services that provide user interfaces, if required.</p>
 <p>Sometimes it can seem data is naturally represented using numerical timestamps, but this can introduce interpretation issues with precision - for example whether to represent a timestamp as 1460062925, 1460062925000 or 1460062925.000. Date strings, though more verbose and requiring more effort to parse, avoid this ambiguity.</p>
 <h3 id="could-time-durations-and-intervals-could-conform-to-iso-8601"><span style="color:green;font-weight:bold">Could:</span> Time durations and intervals could conform to ISO 8601</h3>
-<p>Schema based JSON properties that are by design durations and intervals could be strings formatted as recommended by ISO 8601 (<a href="https://tools.ietf.org/html/rfc3339#appendix-A" target="_blank">Appendix A of RFC 3399 contains a grammar</a> for durations). </p>
+<p>Schema based JSON properties that are by design durations and intervals could be strings formatted as recommended by ISO 8601 (<a href="https://tools.ietf.org/html/rfc3339#appendix-A" target="_blank">Appendix A of RFC 3399 contains a grammar</a> for durations).</p>
 <h3 id="could-standards-could-be-used-for-language-country-and-currency"><span style="color:green;font-weight:bold">Could:</span> Standards could be used for Language, Country and Currency</h3>
 <ul>
-<li><a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank">ISO 3166-1-alpha2 country 
+<li><a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank">ISO 3166-1-alpha2 country
 </a><ul>
 <li>(It&apos;s &quot;GB&quot;, not &quot;UK&quot;, even though &quot;UK&quot; has seen some use at Zalando)</li>
 </ul>
