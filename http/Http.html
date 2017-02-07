@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Tue Feb 07 2017 09:29:55 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Tue Feb 07 2017 09:46:06 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -643,6 +643,11 @@ different HTTP methods on resources.</p>
 <td>No content - There is no response body</td>
 <td>PUT, DELETE</td>
 </tr>
+<tr>
+<td>207</td>
+<td>Multi-Status - The response body contains multiple status informations for different parts of a batch/bulk request. See <a href="#use-207-for-batch-or-bulk-requests">&quot;Use 207 for Batch or Bulk Requests&quot;</a>.</td>
+<td>POST</td>
+</tr>
 </tbody>
 </table>
 <h3 id="redirection-codes">Redirection Codes</h3>
@@ -803,6 +808,15 @@ different HTTP methods on resources.</p>
 </ul>
 <p>Even though they might not be documented - they may very much occur in production, so clients should be prepared for unexpected response codes, and in case of doubt handle them like they would handle the corresponding x00 code. Adding new response codes (specially error responses) should be considered a compatible API evolution.</p>
 <p>Functional errors on the other hand, that convey domain-specific semantics, must be documented and are strongly encouraged to be expressed with <a href="../common-data-objects/CommonDataObjects.html#must-use-common-error-return-objects"><em>Problem types</em></a>.</p>
+<h2 id="must-use-207-for-batch-or-bulk-requests"><span style="color:red;font-weight:bold">Must:</span> Use 207 for Batch or Bulk Requests</h2>
+<p>Some APIs are required to provide either <em>batch</em> or <em>bulk</em> requests using POST for performance reasons, i.e. for communication and processing efficiency. In this case services may be in need to signal multiple response codes for each part of an batch or bulk request. As HTTP does not provide proper guidance for handling batch/bulk requests and responses, we herewith define the following approach:</p>
+<ul>
+<li>A batch or bulk request <strong>always</strong> has to respond with HTTP status code <strong>207</strong>, unless it encounters a generic or unexpected failure before looking at individual parts.</li>
+<li>A batch or bulk response with status code 207 <strong>always</strong> returns a multi-status object containing sufficient status and/or monitoring information for each part of the batch or bulk request.</li>
+<li>A batch or bulk request may result in a status code 400/500, only if the service encounters a failure before looking at individual parts or, if an unanticipated failure occurs.</li>
+</ul>
+<p>The before rules apply <em>even in the case</em> that processing of all individual part <em>fail</em> or each part is executed <em>asynchronously</em>! They are intended to allow clients to act on batch and bulk responses by inspecting the individual results in a consistent way.</p>
+<p><strong>Note</strong>: while a <em>batch</em> defines a collection of requests triggering independent processes, a <em>bulk</em> defines a collection of independent resources created or updated together in one request. With respect to response processing this distinction normally does not matter.</p>
 <h2 id="must-use-429-with-headers-for-rate-limits"><span style="color:red;font-weight:bold">Must:</span> Use 429 with Headers for Rate Limits</h2>
 <p>APIs that wish to manage the request rate of clients must use the <a href="http://tools.ietf.org/html/rfc6585" target="_blank">&apos;429 Too Many Requests&apos;</a> response code if the client exceeded the request rate and therefore the request can&apos;t be fulfilled. Such responses must also contain header information providing further details to the client. There are two approaches a service can take for header information:</p>
 <ul>
