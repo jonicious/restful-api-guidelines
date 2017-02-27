@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="8" data-chapter-title="Resources" data-filepath="resources/Resources.md" data-basepath=".." data-revision="Tue Feb 21 2017 12:00:28 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="8" data-chapter-title="Resources" data-filepath="resources/Resources.md" data-basepath=".." data-revision="Mon Feb 27 2017 17:10:53 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -460,11 +460,20 @@ In URLs, use only nouns.</p>
 <h2 id="must-use-domainspecific-resource-names"><span style="color:red;font-weight:bold">Must:</span> Use Domain-Specific Resource Names</h2>
 <p>API resources represent elements of the application&#x2019;s domain model. Using domain-specific nomenclature for resource names helps developers to understand the functionality and basic semantics of your resources. It also reduces the need for further documentation outside the API definition. For example, &#x201C;sales-order-items&#x201D; is superior to &#x201C;order-items&#x201D; in that it clearly indicates which business object it represents. Along these lines, &#x201C;items&#x201D; is too general.</p>
 <h2 id="must-identify-resources-and-subresources-via-path-segments"><span style="color:red;font-weight:bold">Must:</span> Identify resources and Sub-Resources via Path Segments</h2>
+<p>Some API resources may contain or reference sub-resources. Embedded sub-resources, which are not top-level resources,
+are parts of a higher-level resource and cannot be used outside of its scope. Sub-resources should be referenced
+by their name and identifier in the path segments.</p>
+<p>Composite identifiers must not contain &#x201C;/&#x201D; as a separator. In order to improve the consumer experience, you should
+aim for intuitively understandable URLs, where each sub-path is a valid reference to a resource or a set of resources.
+For example, if &#x201C;/customers/12ev123bv12v/addresses/DE_100100101&#x201D; is a valid path of your API, then
+&#x201C;/customers/12ev123bv12v/addresses&#x201D;, &#x201C;/customers/12ev123bv12v&#x201D; and &#x201C;/customers&#x201D; must be valid as well in principle.</p>
 <p>Basic URL structure:</p>
 <pre><code>/{resources}/[resource-id]/{sub-resources}/[sub-resource-id]
+/{resources}/[partial-id-1][separator][partial-id-2]
 </code></pre><p>Examples:</p>
 <pre><code>/carts/1681e6b88ec1/items
 /carts/1681e6b88ec1/items/1
+/customers/12ev123bv12v/addresses/DE_100100101
 </code></pre><h2 id="should-only-use-uuids-if-necessary"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Only Use UUIDs If Necessary</h2>
 <p>Generating IDs can be a scaling problem in high frequency and near real time use cases. 
 UUIDs solve this problem, as they can be generated without collisions in a distributed, 
