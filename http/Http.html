@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Mon Feb 27 2017 17:10:53 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Tue Feb 28 2017 15:51:02 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -474,6 +474,10 @@ without actual content returned), and 201 (if the resource was created)</li>
 URL path segment. Putting the same resource twice is required to be idempotent and to result in
 the same single resource instance. If PUT is applied for creating a resource, only URIs should be
 allowed as resource IDs. If URIs are not available POST should be preferred.</p>
+<p>To prevent unnoticed concurrent updates when using PUT, the combination of <a href="../headers/CommonHeaders.html#could-consider-using-etag-together-with-ifnonematch-header"><code>ETag</code> and
+<code>If-(None-)Match</code></a>
+headers should be considered to signal the server stricter demands to expose conflicts and prevent
+lost updates.</p>
 <h3 id="post">POST</h3>
 <p>POST requests are idiomatically used to create single resources on a collection resource endpoint,
 but other semantics on single resources endpoint are equally possible. The semantic for collection
@@ -532,6 +536,10 @@ limited, especially when trying to update single objects in large collections (a
 resource). In this cases <a href="http://tools.ietf.org/html/rfc6902" target="_blank">JSON Patch</a> can shown its full power
 while still showing readable patch requests
 (<a href="http://erosb.github.io/post/json-patch-vs-merge-patch" target="_blank">see also</a>).</p>
+<p>To prevent unnoticed concurrent updates when using PATCH, the combination of <a href="../headers/CommonHeaders.html#could-consider-using-etag-together-with-ifnonematch-header"><code>ETag</code> and
+<code>If-Match</code></a>
+headers should be considered to signal the server stricter demands to expose conflicts and prevent
+lost updates.</p>
 <h3 id="delete">DELETE</h3>
 <p>DELETE request are used to delete resources. The semantic is best described as &#xBB;<em>please delete the
 resource identified by the URL</em>&#xAB;.</p>
@@ -645,7 +653,7 @@ different HTTP methods on resources.</p>
 </tr>
 <tr>
 <td>207</td>
-<td>Multi-Status - The response body contains multiple status informations for different parts of a batch/bulk request. See <a href="#must-use-207-for-batch-or-bulk-requests">&quot;Use 207 for Batch or Bulk Requests&quot;</a>.</td>
+<td>Multi-Status - The response body contains multiple status informations for different parts of a batch/bulk request. See <a href="Http.html#must-use-207-for-batch-or-bulk-requests">&quot;Use 207 for Batch or Bulk Requests&quot;</a>.</td>
 <td>POST</td>
 </tr>
 </tbody>
@@ -754,7 +762,7 @@ different HTTP methods on resources.</p>
 </tr>
 <tr>
 <td>429</td>
-<td>Too many requests - the client does not consider rate limiting and sent too many requests. See <a href="#must-use-429-with-headers-for-rate-limits">&quot;Use 429 with Headers for Rate Limits&quot;</a>.</td>
+<td>Too many requests - the client does not consider rate limiting and sent too many requests. See <a href="Http.html#must-use-429-with-headers-for-rate-limits">&quot;Use 429 with Headers for Rate Limits&quot;</a>.</td>
 <td>All</td>
 </tr>
 </tbody>

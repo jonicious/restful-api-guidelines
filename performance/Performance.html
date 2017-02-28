@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="10" data-chapter-title="Performance" data-filepath="performance/Performance.md" data-basepath=".." data-revision="Mon Feb 27 2017 17:10:53 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="10" data-chapter-title="Performance" data-filepath="performance/Performance.md" data-basepath=".." data-revision="Tue Feb 28 2017 15:51:02 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -456,7 +456,7 @@ point.)</p>
 <li>querying field filters to retrieve a subset of resource attributes (see <a href="Performance.html#should-support-filtering-of-resource-fields"><em>Support Filtering of Resource Fields</em></a>
 below)</li>
 <li>paginate lists of data items (see <a href="../pagination/Pagination.html"><em>Pagination</em></a> below)</li>
-<li><code>ETag</code> (and If-[None-]Match) headers to avoid refetch of unchanged resources</li>
+<li><code>ETag</code> and <code>If-(None-)Match</code> headers to avoid re-fetching of unchanged resources (see <a href="../headers/CommonHeaders.html#could-consider-using-etag-together-with-ifnonematch-header"><em>Common Headers</em></a></li>
 <li>pagination for incremental access of larger (result) lists</li>
 </ul>
 <p>Each of these items is described in greater detail below.</p>
@@ -513,18 +513,6 @@ can easily be introduced with a minimum of effort.</p>
 <p>Hint: OpenAPI doesn&apos;t allow you to formally specify whether depending on a given parameter will
 return different parts of the specified result schema. Explain this in English in the parameter
 description.</p>
-<h2 id="could-support-the-etag-header"><span style="color:green;font-weight:bold">Could:</span> Support the ETag Header</h2>
-<p>If a resource changes, the contents of the <a href="https://en.wikipedia.org/wiki/HTTP_ETag" target="_blank"><code>ETag</code></a> header
-must also change. Combined with the <code>If-Match</code> and <code>If-None-Match</code> headers, the <code>ETag</code> header allows
-caching of entities.</p>
-<p>Its possible contents:</p>
-<ul>
-<li>the entity&#x2019;s version number</li>
-<li>hash of the response body</li>
-<li>hash of the entity&#x2019;s last modified field</li>
-</ul>
-<p>Also see <a href="Performance.html#should-allow-embedding-of-complex-subresources"><em>Allow Embedding of Complex Sub-Resources</em></a>
-below as contribution to performance optimization to avoid multiple requests for sub-resources.</p>
 <h2 id="should-allow-optional-embedding-of-subresources"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Allow Optional Embedding of Sub-Resources</h2>
 <p>Embedding related resources (also know as <em>Resource expansion</em>) is a great way to reduce the number of requests. In
 cases where clients know upfront that they need some related resources they can instruct the server to prefetch that
