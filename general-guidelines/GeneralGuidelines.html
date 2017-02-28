@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="3" data-chapter-title="General Guidelines" data-filepath="general-guidelines/GeneralGuidelines.md" data-basepath=".." data-revision="Tue Feb 28 2017 15:53:22 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="3" data-chapter-title="General Guidelines" data-filepath="general-guidelines/GeneralGuidelines.md" data-basepath=".." data-revision="Tue Feb 28 2017 16:00:17 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -446,8 +446,8 @@
                         <h1 id="general-guidelines">General Guidelines</h1>
 <p>The titles are marked with the corresponding labels: <span style="color:red;font-weight:bold">Must:</span>, <span style="color:darkgoldenrod;font-weight:bold">Should:</span>, <span style="color:green;font-weight:bold">Could:</span>.</p>
 <h2 id="must-follow-api-first-principle"><span style="color:red;font-weight:bold">Must:</span> Follow API First Principle</h2>
-<p>As mentioned in the introduction, API First is one of our architecture principles, as per our Architecture Rules of Play. 
-In a nutshell API First has two aspects:</p>
+<p>As mentioned in the introduction, API First is one of our <a href="https://github.com/zalando-incubator/zalando-tech-principles" target="_blank">engineering and architecture principles</a>. 
+In a nutshell API First requires two aspects:</p>
 <ul>
 <li>define APIs outside the code first using a standard specification language</li>
 <li>get early review feedback from peers and client developers</li>
@@ -470,41 +470,40 @@ Peer review is important for us to get high quality APIs, to enable architectura
 and to supported development of client applications decoupled from service provider engineering life cycle. </p>
 <p>It is important to learn, that API First is <strong>not in conflict with the agile development principles</strong> that we love. 
 Service applications should evolve incrementally &#x2014; and so its APIs. Of course, our API specification will 
-and should evolve iteratively in different cycles, each starting with draft status and early team 
-and peer review feedback. </p>
-<p>API may change and profit from implementation concerns and automated testing feedback. 
+and should evolve iteratively in different cycles; however, each starting with draft status and <em>early</em> team 
+and peer review feedback.
+API may change and profit from implementation concerns and automated testing feedback. 
 API evolution during development life cycle may include breaking changes for not yet productive features 
 and as long as we have aligned the changes with the clients. 
 Hence, API First does <em>not</em> mean that you must have 100% domain and requirement understanding and can never produce code 
 before you have defined the complete API and get it confirmed by peer review. On the other hand, API First obviously is 
-in conflict with the practice of publishing API definition and asking for peer review after the service integration 
+in conflict with the bad practice of publishing API definition and asking for peer review after the service integration 
 or even the service productive operation has started. 
 It is crucial to request and get early feedback &#x2014; as early as possible, but not before the API changes are comprehensive 
 with focus to the next evolution step and have a certain quality (including API Guideline compliance), 
 already confirmed via team internal reviews. </p>
 <h2 id="must-provide-api-reference-definition-using-openapi"><span style="color:red;font-weight:bold">Must:</span> Provide API Reference Definition using OpenAPI</h2>
 <p>We use the <a href="http://swagger.io/specification/" target="_blank">OpenAPI specification</a> (aka Swagger spec) as standard for our REST API definitions. 
-You may choose YAML or JSON as a format of your OpenAPI API definition file; 
-however, YAML is generally preferred due to its improved readability. </p>
+You should use YAML format (instead of JSON) for the OpenAPI API definition files due to its improved readability. </p>
 <p>We also call the OpenAPI API definition the &quot;API Reference definition&quot; (or &quot;API definition&quot;); 
-it provides all information needed by an experienced API client developer to use this API.</p>
+as a reference manual it provides all information needed by an experienced API client developer to use this API.</p>
 <p>The OpenAPI API specification file should be subject of version control together with source code management. 
 Services also have to support an
 <a href="../api-operation/ApiOperation.html#must-Provide-Online-Access-to-OpenAPI-Reference-Definition">endpoint to access the API Reference definition</a> for their external API(s). </p>
 <h2 id="should-provide-user-manual-documentation"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Provide User Manual Documentation</h2>
-<p>In addition to defining the API as OpenAPI Reference Definition, it&#x2019;s good practice to provide 
-further documentation to improve client developer experience, especially of engineers that 
-are novices in using this API. A helpful API User Manual documentation typically describes 
+<p>In addition to the API as OpenAPI Reference Definition, it&#x2019;s good practice to provide 
+an API User Manual documentation to improve client developer experience, especially of engineers that 
+are less experienced in using this API. A helpful API User Manual typically describes 
 the following API aspects:</p>
 <ul>
 <li>API&#x2019;s scope, purpose and use cases</li>
-<li>concrete usage examples </li>
-<li>architecture context - including figures and sequence flows</li>
-<li>edge cases and possible error situations</li>
+<li>concrete examples of API usage</li>
+<li>edge cases, error situation details and repair hints</li>
+<li>architecture context and mayor dependencies - including figures and sequence flows</li>
 </ul>
 <p>The User Manual must be posted online, e.g. via GitHub Enterprise pages, on specific 
 team web servers, or as a Google doc. And don&apos;t forget to include a link to this 
-user manual documentation into your OpenAPI definition using the &#x201C;externalDocs&#x201D; property.</p>
+user manual into your OpenAPI definition using the &#x201C;externalDocs&#x201D; property.</p>
 <h2 id="must-write-apis-in-us-english"><span style="color:red;font-weight:bold">Must:</span> Write APIs in U.S. English</h2>
 
                     
