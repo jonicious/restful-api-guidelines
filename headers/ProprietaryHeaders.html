@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="16" data-chapter-title="Proprietary Headers" data-filepath="headers/ProprietaryHeaders.md" data-basepath=".." data-revision="Tue Feb 28 2017 16:00:17 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="16" data-chapter-title="Proprietary Headers" data-filepath="headers/ProprietaryHeaders.md" data-basepath=".." data-revision="Wed Mar 01 2017 12:34:23 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -448,6 +448,7 @@
 they address overarching service-related concerns. Whether services support these concerns or not is
 optional; therefore, the OpenAPI API specification is the right place to make this explicitly
 visible. Use the parameter definitions of the resource HTTP methods.</p>
+<p>Remember that HTTP header field names are not case-sensitive.</p>
 <table>
 <thead>
 <tr>
@@ -461,7 +462,7 @@ visible. Use the parameter definitions of the resource HTTP methods.</p>
 <tr>
 <td>X-Flow-ID</td>
 <td>String</td>
-<td>The flow id of the request, which is written into the logs and passed to called services. Helpful for operational troubleshooting and log analysis.</td>
+<td>The flow id of the request, which is written into the logs and passed to called services. Helpful for operational troubleshooting and log analysis. It supports traceability of requests and identifying request flows through system of many services. It should be a string consisting of just printable ASCII characters (i.e. without whitespace). Verify in a received request that it fits to a specific format, has a sensible maximum length and possibly throw out or escape characters/bytes which could crash your log parsing (line breaks, tabs, spaces, NULL). If a legacy subsystem can only work with flow IDs of a specific format, it needs to define this in its API, or make its own ones.</td>
 <td>GKY7oDhpSiKY_gAAAABZ_A</td>
 </tr>
 <tr>
@@ -508,7 +509,6 @@ visible. Use the parameter definitions of the resource HTTP methods.</p>
 </tr>
 </tbody>
 </table>
-<p>Remember that HTTP header field names are not case-sensitive.</p>
 
                     
                     </section>
