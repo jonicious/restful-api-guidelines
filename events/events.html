@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="19" data-chapter-title="Events" data-filepath="events/events.md" data-basepath=".." data-revision="Wed Mar 01 2017 12:34:23 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="19" data-chapter-title="Events" data-filepath="events/events.md" data-basepath=".." data-revision="Wed Mar 01 2017 13:57:09 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -567,9 +567,13 @@
 <ul>
 <li><p>Event type names must be url-safe. This is because the event type names are used by Nakadi as part of the URL for the event type and its stream.</p>
 </li>
-<li><p>Event type names should be lowercase words and numbers, using hypens, underscores or periods as separators. </p>
+<li><p>Event type names should be lowercase words and numbers, using hyphens, underscores or periods as separators.</p>
 </li>
 </ul>
+<h2 id="must-prepare-for-duplicate-events"><span style="color:red;font-weight:bold">Must:</span> Prepare for duplicate Events</h2>
+<p>Event consumers must be able to process duplicate events.</p>
+<p>Most of message broker and event bus systems, like Nakadi, guarantee &#x201C;at-least-once&#x201D; delivery. That is, one particular event is delivered to the consumers one or more times. Other circumstances can also cause duplicate events.</p>
+<p>For example, these situations occur if the publisher sends an event and doesn&apos;t receive the acknowledgment (e.g. due to a network issue). In this case, the publisher will try to send the same event again. This leads to two identical events in the event bus which have to be processed by the consumers. Similar conditions can appear on consumer side: an event has been processed successfully, but the consumer fails to confirm the processing.</p>
 
                     
                     </section>
