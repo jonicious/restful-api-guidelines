@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="19" data-chapter-title="Events" data-filepath="events/events.md" data-basepath=".." data-revision="Wed Mar 01 2017 19:24:39 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="19" data-chapter-title="Events" data-filepath="events/events.md" data-basepath=".." data-revision="Fri Mar 03 2017 08:33:09 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -548,6 +548,37 @@
 <li>Adding a new optional field to redefine the meaning of an existing field (also known as a co-occurrence constraint).</li>
 <li>Adding a value to an enumeration (note that <a href="../compatibility/Compatibility.html#should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations"><code>x-extensible-enum</code></a> is not available in JSON Schema).</li>
 </ul>
+<h2 id="should-avoid-additionalproperties-in-event-type-definitions"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Avoid <code>additionalProperties</code> in event type definitions</h2>
+<p>Event type schema should avoid using <code>additionalProperties</code> declarations, in 
+order to support schema evolution.</p>
+<p>Events are often intermediated by publish/subscribe systems and are 
+commonly captured in logs or long term storage to be read later. In 
+particular, the schemas used by publishers and consumers can<br>drift over time. As a result, compatibility and extensibility issues 
+that happen less frequently with client-server style APIs become important 
+and regular considerations for event design. The guidelines recommend the 
+following to enable event schema evolution:</p>
+<ul>
+<li><p>Publishers who intend to provide compatibility and allow their schemas 
+to evolve safely over time must define new optional fields 
+(as additive changes) and update their schemas in advance of publishing 
+those fields. In doing so, they <strong>must not</strong> declare an <code>additionalProperties</code> 
+field as a wildcard extension point. </p>
+</li>
+<li><p>Consumers must ignore fields they cannot process and not raise 
+errors, just as they would as an API client. This can happen if they are 
+processing events with an older copy of the event schema than the one
+containing the new definitions specified by the publishers. </p>
+</li>
+</ul>
+<p>Requiring event publishers to define their fields ahead of publishing avoids 
+the problem of <em>field redefinition</em>. This is when a publisher defines a 
+field to be of a different type that was already being emitted, or, is 
+changing the type of an undefined field. Both of these are prevented by 
+not using <code>additionalProperties</code>. </p>
+<p>Avoiding <code>additionalProperties</code> as described here also aligns with the approach
+ taken by the Nakadi API&apos;s <a href="http://zalando.github.io/nakadi-manual/docs/using/event-types.html#compatible" target="_blank">&quot;compatible mode&quot;</a> for event type schema.</p>
+<p>See also &quot;Treat Open API Definitions As Open For Extension By Default&quot;<br>in the <a href="../compatibility/Compatibility.html#must-treat-open-api-definitions-as-open-for-extension-by-default">Compatibility</a> 
+section for further guidelines on the use of <code>additionalProperties</code>. </p>
 <h2 id="must-use-unique-event-identifiers"><span style="color:red;font-weight:bold">Must:</span> Use unique Event identifiers</h2>
 <p>The <code>eid</code> (event identifier) value of an event must be unique.</p>
 <p>The <code>eid</code> property is part of the standard metadata for an event and gives the event an identifier. Producing clients must generate this value when sending an event and it must be guaranteed to be unique from the perspective of the owning application. In particular events within a given event type&apos;s stream must have unique identifiers. This allows consumers to process the <code>eid</code> to assert the event is unique and use it as an idempotency check. </p>

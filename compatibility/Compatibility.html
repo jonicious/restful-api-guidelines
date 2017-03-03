@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Wed Mar 01 2017 19:24:39 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Fri Mar 03 2017 08:33:09 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -490,6 +490,32 @@ provide default behavior for unknown values, if applicable</li>
 </ul>
 <h2 id="must-always-return-json-objects-as-toplevel-data-structures-to-support-extensibility"><span style="color:red;font-weight:bold">Must:</span> Always Return JSON Objects As Top-Level Data Structures To Support Extensibility</h2>
 <p>In a response body, you must always return a JSON objects (and not e.g. an array) as a top level data structure to support future extensibility. JSON objects support compatible extension by additional attributes. This allows you to easily extend your response and e.g. add pagination later, without breaking backwards compatibility.</p>
+<h2 id="must-treat-open-api-definitions-as-open-for-extension-by-default"><span style="color:red;font-weight:bold">Must:</span> Treat Open API Definitions As Open For Extension By Default</h2>
+<p>The Open API 2.0 specification is not very specific on default extensibility 
+of objects, and redefines JSON-Schema keywords related to extensibility, like 
+<code>additionalProperties</code>. Following our overall compatibility guidelines, Open 
+API object definitions are considered open for extension by default as per 
+<a href="http://json-schema.org/latest/json-schema-validation.html#rfc.section.5.18" target="_blank">Section 5.18 &quot;additionalProperties&quot;</a> of JSON-Schema. </p>
+<p>When it comes to Open API 2.0, this means an <code>additionalProperties</code> declaration 
+is not required to make an object definition extensible:</p>
+<ul>
+<li><p>API clients consuming data must not assume that objects are closed for 
+extension in the absence of an <code>additionalProperties</code> declaration and must 
+ignore fields sent by the server they cannot process. This allows API servers 
+to evolve their data formats. </p>
+</li>
+<li><p>For API servers receiving unxpected data, the situation is slightly different. 
+Instead of ignoring fields, servers <em>may</em> reject requests whose entities 
+contain undefined fields in order to signal to clients that those fields 
+would not be stored on behalf of the client. API designers must document 
+clearly how unexpected fields are handled for PUT, POST and PATCH requests. </p>
+</li>
+</ul>
+<p>API formats must not declare <code>additionalProperties</code> to be false, as this 
+prevents objects being extended in the future.</p>
+<p>Note  that this guideline concentrates on default extensibility and does not 
+exclude the use of <code>additionalProperties</code> with a schema as a value, which might 
+be appropriate in some circumstances.</p>
 <h2 id="should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Used Open-Ended List of Values (x-extensible-enum) Instead of Enumerations</h2>
 <p>Enumerations are per definition closed sets of values, that are assumed to be complete and not
 intended for extension. This closed principle of enumerations imposes compatibility issues when
