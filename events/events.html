@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="19" data-chapter-title="Events" data-filepath="events/events.md" data-basepath=".." data-revision="Mon Apr 03 2017 15:02:13 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="19" data-chapter-title="Events" data-filepath="events/events.md" data-basepath=".." data-revision="Mon Apr 03 2017 15:28:27 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -513,6 +513,8 @@ their last read position within the ordered stream. Events <em>should</em> there
 <li><p>Events that are the result of a computation, such as a matching algorithm, or the generation of enriched data, and which might not be stored as entity by the service. </p>
 </li>
 </ul>
+<h2 id="must-permissions-on-events-must-correspond-to-api-permissions"><span style="color:red;font-weight:bold">Must:</span> Permissions on events must correspond to API permissions</h2>
+<p>If a resource can be read synchronously via a REST API and read asynchronously via an event, the same read-permission must apply: We want to protect access to data, not the way data is accessed.</p>
 <h2 id="must-indicate-ownership-of-event-types"><span style="color:red;font-weight:bold">Must:</span> Indicate ownership of Event Types</h2>
 <p>Event definitions must have clear ownership - this can be indicated via the <code>owning_application</code> field of the EventType. </p>
 <p>Typically there is one producer application, which owns the EventType and is responsible for its definition, akin to how RESTful API definitions are managed. However, the owner may also be a particular service from a set of multiple services that are producing the same kind of event. Please note indicating that a specific application is producing or consuming a specific event type is not yet defined explicitly, but a subject of Nakadi service discovery support functions.</p>
