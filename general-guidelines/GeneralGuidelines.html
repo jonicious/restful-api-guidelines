@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="3" data-chapter-title="General Guidelines" data-filepath="general-guidelines/GeneralGuidelines.md" data-basepath=".." data-revision="Fri Apr 07 2017 07:12:31 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="3" data-chapter-title="General Guidelines" data-filepath="general-guidelines/GeneralGuidelines.md" data-basepath=".." data-revision="Mon Apr 10 2017 13:04:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -446,13 +446,13 @@
                         <h1 id="general-guidelines">General Guidelines</h1>
 <p>The titles are marked with the corresponding labels: <span style="color:red;font-weight:bold">Must:</span>, <span style="color:darkgoldenrod;font-weight:bold">Should:</span>, <span style="color:green;font-weight:bold">Could:</span>.</p>
 <h2 id="must-follow-api-first-principle"><span style="color:red;font-weight:bold">Must:</span> Follow API First Principle</h2>
-<p>As mentioned in the introduction, API First is one of our <a href="https://github.com/zalando-incubator/zalando-tech-principles" target="_blank">engineering and architecture principles</a>. 
+<p>As mentioned in the introduction, API First is one of our <a href="https://github.com/zalando-incubator/zalando-tech-principles" target="_blank">engineering and architecture principles</a>.
 In a nutshell API First requires two aspects:</p>
 <ul>
 <li>define APIs outside the code first using a standard specification language</li>
 <li>get early review feedback from peers and client developers</li>
 </ul>
-<p>By defining APIs outside the code, we want to facilitate early review feedback and also a development 
+<p>By defining APIs outside the code, we want to facilitate early review feedback and also a development
 discipline that focus service interface design on...</p>
 <ul>
 <li>profound understanding of the domain and required functionality</li>
@@ -461,40 +461,44 @@ discipline that focus service interface design on...</p>
 </ul>
 <p>Moreover, API definitions with standardized specification format also facilitate...</p>
 <ul>
-<li>single source of truth for the API specification; 
+<li>single source of truth for the API specification;
 it is a crucial part of a contract between service provider and client users</li>
 <li>infrastructure tooling for API discovery, API GUIs, API documents, automated quality checks</li>
 </ul>
-<p>An element of API First are also this API Guidelines and a <a href="https://github.bus.zalan.do/ApiGuild/ApiReviewProcedure" target="_blank">lightweight API review process [internal link]</a> as to get early review feedback from peers and client developers. 
-Peer review is important for us to get high quality APIs, to enable architectural and design alignment 
-and to supported development of client applications decoupled from service provider engineering life cycle. </p>
-<p>It is important to learn, that API First is <strong>not in conflict with the agile development principles</strong> that we love. 
-Service applications should evolve incrementally &#x2014; and so its APIs. Of course, our API specification will 
-and should evolve iteratively in different cycles; however, each starting with draft status and <em>early</em> team 
+<p>An element of API First are also this API Guidelines and a <a href="https://github.bus.zalan.do/ApiGuild/ApiReviewProcedure" target="_blank">lightweight API review process [internal link]</a> as to get early review feedback from peers and client developers.
+Peer review is important for us to get high quality APIs, to enable architectural and design alignment
+and to supported development of client applications decoupled from service provider engineering life cycle.</p>
+<p>It is important to learn, that API First is <strong>not in conflict with the agile development principles</strong> that we love.
+Service applications should evolve incrementally &#x2014; and so its APIs. Of course, our API specification will
+and should evolve iteratively in different cycles; however, each starting with draft status and <em>early</em> team
 and peer review feedback.
-API may change and profit from implementation concerns and automated testing feedback. 
-API evolution during development life cycle may include breaking changes for not yet productive features 
-and as long as we have aligned the changes with the clients. 
-Hence, API First does <em>not</em> mean that you must have 100% domain and requirement understanding and can never produce code 
-before you have defined the complete API and get it confirmed by peer review. On the other hand, API First obviously is 
-in conflict with the bad practice of publishing API definition and asking for peer review after the service integration 
-or even the service productive operation has started. 
-It is crucial to request and get early feedback &#x2014; as early as possible, but not before the API changes are comprehensive 
-with focus to the next evolution step and have a certain quality (including API Guideline compliance), 
-already confirmed via team internal reviews. </p>
+API may change and profit from implementation concerns and automated testing feedback.
+API evolution during development life cycle may include breaking changes for not yet productive features
+and as long as we have aligned the changes with the clients.
+Hence, API First does <em>not</em> mean that you must have 100% domain and requirement understanding and can never produce code
+before you have defined the complete API and get it confirmed by peer review. On the other hand, API First obviously is
+in conflict with the bad practice of publishing API definition and asking for peer review after the service integration
+or even the service productive operation has started.
+It is crucial to request and get early feedback &#x2014; as early as possible, but not before the API changes are comprehensive
+with focus to the next evolution step and have a certain quality (including API Guideline compliance),
+already confirmed via team internal reviews.</p>
 <h2 id="must-provide-api-reference-definition-using-openapi"><span style="color:red;font-weight:bold">Must:</span> Provide API Reference Definition using OpenAPI</h2>
 <p>We use the <a href="http://swagger.io/specification/" target="_blank">OpenAPI specification</a> (aka Swagger spec) as standard for our REST API definitions.
-You should use YAML format (instead of JSON) for the OpenAPI API definition files due to its improved readability.</p>
+You <strong>have to provide the API definition in YAML format</strong> (instead of JSON) for the OpenAPI API definition files due to its improved readability.</p>
 <p>Please stick to version 2.0 of the specification for now, until we succeed to update all our tooling to support the upcoming version 3.0.</p>
-<p>We also call the OpenAPI API definition the &quot;API Reference definition&quot; (or &quot;API definition&quot;); 
+<p>We also call the OpenAPI API definition the &quot;API Reference definition&quot; (or &quot;API definition&quot;);
 as a reference manual it provides all information needed by an experienced API client developer to use this API.</p>
-<p>The OpenAPI API specification file should be subject of version control together with source code management. 
+<p>The OpenAPI API specification file should be subject of version control together with source code management.
 Services also have to support an
-<a href="../api-operation/ApiOperation.html#must-Provide-Online-Access-to-OpenAPI-Reference-Definition">endpoint to access the API Reference definition</a> for their external API(s). </p>
+<a href="../api-operation/ApiOperation.html#must-Provide-Online-Access-to-OpenAPI-Reference-Definition">endpoint to access the API Reference definition</a> for their external API(s).</p>
+<p>Furthermore you should make use of <a href="https://github.com/zalando-incubator/zally" target="_blank">Zally</a>,
+our own API linter which supports you in designing a guideline compliant API.
+You find more information in the Github repository itself and in
+<a href="https://pages.github.bus.zalan.do/ApiGuild/ApiReviewProcedure/" target="_blank">API review procedures [internal link]</a>.</p>
 <h2 id="should-provide-user-manual-documentation"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Provide User Manual Documentation</h2>
-<p>In addition to the API as OpenAPI Reference Definition, it&#x2019;s good practice to provide 
-an API User Manual documentation to improve client developer experience, especially of engineers that 
-are less experienced in using this API. A helpful API User Manual typically describes 
+<p>In addition to the API as OpenAPI Reference Definition, it&#x2019;s good practice to provide
+an API User Manual documentation to improve client developer experience, especially of engineers that
+are less experienced in using this API. A helpful API User Manual typically describes
 the following API aspects:</p>
 <ul>
 <li>API&#x2019;s scope, purpose and use cases</li>
@@ -502,8 +506,8 @@ the following API aspects:</p>
 <li>edge cases, error situation details and repair hints</li>
 <li>architecture context and major dependencies - including figures and sequence flows</li>
 </ul>
-<p>The User Manual must be posted online, e.g. via GitHub Enterprise pages, on specific 
-team web servers, or as a Google doc. And don&apos;t forget to include a link to this 
+<p>The User Manual must be posted online, e.g. via GitHub Enterprise pages, on specific
+team web servers, or as a Google doc. And don&apos;t forget to include a link to this
 user manual into your OpenAPI definition using the &#x201C;externalDocs&#x201D; property.</p>
 <h2 id="must-write-apis-in-us-english"><span style="color:red;font-weight:bold">Must:</span> Write APIs in U.S. English</h2>
 
