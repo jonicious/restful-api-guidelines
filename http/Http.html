@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Wed Apr 19 2017 14:27:29 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Tue Apr 25 2017 13:28:48 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -477,16 +477,16 @@ context information, e.g. FlowIDs. In addition, size limits on query parameters 
 reliable and depend on clients, gateways, server, and actual settings. Thus, switching to headers
 does not solve the original problem.</p>
 <h3 id="put">PUT</h3>
-<p>PUT requests are used to create or update single resources or an entire collection resources. The
+<p>PUT requests are used to create or update <strong>entire</strong> resources - single or collection resources. The
 semantic is best described as &#xBB;<em>please put the enclosed representation at the resource mentioned by
-the URL</em>&#xAB;.</p>
+the URL, replacing any existing resource.</em>&#xAB;.</p>
 <ul>
 <li>PUT requests are usually applied to single resources, and not to collection resources, as this
 would imply replacing the entire collection</li>
 <li>PUT requests are usually robust against non-existence of resources by implicitly creating before
 updating</li>
-<li>on successful PUT requests, the server will replace the entire resource addressed by the URL with
-the representation passed in the payload</li>
+<li>on successful PUT requests, the server will <strong>replace the entire resource</strong> addressed by the URL
+with the representation passed in the payload (subsequent reads will deliver the same payload)</li>
 <li>successful PUT requests will usually generate 200 or 204 (if the resource was updated - with or
 without actual content returned), and 201 (if the resource was created)</li>
 </ul>
