@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Tue Apr 25 2017 13:28:48 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Tue Apr 25 2017 13:56:31 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -640,7 +640,15 @@ necessarily mean returning the same status code)</li>
 </table>
 <p>Please see also <a href="https://goo.gl/vhwh8a" target="_blank">Best Practices [internal link]</a> for further hints on how to support the
 different HTTP methods on resources.</p>
-<h2 id="must-use-meaningful-http-status-codes"><span style="color:red;font-weight:bold">Must:</span> Use Meaningful HTTP Status Codes</h2>
+<h2 id="must-use-specific-http-status-codes"><span style="color:red;font-weight:bold">Must:</span> Use Specific HTTP Status Codes</h2>
+<p>This guideline groups the following rules for HTTP status codes usage:</p>
+<ul>
+<li>You must not invent new HTTP status codes; only use standardized HTTP status codes and consistent with its intended semantics. </li>
+<li>You should use the most specific HTTP status code for your concrete resource request processing status or error situation. </li>
+<li>You should provide good documentation in the API definition when using HTTP status codes that are less commonly used and not listed below.  </li>
+</ul>
+<p>There are ~60 different HTTP status codes with specific semantics defined in the HTTP standards (mainly <a href="https://tools.ietf.org/html/rfc7231#section-6" target="_blank">RFC7231</a> and <a href="https://tools.ietf.org/html/rfc6585" target="_blank">RFC-6585</a>) - and there are upcoming new ones, e.g. <a href="https://tools.ietf.org/html/draft-tbray-http-legally-restricted-status-05" target="_blank">draft legally-restricted-status</a> (see overview on all error codes on <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">Wikipedia</a> or via <a href="https://httpstatuses.com/" target="_blank">https://httpstatuses.com/</a><error_code>). And there are unofficial ones, e.g. used by specific web servers like Nginx.  </error_code></p>
+<p>Our list of most commonly used and best understood HTTP status codes: </p>
 <h3 id="success-codes">Success Codes</h3>
 <table>
 <thead>
@@ -814,7 +822,6 @@ different HTTP methods on resources.</p>
 </tr>
 </tbody>
 </table>
-<p>All error codes can be found in <a href="https://tools.ietf.org/html/rfc7231#section-6" target="_blank">RFC7231</a> and <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">Wikipedia</a> or via <a href="https://httpstatuses.com/" target="_blank">https://httpstatuses.com/</a><error_code>.</error_code></p>
 <h2 id="must-provide-error-documentation"><span style="color:red;font-weight:bold">Must:</span> Provide Error Documentation</h2>
 <p>APIs should define the functional, business view and abstract from implementation aspects. Errors become a key element providing context and visibility into how to use an API. The error object should be extended by an application-specific error identifier if and only if the HTTP status code is not specific enough to convey the domain-specific error semantic. For this reason, we use a standardized error return object definition &#x2014; see <a href="../common-data-objects/CommonDataObjects.html#must-use-common-error-return-objects"><em>Use Common Error Return Objects</em></a>.</p>
 <p>The OpenAPI specification shall include definitions for error descriptions that will be returned; they are part of the interface definition and provide important information for service clients to handle exceptional situations and support troubleshooting. You should also think about a troubleshooting board &#x2014; it is part of the associated online API documentation, provides information and handling guidance on application-specific errors and is referenced via links of the API definition. This can reduce service support tasks and contribute to service client and provider performance.</p>
