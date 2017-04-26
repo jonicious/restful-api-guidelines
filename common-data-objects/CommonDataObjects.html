@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="14" data-chapter-title="Common Data Objects" data-filepath="common-data-objects/CommonDataObjects.md" data-basepath=".." data-revision="Tue Apr 25 2017 13:56:31 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="14" data-chapter-title="Common Data Objects" data-filepath="common-data-objects/CommonDataObjects.md" data-basepath=".." data-revision="Wed Apr 26 2017 09:08:07 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -478,6 +478,13 @@ cases. Use it in your APIs &#x2014; and compatible extend it if necessary for yo
     description:
       a common address structure adequate for many use cases
     type: object
+    required:
+      - first_name
+      - last_name
+      - street
+      - city
+      - zip
+      - country_code
     properties:
       salutation:
         type: string
@@ -516,13 +523,6 @@ cases. Use it in your APIs &#x2014; and compatible extend it if necessary for yo
         type: string
         format: iso-3166-1-alpha-2
         example: DE
-    required:
-      - first_name
-      - last_name
-      - street
-      - city
-      - zip
-      - country_code
 </code></pre><h2 id="must-use-problem-json"><span style="color:red;font-weight:bold">Must:</span> Use Problem JSON</h2>
 <p><a href="http://tools.ietf.org/html/rfc7807" target="_blank">RFC 7807</a> defines the media type <code>application/problem+json</code>.
 Operations should return that (together with a suitable status code) when any problem
