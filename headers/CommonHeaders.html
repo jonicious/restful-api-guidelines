@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="15" data-chapter-title="Common Headers" data-filepath="headers/CommonHeaders.md" data-basepath=".." data-revision="Wed Apr 26 2017 09:08:07 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="15" data-chapter-title="Common Headers" data-filepath="headers/CommonHeaders.md" data-basepath=".." data-revision="Thu May 11 2017 11:55:37 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -457,7 +457,7 @@ they can be used in both, HTTP requests and responses. Commonly used content hea
 <li><a href="https://tools.ietf.org/html/rfc7233#section-4.2" target="_blank"><code>Content-Range</code></a> is used in responses to range requests to indicate which part of the requested resource representation is delivered with the body.</li>
 <li><a href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5" target="_blank"><code>Content-Type</code></a> indicates the media type of the body content.</li>
 </ul>
-<h2 id="could-use-contentlocation-header"><span style="color:green;font-weight:bold">Could:</span> Use Content-Location Header</h2>
+<h2 id="may-use-contentlocation-header"><span style="color:green;font-weight:bold">May:</span> Use Content-Location Header</h2>
 <p>The Content-Location header is <em>optional</em> and can be used in successful write operations (PUT, POST or PATCH) or read operations (GET, HEAD) to guide caching and signal a receiver the actual location of the resource transmitted in the response body. This allows clients to identify the resource and to update their local copy when receiving a response with this header.</p>
 <p>The Content-Location header can be used to support the following use cases:</p>
 <ul>
@@ -475,7 +475,7 @@ they can be used in both, HTTP requests and responses. Commonly used content hea
 <h2 id="should-use-location-header-instead-of-contentlocation-header"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Use Location Header instead of Content-Location Header</h2>
 <p>As the correct usage of Content-Location with respect to semantics and caching is difficult, we <em>discourage</em> the use of Content-Location. In most cases it is sufficient to direct clients to the resource location by using the Location header instead without hitting the Content-Location specific ambiguities and complexities.</p>
 <p>More details in RFC 7231 <a href="https://tools.ietf.org/html/rfc7231#section-7.1.2" target="_blank">7.1.2 Location</a>, <a href="https://tools.ietf.org/html/rfc7231#section-3.1.4.2" target="_blank">3.1.4.2 Content-Location</a></p>
-<h2 id="could-use-the-prefer-header-to-indicate-processing-preferences"><span style="color:green;font-weight:bold">Could:</span> Use the Prefer header to indicate processing preferences</h2>
+<h2 id="may-use-the-prefer-header-to-indicate-processing-preferences"><span style="color:green;font-weight:bold">May:</span> Use the Prefer header to indicate processing preferences</h2>
 <p>The  <code>Prefer</code> header defined in <a href="https://tools.ietf.org/html/rfc7240" target="_blank">RFC7240</a> allows clients to request processing behaviors from servers. <a href="https://tools.ietf.org/html/rfc7240" target="_blank">RFC7240</a> pre-defines a number of preferences and is extensible, to allow others to be defined. Support for the Prefer header is entirely optional and at the discretion of API designers, but as an existing Internet Standard, is recommended over defining proprietary &quot;X-&quot; headers for processing directives. </p>
 <p>The <code>Prefer</code> header can defined like this in an API definition:</p>
 <pre><code class="lang-yaml">  Prefer:
@@ -492,7 +492,7 @@ they can be used in both, HTTP requests and responses. Commonly used content hea
     required: false
 </code></pre>
 <p>Supporting APIs may return the <code>Preference-Applied</code> header also defined in <a href="https://tools.ietf.org/html/rfc7240" target="_blank">RFC7240</a> to indicate whether the preference was applied.</p>
-<h2 id="could-consider-using-etag-together-with-ifnonematch-header"><span style="color:green;font-weight:bold">Could:</span> Consider using ETag together with If-(None-)Match header</h2>
+<h2 id="may-consider-using-etag-together-with-ifnonematch-header"><span style="color:green;font-weight:bold">May:</span> Consider using ETag together with If-(None-)Match header</h2>
 <p>When creating or updating resources it may be necessary to expose conflicts and to prevent the lost update
 problem. This can be best accomplished by using the <a href="https://tools.ietf.org/html/rfc7232#section-2.3" target="_blank"><code>ETag</code></a>
 header together with the <a href="https://tools.ietf.org/html/rfc7232#section-3.1" target="_blank"><code>If-Match</code></a> and 

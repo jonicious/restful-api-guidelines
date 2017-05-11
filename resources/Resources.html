@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="8" data-chapter-title="Resources" data-filepath="resources/Resources.md" data-basepath=".." data-revision="Wed Apr 26 2017 09:08:07 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="8" data-chapter-title="Resources" data-filepath="resources/Resources.md" data-basepath=".." data-revision="Thu May 11 2017 11:55:37 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -509,7 +509,7 @@ Accordingly, if used as identifiers, UUIDs should not be qualified using a forma
 Though UUID version 1 also contains leading timestamps it is not reflected by its lexicographic sorting.
 This deficit is addressed by <a href="https://github.com/alizain/ulid" target="_blank">ULID</a> (Universally Unique Lexicographically Sortable Identifier). 
 You may favour ULID instead of UUID, for instance, for pagination use cases ordered along creation time. </p>
-<h2 id="could-consider-using-non-nested-urls"><span style="color:green;font-weight:bold">Could:</span> Consider Using (Non-) Nested URLs</h2>
+<h2 id="may-consider-using-non-nested-urls"><span style="color:green;font-weight:bold">May:</span> Consider Using (Non-) Nested URLs</h2>
 <p>If a sub-resource is only accessible via its parent resource and may not exists without parent resource, consider using a nested URL structure, for instance:</p>
 <pre><code>/carts/1681e6b88ec1/cart-items/1
 </code></pre><p>However, if the resource can be accessed directly via its unique id, then the API should expose it as a top-level resource. For example, customer is a collection for sales orders; however, sales orders have globally unique id and some services may choose to access the orders directly, for instance:</p>

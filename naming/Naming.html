@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="7" data-chapter-title="Naming" data-filepath="naming/Naming.md" data-basepath=".." data-revision="Wed Apr 26 2017 09:08:07 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="7" data-chapter-title="Naming" data-filepath="naming/Naming.md" data-basepath=".." data-revision="Thu May 11 2017 11:55:37 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -462,12 +462,12 @@ Disposition-Notification-Options
 Original-Message-ID
 </code></pre><p>See also: <a href="http://tools.ietf.org/html/rfc7230#page-22" target="_blank">HTTP Headers are case-insensitive
 (RFC 7230)</a>.</p>
-<h2 id="could-use-standardized-headers"><span style="color:green;font-weight:bold">Could:</span> Use Standardized Headers</h2>
+<h2 id="may-use-standardized-headers"><span style="color:green;font-weight:bold">May:</span> Use Standardized Headers</h2>
 <p>Use <a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields" target="_blank">this list</a> and mention its support in
 your OpenAPI definition.</p>
 <h2 id="must-pluralize-resource-names"><span style="color:red;font-weight:bold">Must:</span> Pluralize Resource Names</h2>
 <p>Usually, a collection of resource instances is provided (at least API should be ready here). The special case of a resource singleton is a collection with cardinality 1.</p>
-<h2 id="could-use-api-as-first-path-segment"><span style="color:green;font-weight:bold">Could:</span> Use /api as first Path Segment</h2>
+<h2 id="may-use-api-as-first-path-segment"><span style="color:green;font-weight:bold">May:</span> Use /api as first Path Segment</h2>
 <p>In most cases, all resources provided by a service are part of the public API, and therefore should
 be made available under the root &#x201C;/&#x201D; base path. If  the service should also support non-public,
 internal APIs &#x2014; for specific operational support functions, for example &#x2014; add &#x201C;/api&#x201D; as base path to
@@ -475,7 +475,7 @@ clearly separate public and non-public API resources.</p>
 <h2 id="must-avoid-trailing-slashes"><span style="color:red;font-weight:bold">Must:</span> Avoid Trailing Slashes</h2>
 <p>The trailing slash must not have specific semantics. Resource paths must deliver the same results
 whether they have the trailing slash or not.</p>
-<h2 id="could-use-conventional-query-strings"><span style="color:green;font-weight:bold">Could:</span> Use Conventional Query Strings</h2>
+<h2 id="may-use-conventional-query-strings"><span style="color:green;font-weight:bold">May:</span> Use Conventional Query Strings</h2>
 <p>If you provide query support for sorting, pagination, filtering functions or other actions, use the
 following standardized naming conventions:</p>
 <ul>

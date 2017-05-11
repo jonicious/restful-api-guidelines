@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="6" data-chapter-title="JSON Guidelines" data-filepath="json-guidelines/JsonGuidelines.md" data-basepath=".." data-revision="Wed Apr 26 2017 09:08:07 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="6" data-chapter-title="JSON Guidelines" data-filepath="json-guidelines/JsonGuidelines.md" data-basepath=".." data-revision="Thu May 11 2017 11:55:37 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -473,9 +473,9 @@
 <p>A zone offset may be used (both, in request and responses) -- this is simply defined by the standards. However, we encourage restricting dates to UTC and without offsets. For example <code>2015-05-28T14:07:17Z</code> rather than <code>2015-05-28T14:07:17+00:00</code>. From experience we have learned that zone offsets are not easy to understand and often not correctly handled. Note also that zone offsets are different from local times that might be including daylight saving time. Localization of dates should be done by the services that provide user interfaces, if required.</p>
 <p>When it comes to storage, all dates should be consistently stored in UTC without a zone offset. Localization should be done locally by the services that provide user interfaces, if required.</p>
 <p>Sometimes it can seem data is naturally represented using numerical timestamps, but this can introduce interpretation issues with precision - for example whether to represent a timestamp as 1460062925, 1460062925000 or 1460062925.000. Date strings, though more verbose and requiring more effort to parse, avoid this ambiguity.</p>
-<h3 id="could-time-durations-and-intervals-could-conform-to-iso-8601"><span style="color:green;font-weight:bold">Could:</span> Time durations and intervals could conform to ISO 8601</h3>
+<h3 id="may-time-durations-and-intervals-could-conform-to-iso-8601"><span style="color:green;font-weight:bold">May:</span> Time durations and intervals could conform to ISO 8601</h3>
 <p>Schema based JSON properties that are by design durations and intervals could be strings formatted as recommended by ISO 8601 (<a href="https://tools.ietf.org/html/rfc3339#appendix-A" target="_blank">Appendix A of RFC 3399 contains a grammar</a> for durations).</p>
-<h3 id="could-standards-could-be-used-for-language-country-and-currency"><span style="color:green;font-weight:bold">Could:</span> Standards could be used for Language, Country and Currency</h3>
+<h3 id="may-standards-could-be-used-for-language-country-and-currency"><span style="color:green;font-weight:bold">May:</span> Standards could be used for Language, Country and Currency</h3>
 <ul>
 <li><a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank">ISO 3166-1-alpha2 country
 </a><ul>
