@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Thu May 11 2017 15:33:30 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="9" data-chapter-title="HTTP" data-filepath="http/Http.md" data-basepath=".." data-revision="Wed May 17 2017 14:43:27 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -867,6 +867,33 @@ different HTTP methods on resources.</p>
 <li><code>X-RateLimit-Reset</code>: The relative time in seconds when the rate limit window will be reset.</li>
 </ul>
 <p>The reason to allow both approaches is that APIs can have different needs. Retry-After is often sufficient for general load handling and request throttling scenarios and notably, does not strictly require the concept of a calling entity such as a tenant or named account. In turn this allows resource owners to minimise the amount of state they have to carry with respect to client requests. The &apos;X-RateLimit&apos; headers are suitable for scenarios where clients are associated with pre-existing account or tenancy structures. &apos;X-RateLimit&apos; headers are generally returned on every request and not just on a 429, which implies the service implementing the API is carrying sufficient state to track the number of requests made within a given window for each named entity.</p>
+<h2 id="should-explicitly-define-the-collection-format-of-query-parameters"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Explicitly define the Collection Format of Query Parameters</h2>
+<p>There are different ways of supplying a set of values as a query parameter.
+One particular type should be selected and stated explicitly in the API definition. 
+The OpenAPI property <code>[collectionFormat](http://swagger.io/specification/)</code> is used to specify the format of the query parameter.</p>
+<p>Only the <code>csv</code> or <code>multi</code> formats should be used for multi-value query parameters as described below.</p>
+<table>
+<thead>
+<tr>
+<th>Collection Format</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>csv</code></td>
+<td>Comma separated values</td>
+<td><code>?parameter=value1,value2,value3</code></td>
+</tr>
+<tr>
+<td><code>multi</code></td>
+<td>Multiple parameter instances</td>
+<td><code>?parameter=value1&amp;parameter=value2&amp;parameter=value3</code></td>
+</tr>
+</tbody>
+</table>
+<p>When choosing the collection format, take into account the tool support, the escaping of special characters and the maximal URL length.</p>
 
                     
                     </section>
