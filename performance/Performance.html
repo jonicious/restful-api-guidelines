@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="10" data-chapter-title="Performance" data-filepath="performance/Performance.md" data-basepath=".." data-revision="Thu Jun 15 2017 13:00:00 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="10" data-chapter-title="Performance" data-filepath="performance/Performance.md" data-basepath=".." data-revision="Thu Jun 15 2017 15:27:02 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -500,16 +500,30 @@ compression via the Content-Encoding header.</p>
   </span>}
 </span>}
 </span></span></code></pre>
-<p>The approach we recommend for field filtering is a Zalando Github project,
-<a href="https://github.com/zalando/json-fields" target="_blank">json-fields</a>. It defines a formal grammar for the ANTLR
- parser generator and provides a ready-to use library for Java / Jackson based projects
- (<a href="http://mvnrepository.com/artifact/org.zalando.guild.api/json-fields-jackson" target="_blank">Maven link</a>).
-Teams that use other JSON serializers are encouraged to contribute to the open source project and
-create their own parser / framework based on this grammar.</p>
-<p>Other approaches we have considered are JSONPath or GraphQL. While they have advantages, neither of
-them can easily be plugged into an existing serialization process, so they require an additional,
-manual serialization process, whereas the above solution addresses our main filter use cases and
-can easily be introduced with a minimum of effort.</p>
+<p>As illustrated by this example, field filtering should be done via request parameter &quot;fields&quot; with value range defined 
+by the following <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form" target="_blank">BNF</a> grammar.</p>
+<pre><code>&lt;fields&gt; ::= &lt;negation&gt; &lt;fields_expression&gt; | &lt;fields_expression&gt;
+
+&lt;negation&gt; ::= &quot;!&quot;
+
+&lt;fields_expression&gt; ::= &quot;(&quot; &lt;field_set&gt; &quot;)&quot;
+
+&lt;field_set&gt; ::= &lt;qualified_field&gt; | &lt;qualified_field&gt; &quot;,&quot; &lt;field_set&gt;
+
+&lt;qualified_field&gt; ::= &lt;field&gt; | &lt;field&gt; &lt;fields_expression&gt;
+
+&lt;field&gt; ::= &lt;DASH_LETTER_DIGIT&gt; | &lt;DASH_LETTER_DIGIT&gt; &lt;field&gt;
+
+&lt;DASH_LETTER_DIGIT&gt; ::= &lt;DASH&gt; | &lt;LETTER&gt; | &lt;DIGIT&gt;
+
+&lt;DASH&gt; ::= &quot;-&quot; | &quot;_&quot;
+
+&lt;LETTER&gt; ::= &quot;A&quot; | &quot;B&quot; | &quot;C&quot; | &quot;D&quot; | &quot;E&quot; | &quot;F&quot; | &quot;G&quot; | &quot;H&quot; | &quot;I&quot; | &quot;J&quot; | &quot;K&quot; | &quot;L&quot; | &quot;M&quot; | &quot;N&quot; | &quot;O&quot; | &quot;P&quot; | &quot;Q&quot; | &quot;R&quot; | &quot;S&quot; | &quot;T&quot; | &quot;U&quot; | &quot;V&quot; | &quot;W&quot; | &quot;X&quot; | &quot;Y&quot; | &quot;Z&quot; | &quot;a&quot; | &quot;b&quot; | &quot;c&quot; | &quot;d&quot; | &quot;e&quot; | &quot;f&quot; | &quot;g&quot; | &quot;h&quot; | &quot;i&quot; | &quot;j&quot; | &quot;k&quot; | &quot;l&quot; | &quot;m&quot; | &quot;n&quot; | &quot;o&quot; | &quot;p&quot; | &quot;q&quot; | &quot;r&quot; | &quot;s&quot; | &quot;t&quot; | &quot;u&quot; | &quot;v&quot; | &quot;w&quot; | &quot;x&quot; | &quot;y&quot; | &quot;z&quot;
+
+&lt;DIGIT&gt; ::= &quot;0&quot; | &quot;1&quot; | &quot;2&quot; | &quot;3&quot; | &quot;4&quot; | &quot;5&quot; | &quot;6&quot; | &quot;7&quot; | &quot;8&quot; | &quot;9&quot;
+</code></pre><p>A <code>fields_expression</code> as defined by the grammar describes the properties of an object, i.e. <code>(name)</code> returns only the 
+<code>name</code> property of the root object. <code>(name,partner(name))</code> returns the <code>name</code> and  <code>partner</code> properties where <code>partner</code> 
+itself is also an object and only its <code>name</code> property is returned.</p>
 <p>Hint: OpenAPI doesn&apos;t allow you to formally specify whether depending on a given parameter will
 return different parts of the specified result schema. Explain this in English in the parameter
 description.</p>
@@ -518,7 +532,10 @@ description.</p>
 cases where clients know upfront that they need some related resources they can instruct the server to prefetch that
 data eagerly. Whether this is optimized on the server, e.g. a database join, or done in a generic way, e.g. an HTTP
 proxy that transparently embeds resources, is up to the implementation.</p>
-<p>See <a href="../naming/Naming.html#could-use-conventional-query-strings"><em>Conventional Query Strings</em></a> for naming. Please use <a href="https://github.com/zalando/json-fields" target="_blank">json-fields</a> library, already mentioned above for filtering, when it comes to an embedding query syntax.</p>
+<p>See <a href="../naming/Naming.html#could-use-conventional-query-strings"><em>Conventional Query Parameters</em></a> for naming, e.g. 
+&quot;embed&quot; for steering of embedded resource expansion. Please use the 
+<a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form" target="_blank">BNF</a> grammar, as already defined above for filtering, when it 
+comes to an embedding query syntax.</p>
 <p>Embedding a sub-resource can possibly look like this where an order resource has its order items as sub-resource (/order/{orderId}/items):</p>
 <pre><code class="lang-http"><span class="hljs-request">GET <span class="hljs-string">/order/123?embed=(items)</span> HTTP/1.1</span>
 
