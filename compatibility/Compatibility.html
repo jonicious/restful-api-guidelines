@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Thu Jun 15 2017 09:41:01 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Thu Jun 15 2017 13:00:00 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -455,8 +455,16 @@ service contracts that cannot be broken via unilateral decisions.</p>
 <li>introduce new API versions and still support older versions</li>
 </ul>
 <p>We strongly encourage using compatible API extensions and discourage versioning.
-With Postel&#x2019;s Law in mind, here are some rules for providers and consumers that
-allow us to make compatible changes without versioning:</p>
+With Postel&#x2019;s Law in mind, the following five rules for providers and consumers
+allow us to make compatible changes without versioning.</p>
+<p>Please note that the compatibility guarantees are for the on-the-wire format,
+i.e. they ensure that consumers relying on the old API definition will work
+with servers which already implement a newer API definition, assuming both API
+designers and client and server implementors adhere to the following rules.</p>
+<p><strong>Note:</strong> Binary or source compatibility of code generated from an API definition
+is not covered by these rules.  If client implementations update their generation
+process to a new version of the API definition, it has to be expected that code
+changes are necessary.</p>
 <h2 id="should-prefer-compatible-extensions"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Prefer Compatible Extensions</h2>
 <p>Apply the following rules to evolve RESTful APIs in a backward-compatible way:</p>
 <ul>
