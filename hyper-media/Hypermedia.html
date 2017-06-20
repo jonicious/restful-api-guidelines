@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Tue Jun 20 2017 09:02:17 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Tue Jun 20 2017 14:10:35 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -467,111 +467,45 @@ with APIs explicitly defined outside the code with standard specification langua
 <li>Hypermedia does not prevent API clients to implement shortcuts and directly target resources without &apos;discovering&apos; them</li>
 </ul>
 <p>However, we do not forbid HATEOAS; you could use it, if you checked its limitations and still see clear value for your usage scenario that justifies its additional complexity. If you use HATEOAS please share experience and present your findings in the <a href="https://techwiki.zalando.net/display/GUL/API+Guild" target="_blank">API Guild [internal link]</a>.</p>
-<h2 id="must-use-a-welldefined-subset-of-hal"><span style="color:red;font-weight:bold">Must:</span> Use a well-defined subset of HAL</h2>
-<p>Links to other resources must be defined exclusively using <a href="http://stateless.co/hal_specification.html" target="_blank">HAL</a> and
-preferably using standard <a href="http://www.iana.org/assignments/link-relations/link-relations.xml" target="_blank">link relations</a>.</p>
-<p>Clients and Servers are required to support <code>_links</code> with its <code>href</code> and <code>rel</code> attributes, not only at the root level
-but also in nested objects. To reduce the effort needed by clients to process hypertext data from servers it&apos;s not recommended to serve data with CURIEs, URI templates or embedded resources. Nor is it required to support the HAL media type <code>application/hal+json</code>. The following snippet specifies the HAL link structure in JSONSchema:</p>
-<pre><code class="lang-yaml">Link:
+<h2 id="must-use-common-hypertext-controls"><span style="color:red;font-weight:bold">Must:</span> Use common hypertext controls</h2>
+<p>When embedding links to other resources into representations you must use the common hypertext control object. It contains at least one attribute:</p>
+<ul>
+<li><code>href</code>: The URI of the resource the hypertext control is linking to. All our API are using HTTP(s) as URI scheme. </li>
+</ul>
+<p>In API that contain any hypertext controls, the attribute name <code>href</code> is reserved for usage within hypertext controls.</p>
+<p>The schema for hypertext controls can be derived from this model:</p>
+<pre><code class="lang-yaml">HttpLink:
+  description: A base type of objects representing links to resources.
   type: object
   properties:
     href:
+      description: Any URI that is using http or https protocol
       type: string
       format: uri
-      example: https://api.example.com/sales-orders/10101058747628
-  required:
-    - href
-Links:
-  type: object
-  description: |
-    Values can be either a single Link or an array of Links
-    See https://docs.pennybags.zalan.do/ for more.
-  additionalProperties:
-    # keys are link relations
-    type: array
-    items:
-      $ref: &apos;#/definitions/Link&apos;
-  example:
-    &apos;self&apos;:
-      - href: https://api.example.com/sales-orders/10101058747628
+  required: [ &quot;href&quot; ]
 </code></pre>
-<p>We opted for this subset of HAL after conducting a comparison of different hypermedia formats based on properties like:</p>
-<ul>
-<li>Simplicity: resource link syntax and concepts are easy to understand and interpret for API clients.</li>
-<li>Compatibility: introducing and adding links to resources is not breaking existing API clients.</li>
-<li>Adoption: use in open-source libraries and tools as well as other companies</li>
-<li>Docs: degree of good documentation</li>
-</ul>
-<p></p>
-
-<table>
-<thead>
-<tr>
-<th>Standard</th>
-<th>Simplicity</th>
-<th>Compatibility</th>
-<th>Adoption</th>
-<th>Primary Focus</th>
-<th>Docs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HAL Subset</td>
-<td>&#x2713;</td>
-<td>&#x2713;</td>
-<td>&#x2713;</td>
-<td>Links and relationships</td>
-<td>&#x2713;</td>
-</tr>
-<tr>
-<td><a href="http://stateless.co/hal_specification.html" target="_blank">HAL</a></td>
-<td>&#x2717;</td>
-<td>&#x2713;</td>
-<td>&#x2713;</td>
-<td>Links and relationships</td>
-<td>&#x2713;</td>
-</tr>
-<tr>
-<td><a href="http://jsonapi.org/" target="_blank">JSON API</a></td>
-<td>&#x2717;</td>
-<td>&#x2717;</td>
-<td>&#x2713;</td>
-<td>Response format</td>
-<td>&#x2713;</td>
-</tr>
-<tr>
-<td><a href="http://json-ld.org/" target="_blank">JSON-LD</a></td>
-<td>&#x2717;</td>
-<td>&#x2713;</td>
-<td>?</td>
-<td>Link data</td>
-<td>?</td>
-</tr>
-<tr>
-<td><a href="https://github.com/kevinswiber/siren" target="_blank">Siren</a></td>
-<td>&#x2717;</td>
-<td>&#x2717;</td>
-<td>&#x2717;</td>
-<td>Entities and navigation</td>
-<td>&#x2717;</td>
-</tr>
-<tr>
-<td><a href="http://amundsen.com/media-types/collection/" target="_blank">Collection+JSON</a></td>
-<td>&#x2717;</td>
-<td>&#x2717;</td>
-<td>&#x2717;</td>
-<td>Collections and queries</td>
-<td>&#x2713;</td>
-</tr>
-</tbody>
-</table>
-<p>We define HAL links to be extensible, i.e. to contain additional properties if needed. For consistency extensions should reuse attributes from the <a href="https://tools.ietf.org/html/rfc5988#section-5" target="_blank"><code>Link</code> header</a>.</p>
-<p>Interesting articles for comparisons of different hypermedia formats:</p>
-<ul>
-<li><a href="http://sookocheff.com/post/api/on-choosing-a-hypermedia-format/" target="_blank">Kevin Sookocheff&#x2019;s On choosing a hypermedia type for your API</a></li>
-<li><a href="http://blogs.mulesoft.com/dev/api-dev/api-best-practices-hypermedia-part-3/" target="_blank">Mike Stowe&apos;s API Best Practices: Hypermedia</a></li>
-</ul>
+<p>The name of an attribute holding such a <code>HttpLink</code> object specifies the relation between the object that 
+contains the link and the linked resource. Implementations should use names from the 
+<a href="http://www.iana.org/assignments/link-relations/link-relations.xhtml" target="_blank">IANA Link Relation Registry</a> 
+whenever appropriate.</p>
+<p>Specific link objects may extend the basic link type with additional attributes, to give additional information
+related to the linked resource or the relationship between the source resource and the linked one.</p>
+<p>E.g. a service providing &quot;Person&quot; resources could model a person who is married with some other person with a hypertext control that contains attributes which describe the other person (<code>id</code>, <code>name</code>) but also the relationship &quot;spouse&quot; between between the two persons (<code>since</code>):</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;446f9876-e89b-12d3-a456-426655440000&quot;</span>,
+  <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Peter Mustermann&quot;</span>,
+  <span class="hljs-string">&quot;spouse&quot;</span>: {
+    <span class="hljs-string">&quot;href&quot;</span>: <span class="hljs-string">&quot;https://...&quot;</span>,
+    <span class="hljs-string">&quot;since&quot;</span>: <span class="hljs-string">&quot;1996-12-19&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;123e4567-e89b-12d3-a456-426655440000&quot;</span>,
+    <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Linda Mustermann&quot;</span>
+  }
+}
+</code></pre>
+<p>Hypertext controls are allowed anywhere within a JSON model. While this specification would
+allow <a href="http://stateless.co/hal_specification.html" target="_blank">HAL</a>, we actually don&apos;t recommend/enforce the 
+usage of HAL anymore as the structural separation of meta-data and data creates more harm than value to the 
+understandability and usability of an API.</p>
 <h2 id="must-do-not-use-link-headers-with-json-entities"><span style="color:red;font-weight:bold">Must:</span> Do Not Use Link Headers with JSON entities</h2>
 <p>We don&apos;t allow the use of the <a href="http://tools.ietf.org/html/rfc5988#section-5" target="_blank"><code>Link</code> Header defined by RFC 5988</a>
 in conjunction with JSON media types, and favor <a href="#must-use-hal">HAL</a> instead. The primary reason is to have a consistent
