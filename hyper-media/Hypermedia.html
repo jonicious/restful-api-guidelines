@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Tue Jun 27 2017 11:53:02 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Tue Jul 04 2017 13:33:16 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -459,7 +459,7 @@ You can see this expressed by many rules throughout these guidelines, e.g.:</p>
 <p>We do not generally recommend to implement <a href="http://martinfowler.com/articles/richardsonMaturityModel.html#level3" target="_blank">REST Maturity Level 3</a>. HATEOAS comes with additional API complexity without real value in our SOA context where client and server interact via REST APIs and provide complex business functions as part of our e-commerce SaaS platform.</p>
 <p>Our major concerns regarding the promised advantages of HATEOAS (see also <a href="https://www.infoq.com/news/2014/03/rest-at-odds-with-web-apis for detailed discussion" target="_blank">RESTistential Crisis over Hypermedia APIs</a>, <a href="https://jeffknupp.com/blog/2014/06/03/why-i-hate-hateoas/" target="_blank">Why I Hate HATEOAS</a> and others):</p>
 <ul>
-<li>We follow the <a href="../general-guidelines/GeneralGuidelines.html#Must-Follow-API-First-Principle">API First principle</a> 
+<li>We follow the <a href="../general-guidelines/GeneralGuidelines.html#must-follow-api-first-principle">API First principle</a> 
 with APIs explicitly defined outside the code with standard specification language. HATEOAS does not really add value for SOA client engineers in terms of API self-descriptiveness: a client engineer finds necessary links and usage description (depending on resource state) in the API reference definition anyway.</li>
 <li>Generic HATEOAS clients which need no prior knowledge about APIs and explore API capabilities based on hypermedia information provided, is a theoretical concept that we haven&apos;t seen working in practise and does not fit to our SOA set-up. The OpenAPI description format (and tooling based on OpenAPI) doesn&apos;t provide sufficient support for HATEOAS either.</li>
 <li>In practice relevant HATEOAS approximations (e.g. following specifications like HAL or JSON API) support API navigation by abstracting from URL endpoint and HTTP method aspects via link types. So, Hypermedia does not prevent clients from required manual changes when domain model changes over time.</li>
@@ -467,7 +467,7 @@ with APIs explicitly defined outside the code with standard specification langua
 <li>Hypermedia does not prevent API clients to implement shortcuts and directly target resources without &apos;discovering&apos; them</li>
 </ul>
 <p>However, we do not forbid HATEOAS; you could use it, if you checked its limitations and still see clear value for your usage scenario that justifies its additional complexity. If you use HATEOAS please share experience and present your findings in the <a href="https://techwiki.zalando.net/display/GUL/API+Guild" target="_blank">API Guild [internal link]</a>.</p>
-<h2 id="must-use-common-hypertext-controls"><span style="color:red;font-weight:bold">Must:</span> Use common hypertext controls</h2>
+<h2 id="must-use-common-hypertext-controls"><span style="color:red;font-weight:bold">Must:</span> Use Common Hypertext Controls</h2>
 <p>When embedding links to other resources into representations you must use the common hypertext control object. It contains at least one attribute:</p>
 <ul>
 <li><code>href</code>: The URI of the resource the hypertext control is linking to. All our API are using HTTP(s) as URI scheme. </li>
@@ -506,25 +506,12 @@ related to the linked resource or the relationship between the source resource a
 allow <a href="http://stateless.co/hal_specification.html" target="_blank">HAL</a>, we actually don&apos;t recommend/enforce the 
 usage of HAL anymore as the structural separation of meta-data and data creates more harm than value to the 
 understandability and usability of an API.</p>
-<h2 id="must-do-not-use-link-headers-with-json-entities"><span style="color:red;font-weight:bold">Must:</span> Do Not Use Link Headers with JSON entities</h2>
+<h2 id="should-use-simple-hypertext-controls-for-pagination-and-selfreferences"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Use Simple Hypertext Controls for Pagination and Self-References</h2>
+<p>Hypertext controls for pagination inside collections and self-references should use a simple URI value in combination with their corresponding <a href="http://www.iana.org/assignments/link-relations/link-relations.xml" target="_blank">link relations</a> (<code>next</code>, <code>prev</code>, <code>first</code>, <code>last</code>, <code>self</code>) instead of the extensible common hypertext control </p>
+<p>See <a href="../pagination/Pagination.html">Pagination</a> for information how to best represent paginateable collections.</p>
+<h2 id="must-not-use-link-headers-with-json-entities"><span style="color:red;font-weight:bold">Must:</span> Not Use Link Headers with JSON entities</h2>
 <p>We don&apos;t allow the use of the <a href="http://tools.ietf.org/html/rfc5988#section-5" target="_blank"><code>Link</code> Header defined by RFC 5988</a>
-in conjunction with JSON media types, and favor <a href="#must-use-hal">HAL</a> instead. The primary reason is to have a consistent
-place for links as well as the better support for links in JSON payloads compared to the uncommon link header syntax.</p>
-<h2 id="may-use-custom-link-relations"><span style="color:green;font-weight:bold">May:</span> Use Custom Link Relations</h2>
-<p>You should consider using a custom link relation if and only if standard <a href="http://www.iana.org/assignments/link-relations/link-relations.xml" target="_blank">link relations</a>
-are not sufficient to express a relation.
-Related or even embedded (sub-) resources should be linked via &#x201C;meta link attributes&#x201D; within the response payload; use
-the following <a href="http://stateless.co/hal_specification.html" target="_blank">HAL</a> compliant syntax:</p>
-<pre><code>{
-  ...
-  &#x201C;_links&#x201D;: {
-    &#x201C;my-relation&#x201D;: {
-      &#x201C;href&#x201D;: &#x201C;https://service.team.zalan.do/my-entities/123&#x201D;
-    }
-  }
-}
-</code></pre><p>In earlier versions of this rule we proposed URIs but dropped that in favor of readability. Since link relations are
-properties in the <code>_links</code> object you should define and describe them individually in the API specification.</p>
+in conjunction with JSON media types. We prefer links directly embedded in JSON payloads to the uncommon link header syntax.</p>
 
                     
                     </section>

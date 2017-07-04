@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="11" data-chapter-title="Pagination" data-filepath="pagination/Pagination.md" data-basepath=".." data-revision="Tue Jun 27 2017 11:53:02 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="11" data-chapter-title="Pagination" data-filepath="pagination/Pagination.md" data-basepath=".." data-revision="Tue Jul 04 2017 13:33:16 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -500,44 +500,35 @@ deleted while fetching two pages</li>
 </ul>
 <h2 id="may-use-pagination-links-where-applicable"><span style="color:green;font-weight:bold">May:</span> Use Pagination Links Where Applicable</h2>
 <ul>
-<li>Set links to provide information to the client about subsequent paging options.</li>
+<li>API implementing <a href="../hyper-media/Hypermedia.html#may-use-rest-maturity-level-3--hateoas">HATEOS</a> may use <a href="../hyper-media/Hypermedia.html#should-pagination-and-self-references">simplified hypertext controls</a> for pagination within collections.</li>
 </ul>
-<p>For example:</p>
-<pre><code class="lang-http"><span class="hljs-request">GET <span class="hljs-string">http://catalog-service.zalando.net/products?offset=10&amp;limit=5</span> HTTP/1.1</span>
-<span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span>
-
-<span class="http"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
-<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span>
-
-<span class="json">{
-  &quot;<span class="hljs-attribute">_links</span>&quot;: <span class="hljs-value">{
-    &quot;<span class="hljs-attribute">next</span>&quot;: <span class="hljs-value">{
-      &quot;<span class="hljs-attribute">href</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;http://catalog-service.zalando.net/products?offset=15&amp;limit=5&quot;</span>
-    </span>}</span>,
-    &quot;<span class="hljs-attribute">prev</span>&quot;: <span class="hljs-value">{
-      &quot;<span class="hljs-attribute">href</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;http://catalog-service.zalando.net/products?offset=5&amp;limit=5&quot;</span>
-    </span>}
-  </span>}</span>,
-  &quot;<span class="hljs-attribute">total_count</span>&quot;: <span class="hljs-value"><span class="hljs-number">42</span></span>,
-  &quot;<span class="hljs-attribute">products</span>&quot;: <span class="hljs-value">[
-    {&quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;7e4ab218-1772-11e6-892c-836df3feeaee&quot;</span></span>},
-    {&quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;9469725a-1772-11e6-83c2-ab22ac368913&quot;</span></span>},
-    {&quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;a3625d80-1772-11e6-9213-d3a20f9e6bf4&quot;</span></span>},
-    {&quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;a802f070-1772-11e6-a772-c3020d55eb5f&quot;</span></span>},
-    {&quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;adb407ac-1772-11e6-b255-078fb28ff55b&quot;</span></span>}
-  ]
-</span>}
-</span></span></code></pre>
-<p><a href="http://www.iana.org/assignments/link-relations/link-relations.xml" target="_blank">Possible relations</a>:
-<code>next</code>, <code>prev</code>, <code>last</code>, <code>first</code>.</p>
-<p>Previous editions of the guidelines documented the <code>X-Total-Count</code> header to send back the total count of entities in conjunction with the <code>Link</code> header, which has since been deprecated. Instead when returning an object structure, the count can be added as a JSON property, and this is the preferred way to return count (or other result level) information. </p>
-<p>The <code>X-Total-Count</code> is applicable in these cases:</p>
-<ul>
-<li>The API design is still using the <code>Link</code> header.</li>
-<li>The API is returning a non-JSON response media type, and isn&apos;t able to carry the information.</li>
-<li>The JSON response is an array and not an object.</li>
-</ul>
+<p>Those collections should then have an <code>items</code> attribute holding the items of the current page. The collection may contain additional metadata about the collection or the current page (e.g. <code>index</code>, <code>page_size</code>) when necessary.</p>
 <p>You should avoid providing a total count in your API unless there&apos;s a clear need to do so. Very often, there are systems and performance implications to supporting full counts, especially as datasets grow and requests become complex queries or filters that drive full scans (e.g., your database might need to look at all candidate items to count them). While this is an implementation detail relative to the API, it&apos;s important to consider your ability to support serving counts over the life of a service.</p>
+<p>If the collection consists of links to other resources, the collection name should use <a href="http://www.iana.org/assignments/link-relations/link-relations.xml" target="_blank">IANA registered link relations</a> as names whenever appropriate, but use plural form.</p>
+<p>E.g. a service for articles could represent the collection of hyperlinks to an article&apos;s <code>authors</code> like that:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;self&quot;</span>: <span class="hljs-string">&quot;https://.../articles/xyz/authors/&quot;</span>,
+  <span class="hljs-string">&quot;index&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;page_size&quot;</span>: <span class="hljs-number">5</span>,
+  <span class="hljs-string">&quot;items&quot;</span>: [
+    {  
+      <span class="hljs-string">&quot;href&quot;</span>: <span class="hljs-string">&quot;https://...&quot;</span>,
+      <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;123e4567-e89b-12d3-a456-426655440000&quot;</span>,
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Kent Beck&quot;</span>
+    },
+    {  
+      <span class="hljs-string">&quot;href&quot;</span>: <span class="hljs-string">&quot;https://...&quot;</span>,
+      <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;987e2343-e89b-12d3-a456-426655440000&quot;</span>,
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Mike Beedle&quot;</span>
+    },
+    ...
+  ],
+  <span class="hljs-string">&quot;first&quot;</span>: <span class="hljs-string">&quot;https://...&quot;</span>,
+  <span class="hljs-string">&quot;next&quot;</span>: <span class="hljs-string">&quot;https://...&quot;</span>,
+  <span class="hljs-string">&quot;prev&quot;</span>: <span class="hljs-string">&quot;https://...&quot;</span>,
+  <span class="hljs-string">&quot;last&quot;</span>: <span class="hljs-string">&quot;https://...&quot;</span>
+}
+</code></pre>
 
                     
                     </section>
