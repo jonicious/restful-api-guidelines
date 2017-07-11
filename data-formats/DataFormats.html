@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="13" data-chapter-title="Data Formats" data-filepath="data-formats/DataFormats.md" data-basepath=".." data-revision="Tue Jul 11 2017 15:14:36 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="13" data-chapter-title="Data Formats" data-filepath="data-formats/DataFormats.md" data-basepath=".." data-revision="Tue Jul 11 2017 15:20:22 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -473,6 +473,69 @@ use another, more sufficient media type. But only do this if you can not transfe
 <li><p><a href="https://en.wikipedia.org/wiki/ISO_4217" target="_blank">ISO 4217 currency codes</a></p>
 </li>
 </ul>
+<h2 id="must-define-format-for-type-number-and-integer"><span style="color:red;font-weight:bold">Must:</span> Define Format for Type Number and Integer</h2>
+<p>Whenever an API defines a property of type <code>number</code> or <code>integer</code>, the precision must be defined by the format as follows to prevent clients from guessing the precision incorrectly, and thereby changing the value unintentionally:</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>format</th>
+<th>specified value range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>integer</td>
+<td>int32</td>
+<td>integer between -2<sup>31</sup> and 2<sup>31</sup>-1</td>
+</tr>
+<tr>
+<td>integer</td>
+<td>int64</td>
+<td>integer between -2<sup>63</sup> and 2<sup>63</sup>-1</td>
+</tr>
+<tr>
+<td>integer</td>
+<td>bigint</td>
+<td>arbitrarily large signed integer number</td>
+</tr>
+<tr>
+<td>number</td>
+<td>float</td>
+<td>IEEE 754-2008/ISO 60559:2011 binary64 decimal number</td>
+</tr>
+<tr>
+<td>number</td>
+<td>double</td>
+<td>IEEE 754-2008/ISO 60559:2011 binary128 decimal number</td>
+</tr>
+<tr>
+<td>number</td>
+<td>decimal</td>
+<td>arbitrarily precise signed decimal number</td>
+</tr>
+</tbody>
+</table>
+<p>The precision must be translated by clients and servers into the most specific language types. E.g. for the following definitions the most specific language types in Java will translate to <code>BigDecimal</code> for <code>Money.amount</code> and <code>int</code> or <code>Integer</code> for the <code>OrderList.page_size</code>:</p>
+<pre><code class="lang-yaml">Money:
+  type: object
+  properties:
+    amount:
+      type: number
+      description: Amount expressed as a decimal number of major currency units
+      format: decimal
+      example: 99.95
+   ...
+
+OrderList:
+  type: object
+  properties:
+    page_size:
+      type: integer
+      description: Number of orders in list
+      format: int32
+      example: 42
+</code></pre>
 <h2 id="should-prefer-standard-media-type-name-applicationjson"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Prefer standard Media type name <code>application/json</code></h2>
 <p>Previously, this guideline allowed the use of custom media types like <code>application/x.zalando.article+json</code>.
 This usage is not recommended anymore and should be avoided, except where it is necessary for cases
