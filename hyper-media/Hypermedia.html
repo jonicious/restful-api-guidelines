@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Tue Jul 11 2017 15:20:22 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="12" data-chapter-title="Hypermedia" data-filepath="hyper-media/Hypermedia.md" data-basepath=".." data-revision="Wed Jul 12 2017 09:23:32 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -487,7 +487,7 @@ with APIs explicitly defined outside the code with standard specification langua
 <p>The name of an attribute holding such a <code>HttpLink</code> object specifies the relation between the object that 
 contains the link and the linked resource. Implementations should use names from the 
 <a href="http://www.iana.org/assignments/link-relations/link-relations.xhtml" target="_blank">IANA Link Relation Registry</a> 
-whenever appropriate.</p>
+whenever appropriate. As IANA link relation names use hyphen-case notation, while this guide enforces snake_case notation for attribute names, hyphens in IANA names have to be replaced with underscores (e.g. the IANA link relation type <code>version-history</code> would become the attribute <code>version_history</code>) </p>
 <p>Specific link objects may extend the basic link type with additional attributes, to give additional information
 related to the linked resource or the relationship between the source resource and the linked one.</p>
 <p>E.g. a service providing &quot;Person&quot; resources could model a person who is married with some other person with a hypertext control that contains attributes which describe the other person (<code>id</code>, <code>name</code>) but also the relationship &quot;spouse&quot; between between the two persons (<code>since</code>):</p>
