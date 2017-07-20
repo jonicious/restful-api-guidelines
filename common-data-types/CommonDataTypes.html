@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>References | Introduction</title>
+        <title>Common Data Types | Introduction</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.7">
@@ -41,10 +41,10 @@
         
     
     
-    <link rel="next" href="../tooling/Tooling.html">
+    <link rel="next" href="../headers/CommonHeaders.html">
     
     
-    <link rel="prev" href="../events/events.html">
+    <link rel="prev" href="../data-formats/DataFormats.html">
     
 
         
@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="20" data-chapter-title="References" data-filepath="references/References.md" data-basepath=".." data-revision="Thu Jul 20 2017 09:25:33 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="14" data-chapter-title="Common Data Types" data-filepath="common-data-types/CommonDataTypes.md" data-basepath=".." data-revision="Thu Jul 20 2017 09:25:33 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -275,7 +275,7 @@
             
         </li>
     
-        <li class="chapter " data-level="14" data-path="common-data-types/CommonDataTypes.html">
+        <li class="chapter active" data-level="14" data-path="common-data-types/CommonDataTypes.html">
             
                 
                     <a href="../common-data-types/CommonDataTypes.html">
@@ -365,7 +365,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="20" data-path="references/References.html">
+        <li class="chapter " data-level="20" data-path="references/References.html">
             
                 
                     <a href="../references/References.html">
@@ -443,46 +443,206 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="appendix-references">Appendix: References</h1>
-<p>This section collects links to documents to which we refer, and base our guidelines on.</p>
-<h2 id="openapi-specification">OpenAPI Specification</h2>
+                        <h1 id="common-data-types">Common Data Types</h1>
+<p>Definitions of data objects that are good candidates for wider usage:</p>
+<h2 id="should-use-a-common-money-object"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Use a Common Money Object</h2>
+<p>Use the following common money structure:</p>
+<pre><code>Money:
+  type: object
+  properties:
+    amount:
+      type: number
+      description: Amount expressed as a decimal number of major currency units
+      format: decimal
+      example: 99.95
+    currency:
+      type: string
+      description: 3 letter currency code as defined by ISO-4217
+      format: iso-4217
+      example: EUR
+  required:
+    - amount
+    - currency
+</code></pre><p>The decimal values for &quot;amount&quot; describe unit and subunit of the currency in a single value, where
+the digits before the decimal point are for the major unit and the digits after the decimal point are
+for the minor unit. Note that some business cases (e.g. transactions in Bitcoin) call for a higher
+precision, so applications must be prepared to accept values with unlimited precision, unless
+explicitly stated otherwise in the API specification.
+Examples for correct representations (in EUR):</p>
 <ul>
-<li><a href="https://github.com/OAI/OpenAPI-Specification/" target="_blank">OpenAPI Specification</a></li>
+<li><code>42.20</code> or <code>42.2</code> = 42 Euros, 20 Cent</li>
+<li><code>0.23</code> = 23 Cent</li>
+<li><code>42.0</code> or <code>42</code> = 42 Euros</li>
+<li><code>1024.42</code> = 1024 Euros, 42 Cent</li>
+<li><code>1024.4225</code> = 1024 Euros, 42.25 Cent</li>
 </ul>
-<h2 id="publications-specifications-and-standards">Publications, specifications and standards</h2>
+<p>Make sure that you don&#x2019;t convert the &#x201C;amount&#x201D; field to <code>float</code> / <code>double</code> types when implementing
+this interface in a specific language or when doing calculations. Otherwise, you might lose
+precision. Instead, use exact formats like
+Java&#x2019;s <a href="https://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html" target="_blank"><code>BigDecimal</code></a>.
+See <a href="http://stackoverflow.com/a/3730040/342852" target="_blank">Stack Overflow</a> for more info.</p>
+<p>Some JSON parsers (NodeJS&#x2019;s, for example) convert numbers to floats by default. After discussing the
+<a href="https://docs.google.com/spreadsheets/d/12wTj-2w39f69XZGwRDrosNc1yWPwQpGgEs_DCt5ODaQ" target="_blank">pros and cons</a>,
+we&#x2019;ve decided on &quot;decimal&quot; as our amount format. It is not a standard OpenAPI format, but should
+help us to avoid parsing numbers as float / doubles.</p>
+<h2 id="must-use-common-field-names-and-semantics"><span style="color:red;font-weight:bold">Must:</span> Use common field names and semantics</h2>
+<p>There exist a variety of field types that are required in multiple places. To achieve consistency across all API implementations, you must use common field names and semantics whenever applicable.</p>
+<h3 id="generic-fields">Generic Fields</h3>
+<p>There are some data fields that come up again and again in API data:</p>
 <ul>
-<li><a href="https://tools.ietf.org/html/rfc3339" target="_blank">RFC 3339: Date and Time on the Internet: Timestamps</a></li>
-<li><a href="https://tools.ietf.org/html/rfc5988" target="_blank">RFC 5988: Web Linking</a></li>
-<li><a href="https://tools.ietf.org/html/rfc7159" target="_blank">RFC 7159: The JavaScript Object Notation (JSON) Data Interchange Format</a></li>
-<li><a href="https://tools.ietf.org/html/rfc7230" target="_blank">RFC 7230: Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing</a></li>
-<li><a href="https://tools.ietf.org/html/rfc7231" target="_blank">RFC 7231: Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content</a></li>
-<li><a href="https://tools.ietf.org/html/rfc7807" target="_blank">RFC 7807: Problem Details for HTTP APIs</a></li>
-<li><a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601: Date and time format</a></li>
-<li><a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank">ISO 3166-1 alpha-2: Two letter country codes</a></li>
-<li><a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO 639-1: Two letter language codes</a></li>
-<li><a href="https://en.wikipedia.org/wiki/ISO_4217" target="_blank">ISO 4217: Currency codes</a></li>
-<li><a href="https://tools.ietf.org/html/bcp47" target="_blank">BCP 47: Tags for Identifying Languages</a></li>
+<li><p><code>id</code>: the identity of the object. If used, IDs must opaque strings and not numbers. IDs are unique within some documented context, are stable and don&apos;t change for a given object once assigned, and are never recycled cross entities.</p>
+</li>
+<li><p><code>xyz_id</code>: an attribute within one object holding the identifier of another object must use a name that corresponds to the type of the referenced object or the relationship to the referenced object followed by <code>_id</code> (e.g. <code>customer_id</code> not <code>customer_number</code>; <code>parent_node_id</code> for the reference to a parent node from a child node, even if both have the type <code>Node</code>)</p>
+</li>
+<li><p><code>created</code>: when the object was created. If used, this must be a <code>date-time</code> construct.</p>
+</li>
+<li><p><code>modified</code>: when the object was updated. If used, this must be a <code>date-time</code> construct.</p>
+</li>
+<li><p><code>type</code>: the kind of thing this object is. If used, the type of this field should be a string. Types allow runtime information on the entity provided that otherwise requires examining the Open API file.</p>
+</li>
 </ul>
-<h2 id="dissertations">Dissertations</h2>
-<ul>
-<li><a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm" target="_blank">Roy Thomas Fielding - Architectural Styles and the Design of Network-Based Software
-Architectures</a>.
-This is the text which defines what REST is.</li>
-</ul>
-<h2 id="books">Books</h2>
-<ul>
-<li><a href="http://www.amazon.de/REST-Practice-Hypermedia-Systems-Architecture/dp/0596805829" target="_blank">REST in Practice: Hypermedia and Systems
-Architecture</a></li>
-<li><a href="https://leanpub.com/build-apis-you-wont-hate" target="_blank">Build APIs You Won&apos;t
-Hate</a></li>
-<li><a href="http://www.infoq.com/minibooks/emag-web-api" target="_blank">InfoQ eBook - Web APIs: From Start to
-Finish</a></li>
-</ul>
-<h2 id="blogs">Blogs</h2>
-<ul>
-<li><a href="http://restful-api-design.readthedocs.org/en/latest/" target="_blank">Lessons-learned blog: Thoughts on RESTful API
-Design</a></li>
-</ul>
+<p>Example JSON schema:</p>
+<pre><code>tree_node:
+  type: object
+  properties: 
+    id:
+      description: the identifier of this node
+      type: string
+    created:
+      description: when got this node created
+      type: string
+      format: &apos;date-time&apos;
+    modified:
+      description: when got this node last updated
+      type: string
+      format: &apos;date-time&apos;
+    type:
+      type: string
+      enum: [ &apos;LEAF&apos;, &apos;NODE&apos; ]
+    parent_node_id:
+      description: the identifier of the parent node of this node
+      type: string
+  example:
+    id: &apos;123435&apos;
+    created: &apos;2017-04-12T23:20:50.52Z&apos;
+    modified: &apos;2017-04-12T23:20:50.52Z&apos;
+    type: &apos;LEAF&apos;
+    parent_node_id: &apos;534321&apos;
+</code></pre><p>These properties are not always strictly necessary, but making them idiomatic allows API client developers to build up a common understanding of Zalando&apos;s resources. There is very little utility for API consumers in having different names or value types for these fields across APIs.</p>
+<h3 id="address-fields">Address Fields</h3>
+<p>Address structures play a role in different functional and use-case contexts, including country
+variances. All attributes that relate to address information should follow the naming
+and semantics defined below.</p>
+<pre><code>addressee:
+    description:
+      a (natural or legal) person that gets addressed
+    type: object
+    required:
+      - first_name
+      - last_name
+      - street
+      - city
+      - zip
+      - country_code
+    properties:
+      salutation:
+        description: |
+          a salutation and/or title used for personal contacts to some addressee;
+          not to be confused with the gender information!
+        type: string
+        example: Mr
+      first_name:
+        description: |
+          given name(s) or first name(s) of a person; may also include the middle names.
+        type: string
+        example: Hans Dieter
+      last_name:
+        description: |
+          family name(s) or surname(s) of a person
+        type: string
+        example: Mustermann
+      business_name:
+        description: |
+          company name of the business organization. Used when a business is the actual
+          addressee; for personal shipments to office addresses, use `care_of` instead.
+        type: string
+        example: Consulting Services GmbH
+    required:
+      - first_name
+      - last_name
+
+address:
+    description:
+      an address of a location/destination
+    type: object
+    properties:
+      care_of:
+        description: |
+          (aka c/o) the person that resides at the address, if different from
+          addressee. E.g. used when sending a personal parcel to the 
+          office /someone else&apos;s home where the addressee resides temporarily
+        type: string
+        example: Consulting Services GmbH
+      street:
+        description: |
+          the full street address including house number and street name
+        type: string
+        example: Sch&#xF6;nhauser Allee 103
+      additional:
+        description: |
+          further details like building name, suite, apartment number, etc.
+        type: string
+        example: 2. Hinterhof rechts
+      city:
+        description: |
+          name of the city / locality
+        type: string
+        example: Berlin
+      zip:
+        description: |
+          zip code or postal code
+        type: string
+        example: 14265
+      country_code:
+        description: |
+          the country code according to 
+          [iso-3166-1-alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+        type: string
+        example: DE
+    required:
+      - street
+      - city
+      - zip
+      - country_code
+</code></pre><p>Grouping and cardinality of fields in specific data types may vary based on the specific use case
+(e.g. combining addressee and address fields into a single type when modeling an address label vs distinct addressee and address types when modeling users and their addresses).</p>
+<h2 id="must-follow-hypertext-control-conventions"><span style="color:red;font-weight:bold">Must:</span> Follow Hypertext Control Conventions</h2>
+<p>APIs that provide hypertext controls (links) to interconnect API resources must follow
+the conventions for naming and modeling of hypertext controls as defined in section <a href="../hyper-media/Hypermedia.html">Hypermedia</a>. </p>
+<h2 id="must-use-problem-json"><span style="color:red;font-weight:bold">Must:</span> Use Problem JSON</h2>
+<p><a href="http://tools.ietf.org/html/rfc7807" target="_blank">RFC 7807</a> defines the media type <code>application/problem+json</code>.
+Operations should return that (together with a suitable status code) when any problem
+occurred during processing and you can give more details than the status code itself
+can supply, whether it be caused by the client or the server (i.e. both for 4xx or 5xx errors).</p>
+<p>A previous version of this guideline (before the publication of that RFC and the
+registration of the media type) told to return <code>application/x.problem+json</code> in these
+cases (with the same contents).
+Servers for APIs defined before this change should pay attention to the <code>Accept</code> header sent
+by the client and set the <code>Content-Type</code> header of the problem response correspondingly.
+Clients of such APIs should accept both media types.</p>
+<p>APIs may define custom problems types with extension properties, according to their specific needs.</p>
+<p>The Open API schema definition can be found <a href="https://zalando.github.io/problem/schema.yaml" target="_blank">on github</a>.
+You can reference it by using:</p>
+<pre><code class="lang-yaml">responses:
+  503:
+    description: Service Unavailable
+    schema:
+      $ref: &apos;https://zalando.github.io/problem/schema.yaml#/Problem&apos;
+</code></pre>
+<h2 id="must-do-not-expose-stack-traces"><span style="color:red;font-weight:bold">Must:</span> Do not expose Stack Traces</h2>
+<p>Stack traces contain implementation details that are not part of an API, and on which clients
+should never rely. Moreover, stack traces can leak sensitive information that partners and third
+parties are not allowed to receive and may disclose insights about vulnerabilities to attackers.</p>
 
                     
                     </section>
@@ -493,10 +653,10 @@ Design</a></li>
         </div>
 
         
-        <a href="../events/events.html" class="navigation navigation-prev " aria-label="Previous page: Events"><i class="fa fa-angle-left"></i></a>
+        <a href="../data-formats/DataFormats.html" class="navigation navigation-prev " aria-label="Previous page: Data Formats"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../tooling/Tooling.html" class="navigation navigation-next " aria-label="Next page: Tooling"><i class="fa fa-angle-right"></i></a>
+        <a href="../headers/CommonHeaders.html" class="navigation navigation-next " aria-label="Next page: Common Headers"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
