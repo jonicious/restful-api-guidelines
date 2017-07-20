@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="13" data-chapter-title="Data Formats" data-filepath="data-formats/DataFormats.md" data-basepath=".." data-revision="Wed Jul 12 2017 13:34:20 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="13" data-chapter-title="Data Formats" data-filepath="data-formats/DataFormats.md" data-basepath=".." data-revision="Thu Jul 20 2017 08:23:12 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -436,14 +436,21 @@
                     <section class="normal" id="section-">
                     
                         <h1 id="data-formats">Data Formats</h1>
-<h2 id="must-use-json-as-the-body-payload"><span style="color:red;font-weight:bold">Must:</span> Use JSON as the Body Payload</h2>
-<p>JSON-encode the body payload. The JSON payload must follow <a href="https://tools.ietf.org/html/rfc7159" target="_blank">RFC-7159</a> by having
+<h2 id="must-use-json-to-encode-structured-data"><span style="color:red;font-weight:bold">Must:</span> Use JSON to Encode Structured Data</h2>
+<p>Use JSON-encoded body payload for transferring structured data. 
+The JSON payload must follow <a href="https://tools.ietf.org/html/rfc7159" target="_blank">RFC-7159</a> by having
 (if possible) a serialized object as the top-level structure, since it would allow for future extension.
 This also applies for collection resources where one naturally would assume an array. See the
 <a href="../pagination/Pagination.html#could-use-pagination-links-where-applicable">pagination</a> section for an example.</p>
-<h2 id="may-use-other-media-types-than-json"><span style="color:green;font-weight:bold">May:</span> Use other Media Types than JSON</h2>
-<p>If for given use case JSON does not make sense, for instance when providing attachments in form of PDFs, you should
-use another, more sufficient media type. But only do this if you can not transfer the information in JSON.</p>
+<h2 id="may-use-non-json-media-types-for-binary-data-or-alternative-content-representations"><span style="color:green;font-weight:bold">May:</span> Use non JSON Media Types for Binary Data or Alternative Content Representations</h2>
+<p>Other media types may be used in following cases:</p>
+<ul>
+<li>Transferring binary data or data whose structure is not relevant. This is the case if payload structure
+is not interpreted and consumed by clients as is. Example of such use case is downloading images
+in formats JPG, PNG, GIF.</li>
+<li>In addition to JSON version alternative data representations (e.g. in formats PDF, DOC, XML)
+may be made available through content negotiation.</li>
+</ul>
 <h2 id="must-use-standard-date-and-time-formats"><span style="color:red;font-weight:bold">Must:</span> Use Standard Date and Time Formats</h2>
 <h3 id="json-payload">JSON Payload</h3>
 <p>Read more about date and time format in <a href="../json-guidelines/JsonGuidelines.html#date-property-values-should-conform-to-rfc-3399">Json Guideline</a>.</p>
