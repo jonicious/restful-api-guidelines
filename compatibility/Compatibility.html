@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Thu Jul 20 2017 09:25:33 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="5" data-chapter-title="Compatibility" data-filepath="compatibility/Compatibility.md" data-basepath=".." data-revision="Sat Jul 22 2017 21:12:13 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -457,11 +457,8 @@ contracts between service providers and service consumers that cannot be broken 
 <p>We strongly encourage using compatible API extensions and discourage versioning.
 The below guideline rules for service providers and consumers enable us (having Postel&#x2019;s Law in mind) 
 to make compatible changes without versioning.</p>
-<p><strong>Hint:</strong> Please note that the compatibility guarantees are for the on-the-wire format,
-i.e. they ensure that consumers relying on the old API definition will work
-with servers which already implement a newer API definition, assuming both API
-designers and client and server implementors adhere to the following rules.</p>
-<p>Hence, binary or source compatibility of code generated from an API definition
+<p><strong>Hint:</strong> Please note that the compatibility guarantees are for the &quot;on the wire&quot; format.
+Binary or source compatibility of code generated from an API definition
 is not covered by these rules.  If client implementations update their generation
 process to a new version of the API definition, it has to be expected that code
 changes are necessary.</p>
@@ -469,10 +466,11 @@ changes are necessary.</p>
 <p>API designers should apply the following rules to evolve RESTful APIs for services in a backward-compatible way:</p>
 <ul>
 <li>Add only optional, never mandatory fields.</li>
-<li>Never change the meaning of a field (e.g. switching to customer-number 
-semantics for customer-id, both being unique customer keys).</li>
+<li>Never change the semantic of fields (e.g. changing the semantic from
+customer-number to customer-id, as both are different unique customer keys)</li>
 <li>Input fields may have (complex) constraints being validated via server-side business logic.
-Never change the validation logic to be more restrictive and make sure that constraints a clearly defined in description. </li>
+Never change the validation logic to be more restrictive and make sure that all 
+constraints a clearly defined in description. </li>
 <li>Enum ranges can be reduced when used as input parameters, only if the server 
 is ready to accept and handle old range values too. Enum range can be reduced 
 when used as output parameters.</li>
@@ -487,10 +485,19 @@ values and clients must be agnostic to new values.</li>
 (<a href="https://en.wikipedia.org/wiki/HTTP_301" target="_blank">301 Moved Permanently</a>).</li>
 </ul>
 <h2 id="must-prepare-clients-to-not-crash-on-compatible-api-extensions"><span style="color:red;font-weight:bold">Must:</span> Prepare Clients To Not Crash On Compatible API Extensions</h2>
-<p>Service clients apply the robustness principle and must be prepared for compatible API extensions of service providers:</p>
+<p>Service clients should apply the robustness principle:</p>
 <ul>
-<li>Ignore new and unknown fields in the payload (see also Fowler&#x2019;s
-&#x201C;<a href="http://martinfowler.com/bliki/TolerantReader.html" target="_blank">TolerantReader</a>&#x201D; post).</li>
+<li><p>Be conservative with API requests and data passed as input, e.g. avoid to exploit 
+definition eficits like passing megabytes for strings with unspecified maximum length.</p>
+</li>
+<li><p>Be tolerant in processing and reading data of API responses, more specifically...</p>
+</li>
+</ul>
+<p>Service clients must be prepared for compatible API extensions of service providers:</p>
+<ul>
+<li>Be tolerant with unknown fields in the payload
+(see also Fowler&#x2019;s <a href="http://martinfowler.com/bliki/TolerantReader.html" target="_blank">&quot;TolerantReader&quot;</a> post),
+i.e. ignore new fields but do not eliminate them from payload if needed for subsequent PUT requests.</li>
 <li>Be prepared that <a href="#should-used-openended-list-of-values-xextensibleenum-instead-of-enumerations"><code>x-extensible-enum</code></a>
 return parameter may deliver new values; either be agnostic or provide default behavior for unknown values. </li>
 <li>Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions. 
@@ -510,7 +517,7 @@ check constraints and return dedicated error information in case of violations. 
 e.g. by defining length range of strings. It may simplify implementation while providing 
 freedom for further evolution as compatible extensions. </li>
 </ul>
-<p>Not ignoring unknown input fields is a specific deviation from Postel&apos;s Law (e.g. see also<br><a href="https://cacm.acm.org/magazines/2011/8/114933-the-robustness-principle-reconsidered/fulltext" target="_blank">The Robustness Principle Reconsidered</a> 
+<p>Not ignoring unknown input fields is a specific deviation from Postel&apos;s Law (e.g. see also<br><a href="https://cacm.acm.org/magazines/2011/8/114933-the-robustness-principle-reconsidered/fulltext" target="_blank">The Robustness Principle Reconsidered</a>) 
 and a strong recommendation.
 Servers might want to take different approach but should be aware of the following 
 problems and be explicit in what is supported: </p>
