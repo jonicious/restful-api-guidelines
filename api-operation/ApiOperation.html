@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="18" data-chapter-title="API Operation" data-filepath="api-operation/ApiOperation.md" data-basepath=".." data-revision="Sat Jul 22 2017 21:12:13 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="18" data-chapter-title="API Operation" data-filepath="api-operation/ApiOperation.md" data-basepath=".." data-revision="Wed Jul 26 2017 10:26:05 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -448,11 +448,16 @@
 <p>All service applications must support access to the OpenAPI Reference Definitions of their external APIs &#x2014; it
 is optional for internal APIs &#x2014; via the following two API endpoints:  </p>
 <ul>
-<li>endpoint(s) for GET access on its OpenAPI definition(s), for instance
-<code>https://example.com/swagger.json</code> or <code>https://example.com/swagger.yaml</code>.</li>
-<li>API Discovery endpoint <code>https://example.com/.well-known/schema-discovery</code> that delivers
-the OpenAPI definition endpoint(s) above (see the link below for a description of its format).</li>
-<li>whether these endpoints have to be secured by OAuth depends on context of your API and product management</li>
+<li>endpoint(s) for GET access on its OpenAPI definition(s), for instance <code>https://example.com/swagger.json</code> or <code>https://example.com/swagger.yaml</code>.</li>
+<li><p>API Discovery endpoint <code>https://example.com/.well-known/schema-discovery</code> that delivers a JSON discovery document of the following form (adapt the <code>schema_url</code> to point to the endpoint mentioned above):</p>
+<pre><code>  {
+      &quot;schema_url&quot;: &quot;/swagger.json&quot;,
+      &quot;schema_type&quot;: &quot;swagger-2.0&quot;,
+      &quot;ui_url&quot;: &quot;/ui/&quot;
+  }
+</code></pre></li>
+<li><p>whether these endpoints have to be secured by OAuth depends on context of your API and product management</p>
+</li>
 <li>if you secure these endpoint, only use <code>uid</code> scope</li>
 </ul>
 <p>Hint: Though discovery endpoints have to be supported, they should not be specified in the OpenAPI definition
@@ -462,12 +467,10 @@ implemented via small set of services. An external API is used by clients outsid
 another application owned by a different team or even an external business partner user of our platform.
 An internal API is only used within the application and only by the owning team, for instance,
 for operational or implementation internal purposes.</p>
-<p>Background: In our dynamic and complex service infrastructure, it is important to provide API client
-developers a central place with online access to the OpenAPI reference definitions of all running applications.
-<a href="https://github.com/zalando-incubator/api-discovery" target="_blank">API Discovery</a> is an API definition
-crawler of the Zalando platform infrastructure; it checks all running applications via the endpoint above and
-stores the discovered API definitions. API Discovery itself provides a RESTful API as well as an
-API Viewer (Swagger-UI) for central access to all discovered API definitions.</p>
+<p>Background: In our dynamic and complex service infrastructure, it is important to provide API client developers a central place with online access to the OpenAPI reference definitions of all running applications.
+As a part of the Zalando infrastructure, the <code>.well-known/schema-discovery</code> endpoint is used by the API Discovery to detect all API definitions.
+It checks all running applications via the endpoint above and stores the discovered API definitions.
+API Discovery itself provides a RESTful API as well as an API Viewer (Swagger-UI) for central access to all discovered API definitions.</p>
 <p>Editorial: For the time being, this document is an appropriate place to mention this rule, even though it is
 not a RESTful API definition rule but related to service implementation obligations to support client developer API discovery.</p>
 <p>Further reading:</p>
