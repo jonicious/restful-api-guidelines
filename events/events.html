@@ -52,7 +52,7 @@
     <body>
         
         
-    <div class="book" data-level="19" data-chapter-title="Events" data-filepath="events/events.md" data-basepath=".." data-revision="Mon Aug 14 2017 11:36:04 GMT+0000 (UTC)" data-innerlanguage="">
+    <div class="book" data-level="19" data-chapter-title="Events" data-filepath="events/events.md" data-basepath=".." data-revision="Mon Aug 14 2017 14:22:49 GMT+0000 (UTC)" data-innerlanguage="">
     
 
 <div class="book-summary">
@@ -529,48 +529,48 @@ define well known vendor extensions for events.</p>
 <li>The name of the event type.</li>
 <li>An owning application, and by implication, an owning team.</li>
 <li>A schema defining the event payload. </li>
-<li>The compatability mode for the type.</li>
+<li>The compatibility mode for the type.</li>
 </ul>
 <p>Event Types allow easier discovery of event information and ensure that
 information is well-structured, consistent, and can be validated.</p>
-<p>Event type owners must pay attention to the choice of compatability mode.  The
+<p>Event type owners must pay attention to the choice of compatibility mode.  The
 mode provides a means to evolve thee schema. The range of modes are designed to
 be flexible enough so that producers can evolve schemas while not inadvertently
 breaking existing consumers:</p>
 <ul>
-<li><p>&apos;none&apos;: Any schema modification is accepted, even if it might break existing
+<li><p><code>none</code>: Any schema modification is accepted, even if it might break existing
 producers or consumers. When validating events, undefined properties are
 accepted unless declared in the schema.</p>
 </li>
-<li><p>&apos;forward&apos;: A schema <code>S1</code> is forward compatible if the previously registered 
+<li><p><code>forward</code>: A schema <code>S1</code> is forward compatible if the previously registered 
 schema, <code>S0</code> can read events defined by <code>S1</code>  - that is, consumers can read 
 events tagged with the latest schema version using the previous version as 
 long as consumers follow the robustness principle described in the guideline&apos;s
 <a href="../DesignPrinciples.md">API Design Principles</a>.</p>
 </li>
-<li><p>&apos;compatible&apos;: This means changes are fully compatible. A new schema, <code>S1</code>, 
+<li><p><code>compatible</code>: This means changes are fully compatible. A new schema, <code>S1</code>, 
 is fully compatible when every event published since the first schema version 
-will validate against to the new schema. When in compatible mode, it&apos;s allowed 
-to add new optional properties and definitions to an existing schema, but no other
-changes are allowed. </p>
+will validate against the latest schema. In compatible mode, only the addition
+of new optional properties and definitions to an existing schema is allowed.
+Other changes are forbidden.</p>
 </li>
 </ul>
-<p>The compatibility levels interact with revision numbers in the schema
-<code>&quot;version&quot;</code> field, which follows semantic versioning (MAJOR.MINOR.PATCH):</p>
+<p>The compatibility mode interact with revision numbers in the schema
+<code>version</code> field, which follows semantic versioning (MAJOR.MINOR.PATCH):</p>
 <ul>
-<li><p>Changing a <code>&quot;compatible&quot;</code> level type can lead to a PATCH or MINOR version
-revision. MAJOR breaking changes are not allowed.</p>
+<li><p>Changing an event type with compatibility mode <code>compatible</code> can lead to
+a PATCH or MINOR version revision. MAJOR breaking changes are not allowed.</p>
 </li>
-<li><p>Changing a <code>&quot;forward&quot;</code> level event type can lead to a PATCH or MINOR
-version revision. MAJOR breaking changes are not allowed.</p>
+<li><p>Changing an event type with compatibility mode <code>forward</code> can lead to a
+PATCH or MINOR version revision. MAJOR breaking changes are not allowed.</p>
 </li>
-<li><p>Changing a <code>&quot;none&quot;</code> level event type can lead to PATCH, MINOR or MAJOR
-level changes.</p>
+<li><p>Changing an event type with compatibility mode <code>none</code> can lead to PATCH,
+MINOR or MAJOR level changes.</p>
 </li>
 </ul>
-<p>For examples of changes:</p>
+<p>The following examples illustrate this relations:</p>
 <ul>
-<li><p>Changes to the event type&apos;s <code>&quot;title&quot;</code> or <code>&quot;description&quot;</code> are considered PATCH
+<li><p>Changes to the event type&apos;s <code>title</code> or <code>description</code> are considered PATCH
 level.</p>
 </li>
 <li><p>Adding new optional fields to an event type&apos;s schema is considered a MINOR
@@ -595,9 +595,8 @@ fields, or adding new required fields.</p>
       name:
         description: |
           Name of this EventType.  Note: the name can encode the
-          owner/responsible for this EventType and ideally should follow the
-          common pattern &apos;functional-component&apos;.&apos;business event or entity&apos; that
-          makes it easy to read and understand.
+          owner/responsible for this EventType and ideally should follow a
+          naming pattern that makes it easy to read and understand.
         type: string
         pattern: &apos;[a-zA-Z][-0-9a-zA-Z_]*(\.[a-zA-Z][-0-9a-zA-Z_]*)*&apos;
         example: order.order_cancelled, business_partner.contract
@@ -615,11 +614,12 @@ fields, or adding new required fields.</p>
           - general
       compatibility_mode:
         description: |
-          The compatibility modes are:
-            - &quot;compatible&quot;
-            - &quot;forward&quot;
-            - &quot;none&quot;
+          The compatibility mode to evolve the schema.
         type: string
+        x-extensible-enum:
+          - compatible
+          - forward
+          - none
         default: forward
       schema:
         description: The most recent payload schema for this EventType. 
@@ -665,8 +665,8 @@ event category registration also allows the declaration of validation and
 enrichment strategies for events, along with supplemental information, such as
 how events are partitioned in the stream.</p>
 <h2 id="must-ensure-events-conform-to-a-wellknown-event-category"><span style="color:red;font-weight:bold">Must:</span> Ensure Events conform to a well-known Event Category</h2>
-<p>An <em>event category</em> describes a generic class of event. The guidelines define
-two such categories:</p>
+<p>An <em>event category</em> describes a generic class of event types. The guidelines
+define two such categories:</p>
 <ul>
 <li><p>General Event: a general purpose category.</p>
 </li>
@@ -699,7 +699,7 @@ Schema Object definition:</p>
 at the top-level of the document, with the <code>metadata</code> field being reserved for 
 standard information (the contents of <code>metadata</code> are described further down in 
 this section).</p>
-<p>In the example fragment below, the reserved metadata field is shown with fields
+<p>In the example fragment below, the reserved <code>metadata</code> field is shown with fields
 &quot;a&quot; and &quot;b&quot; being defined as part of the custom schema:</p>
 <pre style="font-size: .85em">
   {
@@ -734,7 +734,7 @@ Object:</p>
      description: |
         Represents a change to an entity. The required fields are those expected
         to be sent by the producer, other fields may be added by intermediaries
-        such as a publish/subcribe broker. An instance of an event based on the
+        such as a publish/subscribe broker. An instance of an event based on the
         event type conforms to both the DataChangeEvent&apos;s definition and the
         custom schema definition.      
     required:
@@ -768,10 +768,10 @@ Object:</p>
           - S: A snapshot of an entity at a point in time.
 </code></pre>
 <p>The Data Change Event Category is structurally different to the General Event Category. It defines
-a field called <code>&quot;data&quot;</code> for placing the custom payload information, as well as
+a field called <code>data</code> for placing the custom payload information, as well as
 specific information related to data changes in the <code>data_type</code>. In the example
-fragment below, the fields <code>&quot;a&quot;</code> and <code>&quot;b&quot;</code> are part of the custom payload housed
-inside the <code>&quot;data&quot;</code> field:</p>
+fragment below, the fields <code>a</code> and <code>b</code> are part of the custom payload housed
+inside the <code>data</code> field:</p>
 <pre style="font-size: .85em">
   {
     <span style="font-weight: bold;">&quot;metadata&quot;: {...}</span>
@@ -856,7 +856,7 @@ Category:</p>
         type: string
         example: &apos;0&apos;
 </code></pre>
-<p>Please note than intermediaries acting between the producer of an event and its ulimate consumers, may perform operations like validation of events and enrichment of an event&apos;s <code>&quot;metadata&quot;</code>. For example brokers such as Nakadi, can validate and enrich events with arbitrary additional fields that are not specified here and may set default or other values, if some of the specified fields are not supplied. How such systems work is outside the scope of these guidelines but producers and consumers working with such systems should be look into their documentation for additional information.</p>
+<p>Please note than intermediaries acting between the producer of an event and its ultimate consumers, may perform operations like validation of events and enrichment of an event&apos;s <code>metadata</code>. For example brokers such as Nakadi, can validate and enrich events with arbitrary additional fields that are not specified here and may set default or other values, if some of the specified fields are not supplied. How such systems work is outside the scope of these guidelines but producers and consumers working with such systems should be look into their documentation for additional information.</p>
 <h2 id="must-ensure-that-events-define-useful-business-resources"><span style="color:red;font-weight:bold">Must:</span> Ensure that Events define useful business resources</h2>
 <p> Events are intended to be used by other services including business process/data analytics and monitoring. They should be based around the resources and business processes you have defined for your service domain and adhere to its natural lifecycle (see also &quot;Should: Define useful resources&quot; in the <a href="../general-guidelines/GeneralGuidelines.html">General Guidelines</a>).</p>
 <p>As there is a cost in creating an explosion of event types and topics, prefer to define event types that are abstract/generic enough to be valuable for multiple use cases, and avoid publishing event types without a clear need.</p>
@@ -865,7 +865,7 @@ Category:</p>
 <ul>
 <li><p>Sensitive data, such as (e-mail addresses, phone numbers, etc) are subject to strict access and data protection controls. </p>
 </li>
-<li><p>Event type owners <strong>must not</strong> publish sensitive information unless it&apos;s mandatory or neccessary to do so. For example, events sometimes need to provide personal data, such as delivery addresses in shipment orders  (as do other APIs), and this is fine.</p>
+<li><p>Event type owners <strong>must not</strong> publish sensitive information unless it&apos;s mandatory or necessary to do so. For example, events sometimes need to provide personal data, such as delivery addresses in shipment orders  (as do other APIs), and this is fine.</p>
 </li>
 </ul>
 <h2 id="must-use-the-general-event-category-to-signal-steps-and-arrival-points-in-business-processes"><span style="color:red;font-weight:bold">Must:</span> Use the General Event Category to signal steps and arrival points in business processes</h2>
@@ -875,7 +875,7 @@ must be based on the General Event category.</p>
 <ul>
 <li><p>Business events must contain a specific identifier field (a business process id or &quot;bp-id&quot;) similar to flow-id to allow for efficient aggregation of all events in a business process execution.</p>
 </li>
-<li><p>Business events must contain a means to correctly order events in a business process execution. In distributed settings where monotically increasing values (such as a high precision timestamp that is assured to move forwards) cannot be obtained, the <code>parent_eids</code> data structure allows causal relationships to be declared between events.</p>
+<li><p>Business events must contain a means to correctly order events in a business process execution. In distributed settings where monotonically increasing values (such as a high precision timestamp that is assured to move forwards) cannot be obtained, the <code>parent_eids</code> data structure allows causal relationships to be declared between events.</p>
 </li>
 <li><p>Business events should only contain information that is new to the business process execution at the specific step/arrival point.</p>
 </li>
@@ -894,7 +894,7 @@ event types must be based on the Data Change Event category.</p>
 <li>Change events must be published reliably by the service.</li>
 </ul>
 <h2 id="should-provide-a-means-for-explicit-event-ordering"><span style="color:darkgoldenrod;font-weight:bold">Should:</span> Provide a means for explicit event ordering</h2>
-<p>Some common error cases may require event consumers to reconstruct event streams or replay events from a position within the stream. Events <em>should</em> therefore contain a way to restore their partial order of occurence.</p>
+<p>Some common error cases may require event consumers to reconstruct event streams or replay events from a position within the stream. Events <em>should</em> therefore contain a way to restore their partial order of occurrence.</p>
 <p>This can be done - among other ways -  by adding</p>
 <ul>
 <li>a strictly monotonically increasing entity version (e.g. as created by a database) to allow for partial ordering of all events for an entity</li>
